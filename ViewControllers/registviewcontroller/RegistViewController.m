@@ -38,6 +38,14 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
     
+    CGFloat hei;
+    if (iPhone4) {
+        hei = 64;
+    }
+    else
+        hei = 0;
+    
+    
     [self initwithage];
     [self initwithhight];
     [self initwithweight];
@@ -62,7 +70,7 @@
     [returnbutton addTarget:self action:@selector(returntologin) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:returnbutton];
     
-    table = [[UITableView alloc] initWithFrame:CGRectMake(0, 140, 320, 54*5) style:UITableViewStylePlain
+    table = [[UITableView alloc] initWithFrame:CGRectMake(0, 140-hei, 320, 54*5) style:UITableViewStylePlain
              ];
     table.backgroundColor = [UIColor clearColor];
     table.dataSource = self;
@@ -78,9 +86,10 @@
     namefield.textColor = [UIColor grayColor];
     [self.view addSubview:namefield];
     
+   
     
     nextbutton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    nextbutton.frame = CGRectMake(120, 480, 80, 50);
+    nextbutton.frame = CGRectMake(120, 480-hei, 80, 50);
     [nextbutton setTitle:NSLocalizedStringFromTable(@"NextButton_Title",@"MyLoaclization" , @"") forState:UIControlStateNormal];
     [nextbutton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     
@@ -324,7 +333,28 @@
 }
 -(void)gotonext
 {
-    [(AppDelegate *)[UIApplication sharedApplication].delegate settworegist];
+    if ([[self getPreferredLanguage]isEqual:@"zh-Hans"]) {
+        [(AppDelegate *)[UIApplication sharedApplication].delegate settworegist];
+    }
+    else
+       [(AppDelegate *)[UIApplication sharedApplication].delegate setthreeregist];
+    
+}
+
+-(NSString*)getPreferredLanguage
+
+{
+    
+    NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
+    
+    NSArray * allLanguages = [defaults objectForKey:@"AppleLanguages"];
+    
+    NSString * preferredLang = [allLanguages objectAtIndex:0];
+    
+    NSLog(@"当前语言:%@", preferredLang);
+    
+    return preferredLang;
+    
 }
 
 #pragma mark 设置数据源

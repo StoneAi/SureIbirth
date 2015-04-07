@@ -6,6 +6,7 @@
 // Copyright (c) 2013 elias kang. All rights reserved.
 
 #import <UIKit/UIKit.h>
+#import "Config.h"
 @class EKCustomProgressView;
 @protocol EKCustomProgressViewDelegate<NSObject>
 @end

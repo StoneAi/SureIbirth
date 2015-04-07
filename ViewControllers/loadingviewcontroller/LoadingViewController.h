@@ -13,7 +13,7 @@
 #import "AFHTTPClient.h"
 #import "AFNetworking.h"
 #import "AFNetworkReachabilityManager.h"
-
+#import "ForgetpswViewController.h"
 #import "Config.h"
 #import <sqlite3.h>
 @interface LoadingViewController : UIViewController<UITextFieldDelegate>

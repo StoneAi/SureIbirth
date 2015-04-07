@@ -7,11 +7,12 @@
 //
 
 #import "TeamIntrViewController.h"
-
+#import "Config.h"
 @interface TeamIntrViewController ()
 @property (strong, nonatomic) IBOutlet UILabel *kklabel;
 @property (strong, nonatomic) IBOutlet UILabel *shdlabel;
 @property (strong, nonatomic) IBOutlet UILabel *meililabel;
+@property (strong, nonatomic) IBOutlet UILabel *HaiJ;
 
 @end
 
@@ -19,10 +20,20 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+//    UIImageView *imageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
+//    //imageView.image = [UIImage imageNamed:@"homepagebackground1231.png"];
+//    [imageView setImage:[UIImage imageNamed:MainViewImage]];
+//    imageView.contentMode = UIViewContentModeScaleAspectFill;
+//    imageView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+//    
+//    [self.view addSubview:imageView];
+    
     self.navigationItem.title = NSLocalizedStringFromTable(@"TeamIntrudece", @"MyLoaclization" , @"");
     _kklabel.text = NSLocalizedStringFromTable(@"TeamKKtext", @"MyLoaclization" , @"");
     _shdlabel.text = NSLocalizedStringFromTable(@"TeamShdtext", @"MyLoaclization" , @"");
     _meililabel.text = NSLocalizedStringFromTable(@"TeamMeilitext", @"MyLoaclization" , @"");
+    _HaiJ.text = NSLocalizedStringFromTable(@"TeamHJtext", @"MyLoaclization" , @"");
     // Do any additional setup after loading the view from its nib.
 }
 

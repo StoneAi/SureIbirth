@@ -149,10 +149,31 @@
     
     [self addSubview:pickView];
 }
+-(NSString*)getPreferredLanguage
+
+{
+    
+    NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
+    
+    NSArray * allLanguages = [defaults objectForKey:@"AppleLanguages"];
+    
+    NSString * preferredLang = [allLanguages objectAtIndex:0];
+    
+    NSLog(@"当前语言:%@", preferredLang);
+    
+    return preferredLang;
+    
+}
+
 
 -(void)setUpDatePickerWithdatePickerMode:(UIDatePickerMode)datePickerMode{
     UIDatePicker *datePicker=[[UIDatePicker alloc] init];
-    datePicker.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"zh_CN"];
+    if ([[self getPreferredLanguage] isEqual:@"zh-Hans"]) {
+        datePicker.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"zh_CN"];
+
+    }
+    else
+        datePicker.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"english"];
     datePicker.datePickerMode = UIDatePickerModeDate;
     datePicker.backgroundColor=[UIColor colorWithRed:165.0/255 green:175.0/255 blue:176.0/255 alpha:1];
    // datePicker.backgroundColor=[UIColor lightGrayColor];

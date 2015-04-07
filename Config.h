@@ -6,6 +6,11 @@
 //  Copyright (c) 2014年 Viposes. All rights reserved.
 //
 
+#ifdef __OPTIMIZE__
+# define NSLog(...) {}
+#else
+# define NSLog(...) NSLog(__VA_ARGS__)
+#endif
 #ifndef Simple_demo_Config_h
 #define Simple_demo_Config_h
 
@@ -42,9 +47,9 @@
 #define NAVIGATIONBAR_BACKCOLOR   [UIColor colorWithRed: 240.0/255 green: 146.0/255 blue: 174.0/255 alpha: 1.0f]     //导航栏视图颜色
 #define TABLEVIEWCOLOR   [UIColor colorWithRed: 255.0/255 green: 111.0/255 blue: 132.0/255 alpha: 0]                //表图视图颜色
 #define CELLBACKCOLOR      [UIColor colorWithRed: 255.0/255 green: 111.0/255 blue: 132.0/255 alpha: 0]              //表图单元颜色
-#define CELLTEXTLABELHIGHTCOLOR    [UIColor colorWithRed: 131.0/255 green: 204.0/255 blue: 210.0/255 alpha: 1]       //单元高亮颜色
+#define CELLTEXTLABELHIGHTCOLOR    [UIColor colorWithRed: 117.0/255 green: 193.0/255 blue: 199.0/255 alpha: 1]       //单元字体高亮颜色
 //modify 1204
-#define CELLSELECTCOLOR    [UIColor colorWithRed: 240.0/255 green: 146.0/255 blue: 174.0/255 alpha: 1.0f]            //选中单元背景颜色
+#define CELLSELECTCOLOR    [UIColor colorWithRed: 240.0/255 green: 146.0/255 blue: 174.0/255 alpha: 1.0f]            //选中单元整个背景颜色
 #define CELLBACKCOLOR_SETTING       [UIColor colorWithRed: 255.0/255 green: 111.0/255 blue: 132.0/255 alpha: 1.0f]   //设置单元颜色
 
 
@@ -54,7 +59,7 @@
 #define NAVIGATIONBAR_SIZE    (0, 20, 320, 40)              //导航栏大小位置
 #define MAINVIEWTABLEVIEW_SIZE    (0, 0, 320, 240)         //主界面表图大小位置
 #define HIGHFORCELL_MAINVIEW     40                         //主界面单元高度
-#define SETTINGTABLEVIEW_SIZE    (0, 0, 320, 450)          //设置界面表图大小位置
+#define SETTINGTABLEVIEW_SIZE    (0, 60, 320, 500)          //设置界面表图大小位置
 #define HIGHFORCELL_SETTINGVIEW     40                      //设置界面单元高度
 #define FIRSTVIEWTABLEVIEW_SIZE   (0, 0, 320, 170)          //首页单元高度
 
@@ -121,7 +126,7 @@
 #define RidemenuButtonImage @"menubar1227.png"
 #define ShareSDKImage @"icon.png"
 
-#define RidemenuImage @"background0309.png"
+#define RidemenuImage @"首页背景0309.png"
 
 #define HisNodataImage  @"histroycircle1231.png"
 #define HisBackImage  @"首页背景0309.png"
@@ -134,18 +139,18 @@
 #define HisDanger @"害怕0309.png"
 #define HisDangerest @"大哭0309.png"
 
-#define InforDeHeadImage @"head portrait120.png"
-#define InforBackImage @"backgroundtwo1230.png"
-#define InforSaveImage @"save1227.png"
+#define InforDeHeadImage @"头像2-0327.png"
+#define InforBackImage @"个人中心.png"
+#define InforSaveImage @"save0320.png"
 
 
-#define LeftHomeImage @ "homepageblue0309.png"   //homepageblue0309
+#define LeftHomeImage @ "homepageblue0327.png"   //homepageblue0309
 #define LeftHomeHighImage @"homepage1227.png"
-#define LeftHistoryImage @ "historyblue0309.png"   //historyblue0309
+#define LeftHistoryImage @ "historyblue0327改.png"   //historyblue0309
 #define LeftHistoryHighImage @"history1227.png"
-#define LeftRecomImage @ "recommendblue0309.png"   //recommendblue0309
+#define LeftRecomImage @ "recommendblue0327.png"   //recommendblue0309
 #define LeftRecomHigeImage @ "recommend1227.png"
-#define LeftSettingImage @ "setblue0309.png"   //setblue0309
+#define LeftSettingImage @ "setblue0327.png"   //setblue0309
 #define LeftSettingHighImage @ "set1227.png"
 
 #define HelpImage @"help0104.png"
@@ -156,28 +161,44 @@
 #define RegistOneReImage @"btn_arrow_back.png"
 
 #define SettingCancaleImage @"矩形2.png"
-#define SettingBatteryImage @ "batteryblue0309.png"
-#define SettingShakeImage @ "shakeblue0309.png"
-#define SettingHelpImage @ "helpblue0309.png" //helpblue0309
+#define SettingBatteryImage @ "battery0327改.png"
+#define SettingShakeImage @ "shake0327.png"
+#define SettingHelpImage @ "helpblue0327.png" //helpblue0309
 #define SettingHelpHighImage @ "help1205.png"
-#define SettingRelationImage @ "relationblue0309.png"   //relationblue0309
+#define SettingRelationImage @ "relationblue0327.png"   //relationblue0309
 #define SettingRelationHighImage @"relation1205.png"
-#define SettingStatementImage @ "statementblue0309.png"   //statementblue0309
+#define SettingStatementImage @ "statementblue0327.png"   //statementblue0309
 #define SettingStatementHighImage @"statement1205.png"
-#define SettingIntroImage @"introductionblue0309.png"    //introductionblue0309
+#define SettingIntroImage @"introductionblue0327.png"    //introductionblue0309
 #define SettingIntroHighImage @"introduction1227.png"
 #define SettingUpdateImage @ "refresh1226.png"
-#define SettingUpdateHighImage @ "refreshgreen1231.png"
+#define SettingUpdateHighImage @ "refreshblue0327.png"
+#define SettingUserBookimage @"notebookblue0327.png"
+#define SettingUserBookHighimage @"notebook0320.png"
+#define SettingBackground @"设置背景.png"
 
-#define ConnectLogeImage @"pic_logo_bg.png"
-#define ConnectCallImage @"btn_call_default.png"
-#define ConnectCallHighImage @"btn_call_selcet.png"
+
+
+#define ConnectLogeImage @"viposelogo.png"
+#define ConnectCallImage @"btn_call.png"
+#define ConnectCallHighImage @"btn_call.png"
 #define ConnectEmailImage @"btn_email.png"
-#define ConnectEmailHighImage @"btn_email_select.png"
+#define ConnectEmailHighImage @"btn_email.png"
+#define ConnectUrlImage @"btn_URL.png"
 
-#define LoginLogo @"登录注册(1)"
+
+#define LoginNickname @"输入账号0320.png"
+#define LoginPasswd @"密码0320.png"
+#define LoginLogo @"手镯3D图.png"
 #define LoginzhuceImage @"注册0309.png"
 #define LoginlogImage @"登录0309.png"
 #define LoginEditerImage @"账号0309.png"
+
+
+#define CurrentDeviceRealSize [[[UIScreen mainScreen] currentMode] size]
+#define iPhone4RealSize CGSizeMake(640, 960)
+#define iPhone4 CGSizeEqualToSize(iPhone4RealSize, CurrentDeviceRealSize)
+#define Height iPhone4 ? 64 : 0
+
 
 #endif

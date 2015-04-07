@@ -439,8 +439,9 @@ double numbledegree(double degree)
     CGContextAddArc(contextRef, center.x, center.y, outerRadius, startAngle1, endAngle1, 0);
     CGContextAddArc(contextRef, center.x, center.y, innerRadius, endAngle1, startAngle1, 1);
     //CGContextSetFillColorWithColor(contextRef, [UIColor yellowColor].CGColor);
-    //colortmp = [UIColor clearColor];
-    colortmp = [UIColor colorWithRed:131.0/255 green:204.0/255 blue:210.0/255 alpha:1];
+    colortmp = [UIColor colorWithRed: 131.0/255 green: 204.0/255 blue: 210.0/255 alpha: 1];//环的颜色
+  //  [UIColor colorWithRed: 131.0/255 green: 204.0/255 blue: 210.0/255 alpha: 1]
+    //colortmp = [UIColor colorWithRed:131.0/255 green:204.0/255 blue:210.0/255 alpha:1];
     CGContextSetFillColorWithColor(contextRef, colortmp.CGColor);
     CGContextFillPath(contextRef);  //屏蔽该项，可以只画线
     CGContextStrokePath(contextRef);

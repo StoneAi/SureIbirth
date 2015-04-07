@@ -132,6 +132,14 @@ static int ComeState;
 
 -(void)ShowfaceScollView
 {
+    CGFloat hei;
+    if (iPhone4) {
+        hei = 64;
+    }
+    else
+        hei = 0;
+    
+    
     pageview = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, 320, 600)];
     
     demoView.frame = CGRectMake(pageview.frame.origin.x, pageview.frame.origin.y-100, pageview.frame.size.width, pageview.frame.size.height+100);
@@ -145,14 +153,9 @@ static int ComeState;
     pageview.showsVerticalScrollIndicator = NO;
     pageview.showsHorizontalScrollIndicator = NO;
     pageview.delegate = self;
-    pageview.scrollEnabled = NO;
+    pageview.scrollEnabled =NO;
     
     [self.view addSubview:pageview];
-    
-    
-    //    backview = [[BackAnimationview alloc]initWithFrame:CGRectMake(220, CGRectGetHeight(pageview.frame)-80, 40, 40)];
-    //    backview.backgroundColor = [UIColor clearColor];
-    //    [self.view addSubview:backview];
     
     
     
@@ -164,7 +167,7 @@ static int ComeState;
     nextbutton = [[UIButton alloc] initWithFrame:CGRectMake(220, CGRectGetHeight(pageview.frame)-80, 80, 80)];
     nextbutton.backgroundColor = [UIColor clearColor];
     [nextbutton addTarget:self action:@selector(nextButton:) forControlEvents:UIControlEventTouchUpInside];
-    nextbutton.center = CGPointMake(self.view.center.x, self.view.center.y+240);
+    nextbutton.center = CGPointMake(self.view.center.x, self.view.center.y+240-hei);
     [nextbutton setImage:[UIImage imageNamed:HisRTImage] forState:UIControlStateNormal];
     nextbutton.enabled = YES;
     
@@ -277,7 +280,6 @@ static int ComeState;
         [calendarController dismissCalendarAnimated:YES];
        
     }
-
 
 }
 -(void)calendarControllerDidDismissCalendar:(PMCalendarController *)calendarController
@@ -413,7 +415,6 @@ static int ComeState;
 {
     ComeState=state;
     NSLog(@"state get = %d",state);
-
 }
 #pragma mark 读文件
 -(void)writeInfor:(NSString *)RTpath
@@ -568,11 +569,7 @@ static int ComeState;
 {
     
     int all = 100;
-//    float tmp1 = (float)lv1/((float)(rtlength-1)/2);
-//    float tmp2 = (float)lv2/((float)(rtlength-1)/2);
-//    float tmp3 = (float)lv3/((float)(rtlength-1)/2);
-//    float tmp4 = (float)lv4/((float)(rtlength-1)/2);
-//    float tmp5 = (float)lv5/((float)(rtlength-1)/2);
+
     float tmp1 = (float)lv1/(float)(lv1+lv2+lv3+lv4+lv5);
     float tmp2 = (float)lv2/(float)(lv1+lv2+lv3+lv4+lv5);
     float tmp3 = (float)lv3/(float)(lv1+lv2+lv3+lv4+lv5);
@@ -611,9 +608,7 @@ static int ComeState;
     float tmp1 = (float)lv1steps/lv3steps;
     float tmp2 = (float)lv2steps/lv3steps;
     float tmp3 = (float)lv3steps/lv3steps;
-//    float tmp4 =(float)lv4steps/((float)(steplength-1)/2);
-//    float tmp5 = (float)lv5steps/((float)(steplength-1)/2);
-  //  NSLog(@"步长：tmp1=%f,tmp2=%f,tmp3=%f,tmp4=%f,tmp5=%f,bug = %f",tmp1,tmp2,tmp3,tmp4,tmp5,bug);
+
     long steplv1 = tmp1*all;
     long steplv2 = tmp2*all;
     long steplv3 = tmp3*all;
@@ -623,11 +618,8 @@ static int ComeState;
         steplv2=0;
     }
     
-//    long steplv4 = tmp4*all;
-//    long steplv5 = tmp5*all;
     NSLog(@"步长：%ld,%ld,%ld,%f",steplv1,steplv2,steplv3,bug);
-    //steplv1 = 100-steplv2;
-  //    [serdView readRTforview:buff];
+
     if (steplength==0|steplength==1) {
         [serdView setSize:0 Sedsize:0 Thirdsize:0];
     }
@@ -639,8 +631,63 @@ static int ComeState;
 }
 -(void)refresh
 {
+   float system_version =  [[[UIDevice currentDevice] systemVersion] floatValue];
+    if (system_version>=8.0) {
+         UIUserNotificationSettings *mySet = [[UIApplication sharedApplication] currentUserNotificationSettings]; //获取通知中心应用的状态
+        if(mySet.types == UIUserNotificationTypeNone)
+        {
+            NSLog(@"enabledRemoteNotificationTypes = %@",[[UIApplication sharedApplication] currentUserNotificationSettings]);
+            XYAlertView *alertView2 = [XYAlertView alertViewWithTitle:NSLocalizedStringFromTable(@"HistoryVC_Alret_PushTitle", @"MyLoaclization" , @"")
+                                       /* 消息提示  是否接受我的背包发的推送消息？ */                                    message:NSLocalizedStringFromTable(@"HistoryVC_Alret_Pushmessage", @"MyLoaclization" , @"")
+                                                              buttons:[NSArray arrayWithObjects:NSLocalizedStringFromTable(@"HistoryVC_Alret_SureButton", @"MyLoaclization" , @""), nil]
+                                                         afterDismiss:^(long buttonIndex) {
+                                                             NSLog(@"button index: %ld pressed!", buttonIndex);
+                                                         }];
+            
+            [alertView2 show];
+            
+        }
+        else if ([self.delegate getblestate]==0) {
+            XYAlertView *alertView1 = [XYAlertView alertViewWithTitle:NSLocalizedStringFromTable(@"HistoryVC_ConnectBLE", @"MyLoaclization" , @"")
+                                                              message:nil
+                                                              buttons:[NSArray arrayWithObjects:@"OK", nil]
+                                                         afterDismiss:^(long buttonIndex) {
+                                                             NSLog(@"button index: %ld pressed!", buttonIndex);
+                                                         }];
+            [alertView1 show];
+            //[[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert categories:nil]];
+            
+        }
+        else{
+            loadingview = [XYLoadingView loadingViewWithMessage:NSLocalizedStringFromTable(@"HistoryVC_Loading_Title", @"MyLoaclization" , @"")];
+            
+            
+            XYAlertView *alertView2 = [XYAlertView alertViewWithTitle:NSLocalizedStringFromTable(@"HistoryVC_Alret_Title", @"MyLoaclization" , @"")
+                                                              message:NSLocalizedStringFromTable(@"HistoryVC_Alret_Message", @"MyLoaclization" , @"")
+                                                              buttons:[NSArray arrayWithObjects:NSLocalizedStringFromTable(@"HistoryVC_Alret_SureButton", @"MyLoaclization" , @""), NSLocalizedStringFromTable(@"HistoryVC_Alret_CancleButton", @"MyLoaclization" , @""), nil]
+                                                         afterDismiss:^(long buttonIndex) {
+                                                             if (buttonIndex == 0){
+                                                                 
+                                                                 
+                                                                 [loadingview show];
+                                                                 
+                                                                 
+                                                                 [self.delegate readhistory];
+                                                                 
+                                                                 
+                                                             }
+                                                             if(buttonIndex == 1)
+                                                                 [loadingview dismiss];
+                                                             NSLog(@"button index: %ld pressed!", buttonIndex);
+                                                         }];
+            
+            [alertView2 show];
+        }
+
+
     
-    UIUserNotificationSettings *mySet = [[UIApplication sharedApplication] currentUserNotificationSettings]; //获取通知中心应用的状态
+    }
+    else{
     
     if ([self.delegate getblestate]==0) {
         XYAlertView *alertView1 = [XYAlertView alertViewWithTitle:NSLocalizedStringFromTable(@"HistoryVC_ConnectBLE", @"MyLoaclization" , @"")
@@ -653,23 +700,6 @@ static int ComeState;
         //[[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert categories:nil]];
         
     }
-    
-    //  关闭通知
-    else if(mySet.types == UIUserNotificationTypeNone)
-    {
-        NSLog(@"enabledRemoteNotificationTypes = %@",[[UIApplication sharedApplication] currentUserNotificationSettings]);
-        XYAlertView *alertView2 = [XYAlertView alertViewWithTitle:NSLocalizedStringFromTable(@"HistoryVC_Alret_PushTitle", @"MyLoaclization" , @"")
-                    /* 消息提示  是否接受我的背包发的推送消息？ */                                    message:NSLocalizedStringFromTable(@"HistoryVC_Alret_Pushmessage", @"MyLoaclization" , @"")
-                                                          buttons:[NSArray arrayWithObjects:NSLocalizedStringFromTable(@"HistoryVC_Alret_SureButton", @"MyLoaclization" , @""), NSLocalizedStringFromTable(@"HistoryVC_Alret_CancleButton", @"MyLoaclization" , @""), nil]
-                                                     afterDismiss:^(long buttonIndex) {
-                                                         NSLog(@"button index: %ld pressed!", buttonIndex);
-                                                     }];
-        
-        [alertView2 show];
-
-    }
-    
-    
     else{
             loadingview = [XYLoadingView loadingViewWithMessage:NSLocalizedStringFromTable(@"HistoryVC_Loading_Title", @"MyLoaclization" , @"")];
     
@@ -694,12 +724,13 @@ static int ComeState;
                                                  }];
     
     [alertView2 show];
+        }
     }
 }
 - (void)postHttpUrl:(NSString *)urlString postInfo:(NSDictionary *)info state:(int)state
 //
 {
-    NSURL * url = [NSURL URLWithString:@"http://115.29.205.2:8080/PregnantHealth"];
+    NSURL * url = [NSURL URLWithString:@"http://120.24.237.180:8080/PregnantHealth"];
     AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
     
     
@@ -753,7 +784,7 @@ static int ComeState;
                     NSString *RTorder =@"uploadRadiationFile.jsp";
                     NSMutableURLRequest *request = [httpClient multipartFormRequestWithMethod:@"POST" path:RTorder parameters:RTparameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
                         
-                        [formData appendPartWithFileData:RTdata name:str fileName:str mimeType:@"multipart/form-data; boundary=Boundary+0xAbCdEfGbOuNdArY"];
+                        [formData appendPartWithFileData:RTdata name:str1 fileName:str1 mimeType:@"multipart/form-data; boundary=Boundary+0xAbCdEfGbOuNdArY"];
                         // [formData appendPartWithFormData:RTdata name:str];
                         NSLog(@"进入了block中");
                        
@@ -829,7 +860,7 @@ static int ComeState;
                     NSString *SPorder =@"uploadCalorieFile.jsp";
                     NSMutableURLRequest *request = [httpClient multipartFormRequestWithMethod:@"POST" path:SPorder parameters:SPparameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
                         
-                        [formData appendPartWithFileData:SPdata name:str fileName:str mimeType:@"multipart/form-data; boundary=Boundary+0xAbCdEfGbOuNdArY"];
+                        [formData appendPartWithFileData:SPdata name:str1 fileName:str1 mimeType:@"multipart/form-data; boundary=Boundary+0xAbCdEfGbOuNdArY"];
                         // [formData appendPartWithFormData:RTdata name:str];
                         NSLog(@"进入了block中");
                         NSLog(@"formData = %@",formData);

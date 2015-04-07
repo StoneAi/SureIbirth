@@ -13,7 +13,8 @@
 #import "RESideMenu.h"
 #import "leftMenuViewController.h"
 #import "Config.h"
-
+#import "ThreeRegistViewController.h"
+#import "ForgetpswViewController.h"
 #ifdef __OPTIMIZE__
 # define NSLog(...) {}
 #else
@@ -37,6 +38,8 @@
 @synthesize changeSinaWeiboNaviBGImageDelegate;
 @synthesize isAppNeedUpdate;
 @synthesize appUpdateURL;
+@synthesize FirmwareUpdateURL;
+@synthesize isFirmwareNeedUpdate;
 -(void)initializeSharePlat
 {
  //   添加新浪微博应用 注册网址 http://open.weibo.com
@@ -94,11 +97,41 @@
                         wxDelegate:self];
 }
 
+- (void)GetFirmware
+{
+    NSURL * url = [NSURL URLWithString:@"http://120.24.237.180:8080/PregnantHealth"];
+    AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
+    
+    //"getIOSVersion"
+    [httpClient getPath:@"getFirmware.jsp" parameters:nil success:^(AFHTTPRequestOperation *operation,id responseObject) {
+        
+        NSString *requestTmp = [NSString stringWithString:operation.responseString];
+        NSData *resData = [[NSData alloc] initWithData:[requestTmp dataUsingEncoding:NSUTF8StringEncoding]];
+        //系统自带JSON解析
+        NSDictionary *resultDic = [NSJSONSerialization JSONObjectWithData:resData options:NSJSONReadingMutableLeaves error:nil];
+        NSLog(@"Firm11 result = %@",resultDic);
+        [userDefaults setObject:[resultDic objectForKey:@"version"] forKey:@"version"];
+        [userDefaults synchronize];
+       
+        FirmwareUpdateURL = [resultDic objectForKey:@"url"];
+    
+        
+        
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"由于网络原因失败error = %@",error.localizedDescription);
+        
+    }];
+    
+}
+
+
+
 -(void)GetAppIdFromItunes
 {
     //TODO 从网络获取版本号
     NSDictionary *infoDic = [[NSBundle mainBundle] infoDictionary];
-    appVersion = [infoDic objectForKey:@"CFBundleVersion"];
+    appVersion = [infoDic objectForKey:@"CFBundleShortVersionString"];
     NSLog(@"当前APP版本为%@",appVersion);
     
     
@@ -110,9 +143,9 @@
         NSData *resData = [[NSData alloc] initWithData:[requestTmp dataUsingEncoding:NSUTF8StringEncoding]];
         //系统自带JSON解析
         NSDictionary *resultDic = [NSJSONSerialization JSONObjectWithData:resData options:NSJSONReadingMutableLeaves error:nil];
-       // NSLog(@"resultDic = %@",resultDic);
-        //  NSString *NewVerson = [[resultDic objectForKey:@"results"] valueForKey:@"version"];
-        //  NSLog(@"NewVersion = %@",NewVerson);
+//        NSLog(@"resultDic = %@",resultDic);
+//          NSString *NewVerson = [[resultDic objectForKey:@"results"] valueForKey:@"version"];
+//          NSLog(@"NewVersion = %@",NewVerson);
       //  NSLog(@"%@",resultDic);
         NSArray *infoArray = [resultDic objectForKey:@"results"];
         NSDictionary *releaseInfo = [infoArray objectAtIndex:0];
@@ -155,7 +188,9 @@
     [ShareSDK registerApp:@"4f2fb2128acc"];
     [self shareSDKInit];
     isAppNeedUpdate = NO;
+    isFirmwareNeedUpdate = NO;
     [self GetAppIdFromItunes];
+    [self GetFirmware];
  //   [self Suitable];
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen]bounds]];
    // self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
@@ -233,7 +268,18 @@
     self.window.rootViewController = tworegist;
 
 }
+-(void)setthreeregist
+{
+    ThreeRegistViewController *threegist = [[ThreeRegistViewController alloc]init];
+    self.window.rootViewController = threegist;
 
+}
+-(void)setforget
+{
+    ForgetpswViewController *forget = [[ForgetpswViewController alloc]init];
+    self.window.rootViewController = forget;
+
+}
 
 -(BOOL)application:(UIApplication *)application shouldSaveApplicationState:(NSCoder *)coder
 {

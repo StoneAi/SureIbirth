@@ -27,6 +27,7 @@
     NSString *imageDir;
     NSString *database_path;
     UIView *myview;
+    UIView *tmpview;
 }
 
 
@@ -36,7 +37,7 @@
     self.view.translatesAutoresizingMaskIntoConstraints = NO;
     self.view.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
    // [self.view addSubview:myview];
-    BaseURLString = @"http://115.29.205.2:8080/PregnantHealth";
+    BaseURLString = @"http://120.24.237.180:8080/PregnantHealth";
     userDefaults = [NSUserDefaults standardUserDefaults];
     
     [self initviewcontroller];
@@ -49,14 +50,20 @@
 }
 -(void)initviewcontroller
 {
+    CGFloat hei;
+    if (iPhone4) {
+        hei = 64;
+    }
+    else
+        hei = 0;
     
     self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
     UIImageView *img = [[UIImageView alloc]initWithImage:[UIImage imageNamed:LoginLogo]];
-    img.frame = CGRectMake(50, 40, 229, 298);
+    img.frame = CGRectMake(50, 70-hei, 220, 236);
     [self.view addSubview:img];
     userDefaults = [NSUserDefaults standardUserDefaults];
-    UIButton *loginbutton = [[UIButton alloc]initWithFrame:CGRectMake(32, 450, 120, 40)];
-    UIButton *registbutton = [[UIButton alloc]initWithFrame:CGRectMake(168, 450, 120, 41)];
+    UIButton *loginbutton = [[UIButton alloc]initWithFrame:CGRectMake(32, 450-hei, 120, 40)];
+    UIButton *registbutton = [[UIButton alloc]initWithFrame:CGRectMake(168, 450-hei, 120, 41)];
 //    loginbutton.center = CGPointMake(self.view.center.x, 400);
 //    registbutton.center = CGPointMake(self.view.center.x, 480);
     loginbutton.backgroundColor = [UIColor clearColor];
@@ -91,7 +98,8 @@
     [self.view addSubview:gotovipose];
     [self.view addSubview:loginbutton];
     [self.view addSubview:registbutton];
-//    textview = [[UIView alloc]initWithFrame:CGRectMake(0, 330, 320, 90)];
+    
+   //    textview = [[UIView alloc]initWithFrame:CGRectMake(0, 330, 320, 90)];
 //    textview.backgroundColor = [UIColor clearColor];
 //    UIImageView *account = [[UIImageView alloc] initWithFrame:CGRectMake(32, 330, 256, 40)];
 //    UIImageView *passwdd = [[UIImageView alloc] initWithFrame:CGRectMake(32, 380, 256, 40)];
@@ -100,9 +108,26 @@
 //    [self.view addSubview:account];
 //    [self.view addSubview:passwdd];
     
+    tmpview = [[UIView alloc]initWithFrame:CGRectMake(0, 350-hei, 320, 90)];
+    tmpview.backgroundColor = [UIColor whiteColor];
     
-    loginfield = [[UITextField alloc] initWithFrame:CGRectMake(32, 350, 256, 40)];
-    pwdfield = [[UITextField alloc]initWithFrame:CGRectMake(32, 400, 256, 40)];
+    UIImageView *NickImage = [[UIImageView alloc]initWithFrame:CGRectMake(16, 12, 18, 17)];
+    [NickImage setImage:[UIImage imageNamed:LoginNickname]];
+    [tmpview addSubview:NickImage];
+    
+    
+    UIImageView *PasswdImage = [[UIImageView alloc]initWithFrame:CGRectMake(19, 61, 12, 17)];
+    [PasswdImage setImage:[UIImage imageNamed:LoginPasswd]];
+    [tmpview addSubview:PasswdImage];
+    
+    
+    [self.view addSubview:tmpview];
+    
+    
+    loginfield = [[UITextField alloc] initWithFrame:CGRectMake(50, 0, 300, 40)];
+    pwdfield = [[UITextField alloc]initWithFrame:CGRectMake(50, 50, 300, 40)];
+//    loginfield = [[UITextField alloc] initWithFrame:CGRectMake(40, 350, 300, 40)];
+//    pwdfield = [[UITextField alloc]initWithFrame:CGRectMake(40, 400, 300, 40)];
     loginfield.delegate = self;
     pwdfield.delegate = self;
     loginfield.backgroundColor = [UIColor whiteColor];
@@ -112,18 +137,30 @@
     
     loginfield.text = [userDefaults objectForKey:USERDEFAULTS_USERNAME];
     
-    loginfield.keyboardType = UIKeyboardTypeNumberPad;
-    loginfield.borderStyle = UITextBorderStyleRoundedRect;
-    pwdfield.borderStyle = UITextBorderStyleRoundedRect;
+    //loginfield.keyboardType = UIKeyboardTypeNumberPad;
+//    loginfield.borderStyle = UITextBorderStyleRoundedRect;
+//    pwdfield.borderStyle = UITextBorderStyleRoundedRect;
     loginfield.font = [UIFont systemFontOfSize:18.0];
     loginfield.returnKeyType = UIReturnKeyDone;
     pwdfield.font = [UIFont systemFontOfSize:18.0];
     pwdfield.returnKeyType = UIReturnKeyDone;
     pwdfield.secureTextEntry = YES;
     
-    [self.view addSubview:loginfield];
-    [self.view addSubview:pwdfield];
+    [tmpview addSubview:loginfield];
+    [tmpview addSubview:pwdfield];
     //[self.view addSubview:textview];
+    
+    
+   // UIButton *ForgetPSD = [[UIButton alloc]initWithFrame:CGRectMake(208, 405, 80, 30)];
+    UIButton *ForgetPSD = [[UIButton alloc]initWithFrame:CGRectMake(238, 55, 80, 30)];
+    [ForgetPSD setTitle:NSLocalizedStringFromTable(@"Forgetpsd", @"MyLoaclization", nil) forState:UIControlStateNormal];
+    [ForgetPSD setTitleColor:CELLTEXTLABELHIGHTCOLOR forState:UIControlStateNormal];
+    ForgetPSD.titleLabel.font = [UIFont systemFontOfSize:14.0];
+    [ForgetPSD addTarget:self action:@selector(forget) forControlEvents:UIControlEventTouchUpInside];
+    [tmpview addSubview:ForgetPSD];
+
+    
+    
     
     UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hidenKeyboard)];
     gesture.numberOfTapsRequired = 1;
@@ -133,6 +170,12 @@
 
 
 #pragma mark 按键处理
+-(void)forget
+{
+    [(AppDelegate *)[UIApplication sharedApplication].delegate setforget];
+}
+
+
 -(void)loginpress
 {
     
@@ -309,16 +352,25 @@
 }
 -(void)resumeView
 {
+    CGFloat hei;
+    if (iPhone4) {
+        hei = 64;
+    }
+    else
+        hei = 0;
+    
     NSTimeInterval animationDuration=0.30f;
     [UIView beginAnimations:@"ResizeForKeyboard" context:nil];
     [UIView setAnimationDuration:animationDuration];
 //    float width = self.view.frame.size.width;
 //    float height = 90;
     //上移30个单位，按实际情况设置
-    CGRect rect=CGRectMake(32, 350, 256, 40);
-    CGRect rect1=CGRectMake(32, 400, 256, 40);
-    loginfield.frame=rect;
-    pwdfield.frame = rect1;
+    CGRect rect=CGRectMake(0, 350-hei, 320, 90);
+//    CGRect rect=CGRectMake(32, 350, 256, 40);
+//    CGRect rect1=CGRectMake(32, 400, 256, 40);
+//    loginfield.frame=rect;
+//    pwdfield.frame = rect1;
+    tmpview.frame = rect;
     [UIView commitAnimations];
     
     
@@ -333,10 +385,19 @@
 //        float width = self.view.frame.size.width;
 //        float height = self.view.frame.size.height;
         //上移30个单位，按实际情况设置
-        CGRect rect=CGRectMake(32, 260, 256, 40);
-        CGRect rect1=CGRectMake(32, 310, 256, 40);
-        loginfield.frame=rect;
-        pwdfield.frame = rect1;
+//        CGRect rect=CGRectMake(32, 260, 256, 40);
+//        CGRect rect1=CGRectMake(32, 310, 256, 40);
+//        loginfield.frame=rect;
+//        pwdfield.frame = rect1;
+    CGFloat hei;
+    if (iPhone4) {
+        hei = 64;
+    }
+    else
+        hei = 0;
+    
+        CGRect rect=CGRectMake(0, 250-hei, 320, 90);
+        tmpview.frame = rect;
         [UIView commitAnimations];
     
     return YES;

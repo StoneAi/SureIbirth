@@ -8,7 +8,7 @@
 
 
 #import "BLEdebug.h"
-
+#import "AppDelegate.h"
 @interface BLEdebug()
 @property CBService *uartService;
 @property CBCharacteristic *rxCharacteristic;
@@ -352,7 +352,7 @@ dispatch_queue_t serialqueue;
     if (error) {
         NSLog(@"error discovering services: %@",error);
     }
-    
+
     for(CBService *s in [peripheral services])
     {
         
@@ -442,24 +442,8 @@ dispatch_queue_t serialqueue;
     
     
     if (characteristic == self.firmwareCharacteristic) {
-         NSLog(@"Firmwareversion = %@",[NSString stringWithFormat:@"%@",[characteristic value]]);
-       
-        unsigned char *bufferr = (unsigned char *)[[characteristic value] bytes];
-        int version1 = bufferr[0];
-        int version2 = bufferr[1];
-        int version3 = bufferr[2];
-        int version4 = bufferr[3];
-        int version0 = (version1&0xff)|((version2<<8)&0xff00)|((version3<<16)&0xff0000)|((version4<<24)&0xff000000);
-        version = [NSString stringWithFormat:@"%d",version0];
-        NSLog(@"version = %@",version);
-        NSMutableData *data = [NSMutableData data];
-        NSKeyedArchiver * arch = [[NSKeyedArchiver alloc]initForWritingWithMutableData:data];
-        [arch encodeObject:version forKey:@"version"];//版本号
-        
-        [arch finishEncoding];
-        [data writeToFile:makeConfig atomically:YES];
+
     }
-    
     
     if (characteristic == self.battyCharacteristic)
     {
@@ -485,6 +469,24 @@ dispatch_queue_t serialqueue;
         }
         NSLog(@"commd=%d",bufferr[2]);
         switch (bufferr[2]) {
+            case 0x81:
+                NSLog(@"buff[5] = %d",bufferr[5]);
+                NSLog(@"buff[6] = %d",bufferr[6]);
+                version = [NSString stringWithFormat:@"%d.%d",bufferr[5],bufferr[6]];
+                NSLog(@"version = %@",version);
+                NSLog(@"save = %@",[userDefaults objectForKey:@"version"]);
+           //     AppDelegateAccessor.isFirmwareNeedUpdate = YES;
+                if ([[userDefaults objectForKey:@"version"] isEqual:version]) {
+                    AppDelegateAccessor.isFirmwareNeedUpdate = NO;
+                    NSLog(@"不需要更新固件");
+                }
+                else
+                {
+                    AppDelegateAccessor.isFirmwareNeedUpdate = YES;
+                    NSLog(@"固件需要更新");
+                }
+                
+                break;
             case 0x8c:
                 [self readshanke:(unsigned char *)[[characteristic value]bytes]];
                 break;
@@ -568,264 +570,44 @@ dispatch_queue_t serialqueue;
         }
     }
 }
-#pragma mark 历史解析方法
-//*****************************辐射历史开始*********************************
-//-(void)readfilelength:(unsigned char *)buff
-//{
-//    
-//    //余数 余下多少个单数
-//    _alllength = (((buff[3]<<24)&0xff000000)|((buff[4]<<16)&0xff0000)|((buff[5]<<8)&0xff00)|(buff[6]&0xff))*2%1024;
-//    NSLog(@"余数alllength = %d",_alllength);
-//    rtfilepackageint =(((buff[3]<<24)&0xff000000)|((buff[4]<<16)&0xff0000)|((buff[5]<<8)&0xff00)|(buff[6]&0xff))*2;
-//    NSLog(@"总共长度为%d",rtfilepackageint);
-//    if (rtfilepackageint>0) {
-//        
-//        NSDate *  senddate=[NSDate date];
-//        NSDateFormatter  *dateformatter=[[NSDateFormatter alloc] init];
-//        [dateformatter setDateFormat:@"YYYYMMdd"];
-//        locationString=[dateformatter stringFromDate:senddate];
-//        NSLog(@"%@",locationString);
-//        [userDefaults setValue:locationString forKey:USERDEFAULTS_LASTTIMEREFRESH];
-//        [userDefaults synchronize];
-//        rthistoryPath = [[[[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:NAMEFORUSER]stringByAppendingPathComponent:@"RTDIR"] stringByAppendingPathComponent:locationString];
-//        
-//        NSFileManager *fileManager = [NSFileManager defaultManager];
-//        if(![fileManager fileExistsAtPath:rthistoryPath]) //如果不存在
-//        {
-//            NSData *transformstate= [[NSData alloc]initWithData:[[NSString stringWithFormat:@"0"] dataUsingEncoding:NSUTF8StringEncoding]];
-//            // NSData *transformstate = [[NSData alloc] initWithBytes:@"0" length:1];
-//            [fileManager createFileAtPath:rthistoryPath contents:transformstate attributes:nil];
-//            fh = [NSFileHandle fileHandleForWritingAtPath:rthistoryPath];
-//            //            [fh writeData:transformstate];
-//            [fh seekToEndOfFile];
-//        }
-//        else
-//        {
-//            fh = [NSFileHandle fileHandleForUpdatingAtPath:rthistoryPath];
-//            [fh seekToEndOfFile];
-//        }
-//    }
-//    //有多少个包
-//    if ((_alllength)>0) {
-//        pages = (((buff[3]<<24)&0xff000000)|((buff[4]<<16)&0xff0000)|((buff[5]<<8)&0xff00)|(buff[6]&0xff))*2/1024+1;
-//        
-//    }
-//    else
-//    {
-//        pages = (((buff[3]<<24)&0xff000000)|((buff[4]<<16)&0xff0000)|((buff[5]<<8)&0xff00)|(buff[6]&0xff))*2/1024;
-//    }
-//    
-//    NSLog(@"一共需要包pages = %d",pages);
-//    
-//    if (rtfilepackageint==0) {
-//        NSLog(@"没有历史文件需要下载！");
-//        NSNotification *loadviewdiss = [NSNotification notificationWithName:@"LoadingDismiss" object:nil userInfo:@{@"result":@"nodata"}];
-//        [[NSNotificationCenter defaultCenter] postNotification:loadviewdiss];
-//    }
-//    else
-//    {
-//        
-//        
-//        
-//        Byte arry[] = {0xAA,0x06,0x41,0x00,0x00,0x00,pctime,0x00,0x00};
-//        NSData *data = [[NSData alloc] initWithBytes:arry length:9];
-//        [self.peripheral writeValue:data forCharacteristic:self.txCharacteristic type:CBCharacteristicWriteWithResponse];
-//        NSLog(@"请求发送第一个包");
-//        
-//        
-//    }
-//    
-//}
-//
-//-(void)readdatafromfor:(unsigned char*)buff
-//{
-//    
-//    int ret = (buff[1]-1);
-//    if (ret!=16) {
-//        NSLog(@"辐射：收到最后一次数据");
-//    }
-//    else
-//        NSLog(@"辐射：收到第%d次数据",RTtime);
-//    
-//    
-//    int array[ret];
-//    for (int i = 0; i<ret; i++) {
-//        array[i]=buff[i+3];
-//    }
-//    if (bufferDataFor.length<rtfilepackageint) {
-//        [bufferDataFor appendBytes:array length:ret];
-//    }
-//    NSLog(@"buffer.length = %ld     rtfint = %d",bufferDataFor.length,rtfilepackageint);
-//    if ((bufferDataFor.length%1024==0&&bufferDataFor.length>0)|(bufferDataFor.length>=rtfilepackageint)) {
-//        Byte arry[] = {0xAA,0x05,0x42,0x00,0x00,0x00,pctime,0x00};
-//        NSLog(@"pctime = %hd",pctime);
-//        NSData *data = [[NSData alloc] initWithBytes:arry length:8];
-//        [self.peripheral writeValue:data forCharacteristic:self.txCharacteristic type:CBCharacteristicWriteWithResponse];
-//        pctime++;
-//    }
-//    RTtime++;
-//    
-//    
-//}
-////需要补充校验
-//-(void)checkeverydata:(unsigned char*)buff
-//{
-//        NSLog(@"累加和为%d",buff[3]);
-//    NSLog(@"buffer.length = %ld     rtfint = %d",bufferDataFor.length,rtfilepackageint);
-//    if (bufferDataFor.length>=rtfilepackageint) {
-////        Byte arry[] = {0xAA,0x05,0x43,0x00};
-//        NSData *data = [[NSData alloc] initWithData:[Commond SimpleCommond:BleCmGetRtHistoryCheck]];
-//        [self.peripheral writeValue:data forCharacteristic:self.txCharacteristic type:CBCharacteristicWriteWithResponse];
-//        NSLog(@"请求全部校验");
-//         [self actionmove];
-//         pctime=1;
-//    }
-//    else{
-//    
-//        Byte arry[] = {0xAA,0x06,0x41,0x00,0x00,0x00,pctime,0x00,0x00};
-//        NSData *data = [[NSData alloc] initWithBytes:arry length:9];
-//        [self.peripheral writeValue:data forCharacteristic:self.txCharacteristic type:CBCharacteristicWriteWithResponse];
-//        NSLog(@"辐射:第%d次请求校验",pctime);
-//    }
-//    
-//}
-//
-//
+
+
 -(void)checkcrc:(unsigned char*)buff
 {
     NSLog(@"整个文件累加和为%d",buff[3]);
     
 }
-//************************************辐射历史结束***********************************
-
-//******************************************计步历史开始***************************************
-//文件长度
-//-(void)readMovelength:(unsigned char *)buff
-//{
-//    _alllengthsteps = (((buff[3]<<24)&0xff000000)|((buff[4]<<16)&0xff0000)|((buff[5]<<8)&0xff00)|(buff[6]&0xff))*2%1024;
-//    NSLog(@"步长 余数alllength = %d",_alllengthsteps);
-//    stepsfilepackageint =(((buff[3]<<24)&0xff000000)|((buff[4]<<16)&0xff0000)|((buff[5]<<8)&0xff00)|(buff[6]&0xff))*2;
-//    NSLog(@"步长 总共长度为%d",stepsfilepackageint);
-//    if (stepsfilepackageint>0) {
-//        stepshistoryPath = [[[[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"]stringByAppendingPathComponent:NAMEFORUSER]stringByAppendingPathComponent:@"SPDIR"]stringByAppendingPathComponent:locationString];
-//    
-//       
-//    NSFileManager *fileManager = [NSFileManager defaultManager];
-//    if(![fileManager fileExistsAtPath:stepshistoryPath]) //如果不存在
-//    {
-//       // NSData *transformstate= [[NSData alloc] initWithBase64EncodedString:@"1234" options:NSUTF8StringEncoding];
-//      //  NSData *transformstate = [[NSData alloc] initWithBytes:@"0" length:1];
-//      //  [fileManager createFileAtPath:stepshistoryPath contents:nil attributes:nil];
-//        [fileManager createFileAtPath:stepshistoryPath contents:[[NSString stringWithFormat:@"0"] dataUsingEncoding:NSUTF8StringEncoding] attributes:nil];
-//        fhand = [NSFileHandle fileHandleForWritingAtPath:stepshistoryPath];
-////        [fhand writeData:transformstate];
-//        [fhand seekToEndOfFile];
-//    }
-//    else
-//    {
-//        fhand = [NSFileHandle fileHandleForUpdatingAtPath:stepshistoryPath];
-//        [fhand seekToEndOfFile];
-//    }
-//    }
-//    //有多少个包
-//    if ((_alllengthsteps)>0) {
-//        pagessteps = (((buff[3]<<24)&0xff000000)|((buff[4]<<16)&0xff0000)|((buff[5]<<8)&0xff00)|(buff[6]&0xff))*2/1024+1;
-//        
-//    }
-//    else
-//    {
-//        pagessteps = (((buff[3]<<24)&0xff000000)|((buff[4]<<16)&0xff0000)|((buff[5]<<8)&0xff00)|(buff[6]&0xff))*2/1024;
-//    }
-//    
-//    NSLog(@"步长 一共需要包pages = %d",pagessteps);
-//    
-//    if (pagessteps==0) {
-//        NSLog(@"步长 没有历史文件需要下载！");
-//        
-//    }
-//    else
-//    {
-//        
-//        
-//        
-//        Byte arry[] = {0xAA,0x06,0x45,0x00,0x00,0x00,pctimesteps,0x00,0x00};
-//        NSData *data = [[NSData alloc] initWithBytes:arry length:9];
-//        //remove 2015 0114
-//        [self.peripheral writeValue:data forCharacteristic:self.txCharacteristic type:CBCharacteristicWriteWithResponse];
-//        NSLog(@"步长 请求发送第一个包");
-//        
-//        
-//    }
-//    
-//}
-//
-//-(void)stepsreaddatafromfor:(unsigned char*)buff
-//{
-//    
-//   
-//    int ret = (buff[1]-1);
-//    if (ret!=16) {
-//        NSLog(@"步长 收到最后一次不完整的的数据");
-//    }
-//    else
-//        
-//        NSLog(@"步长 收到第%d次数据",SPtime);
-//    
-//    int array[ret];
-//    
-//    for (int i = 0; i<ret; i++) {
-//        array[i]=buff[i+3];
-//    }
-//    if (bufferDataFortwo.length<stepsfilepackageint) {
-//        [bufferDataFortwo appendBytes:array length:ret];
-//    }
-//    
-//    if (bufferDataFortwo.length%1024==0|bufferDataFortwo.length>=stepsfilepackageint) {
-//        Byte arry[] = {0xAA,0x05,0x46,0x00,0x00,0x00,pctimesteps,0x00};
-//        NSData *data = [[NSData alloc] initWithBytes:arry length:8];
-//        [self.peripheral writeValue:data forCharacteristic:self.txCharacteristic type:CBCharacteristicWriteWithResponse];
-//        NSLog(@"计步:第%d次请求校验",pctimesteps);
-//        pctimesteps++;
-//    }
-//    SPtime++;
-//
-//}
-//-(void)stepscheckeverydata:(unsigned char*)buff
-//{
-//    NSLog(@"步长 累加和为%d",buff[3]);
-//    
-//    if (bufferDataFortwo.length>=stepsfilepackageint) {
-////        Byte arry[] = {0xAA,0x05,0x47,0x00};
-////        NSData *data = [[NSData alloc] initWithBytes:arry length:4];
-//        NSData *data = [[NSData alloc] initWithData:[Commond SimpleCommond:BleCmGetStepHistoryCheck]];
-//        [self.peripheral writeValue:data forCharacteristic:self.txCharacteristic type:CBCharacteristicWriteWithResponse];
-//        NSLog(@"步长 请求全部校验");
-//        // [self.delegate stepswriteInfor];
-//        [self savedata];
-//        NSNotification *loadviewdiss = [NSNotification notificationWithName:@"LoadingDismiss" object:nil userInfo:@{@"result":@"true"}];
-//        [[NSNotificationCenter defaultCenter] postNotification:loadviewdiss];
-//        pctimesteps=1;
-//    }
-//    else{
-//        Byte arry[] = {0xAA,0x06,0x45,0x00,0x00,0x00,pctimesteps,0x00,0x00};
-//        NSData *data = [[NSData alloc] initWithBytes:arry length:9];
-//        [self.peripheral writeValue:data forCharacteristic:self.txCharacteristic type:CBCharacteristicWriteWithResponse];
-//    }
-//    
-//    
-//}
-////*****************************计步历史结束*********************************
-//
-//
-//
 -(int)readBattry
 {
 //    Byte arry[] = {0xAA,0x01,0x02,0x00};
     NSData *data = [[NSData alloc] initWithData:[Commond SimpleCommond:BleCmGetBattay]];
-    [self.peripheral writeValue:data forCharacteristic:self.txCharacteristic type:CBCharacteristicWriteWithResponse];
-   // NSLog(@"bat = %d",bat);
+    if ((self.txCharacteristic.properties & CBCharacteristicPropertyWriteWithoutResponse) != 0)
+    {
+        [self.peripheral writeValue:data forCharacteristic:self.txCharacteristic type:CBCharacteristicWriteWithoutResponse];
+        NSLog(@"RTdata: WithOutResponse is already sendmessage!");
+    }
+    else if ((self.txCharacteristic.properties & CBCharacteristicPropertyWrite) != 0)
+    {
+        [self.peripheral writeValue:data forCharacteristic:self.txCharacteristic type:CBCharacteristicWriteWithResponse];
+        NSLog(@"RTdata: WithResponse is already sendmessage!");
+    }
     return bat;
 
+}
+
+-(void)readFirm
+{
+    NSData *data = [[NSData alloc] initWithData:[Commond SimpleCommond:BleCmGetDeviceVersion]];
+    if ((self.txCharacteristic.properties & CBCharacteristicPropertyWriteWithoutResponse) != 0)
+    {
+        [self.peripheral writeValue:data forCharacteristic:self.txCharacteristic type:CBCharacteristicWriteWithoutResponse];
+        NSLog(@"RTdata: WithOutResponse is already sendmessage!");
+    }
+    else if ((self.txCharacteristic.properties & CBCharacteristicPropertyWrite) != 0)
+    {
+        [self.peripheral writeValue:data forCharacteristic:self.txCharacteristic type:CBCharacteristicWriteWithResponse];
+        NSLog(@"RTdata: WithResponse is already sendmessage!");
+    }
 }
 //
 //
@@ -839,385 +621,7 @@ dispatch_queue_t serialqueue;
 
     
 }
-//-(void)savedata
-//{
-//    //分解数据 分批保存到不同文件中
-//    NSDate *  senddate=[NSDate date];
-//    
-//    NSInteger y = [[[NSCalendar currentCalendar] components:NSYearCalendarUnit fromDate:senddate] year];
-//    
-//    NSInteger mouth =[[[NSCalendar currentCalendar] components:NSMonthCalendarUnit fromDate:senddate] month];
-//    
-//    
-//    NSInteger d =[[[NSCalendar currentCalendar] components:NSDayCalendarUnit fromDate:senddate] day];
-//    
-//    NSString *lastdate = [NSString stringWithFormat:@"%ld",y];
-//    if (mouth<10) {
-//        lastdate = [NSString stringWithFormat:@"%@0%ld",lastdate,mouth];
-//        //   [lastdate stringByAppendingString:[NSString stringWithFormat:@"0%ld",mouth]];
-//    }
-//    else
-//        lastdate = [NSString stringWithFormat:@"%@%ld",lastdate,mouth];
-//    //  [lastdate stringByAppendingString:[NSString stringWithFormat:@"%ld",mouth]];
-//    
-//    if (d-1<10) {
-//        lastdate = [NSString stringWithFormat:@"%@0%ld",lastdate,d-1];
-//        //  [lastdate stringByAppendingString:[NSString stringWithFormat:@"0%ld",d-1]];
-//    }
-//    else
-//        lastdate = [NSString stringWithFormat:@"%@%ld",lastdate,d-1];
-//    // [lastdate stringByAppendingString:[NSString stringWithFormat:@"%ld",d-1]];
-//    
-//    NSString *threedate =   [NSString stringWithFormat:@"%ld",y];
-//    if (mouth<10) {
-//        threedate = [NSString stringWithFormat:@"%@0%ld",threedate,mouth];
-//        //  [threedate stringByAppendingString:[NSString stringWithFormat:@"0%ld",mouth]];
-//    }
-//    else
-//        threedate = [NSString stringWithFormat:@"%@%ld",threedate,mouth];
-//    // [threedate stringByAppendingString:[NSString stringWithFormat:@"%ld",mouth]];
-//    
-//    if (d-2<10) {
-//        threedate = [NSString stringWithFormat:@"%@0%ld",threedate,d-2];
-//        //[threedate stringByAppendingString:[NSString stringWithFormat:@"0%ld",d-2]];
-//    }
-//    else
-//        threedate = [NSString stringWithFormat:@"%@%ld",threedate,d-2];
-//    //  [threedate stringByAppendingString:[NSString stringWithFormat:@"%ld",d-2]];
-//    
-//    NSLog(@"lastdate = %@,threedate = %@",lastdate,threedate);
-//    NSInteger h =[[[NSCalendar currentCalendar] components:NSHourCalendarUnit fromDate:senddate] hour];
-//    NSInteger m = [[[NSCalendar currentCalendar] components:NSMinuteCalendarUnit fromDate:senddate] minute];
-//    //计算今天到当前时间最多能保存多少个数据   *2
-//    NSInteger todaydata = (h*60+m)/6*2;
-//    NSLog(@"今天需要保存的数据为%ld",todaydata);
-//    NSLog(@"接收辐射长度为%ld",bufferDataFor.length);
-//    /****************辐射历史数据处理********************************/
-//    Byte *thisTimeRTByte = (Byte *)[bufferDataFor bytes];     //
-//    
-//    //判断当收到数据大于今天最多保存数据量时的处理
-//    if (bufferDataFor.length>todaydata) {
-//        /***********************今天的文件中只保存今天的数据**************************************/
-//        Byte todayarry[todaydata];  //今天的数据
-//        for (NSInteger i = 0; i<todaydata; i++) {
-//            todayarry[i] = thisTimeRTByte[i+bufferDataFor.length-todaydata];
-//        }
-//        NSData *data= [[NSData alloc]initWithBytes:todayarry length:todaydata];
-//        [fh writeData:data];
-//        [fh closeFile];
-//        
-//        NSFileHandle*fh1 = [NSFileHandle fileHandleForWritingAtPath:rthistoryPath];
-//        [fh1 seekToFileOffset:0];
-//        NSData *data1= [[NSData alloc] initWithData:[[NSString stringWithFormat:@"0"] dataUsingEncoding:NSUTF8StringEncoding]];
-//        [fh1 writeData:data1];
-//        [fh1 closeFile];
-//        NSLog(@"今天的数据已写完");
-//        /**********************************根据数据大小将数据分别保存到前几天的文件中*******************************************/
-//        
-//        if (bufferDataFor.length-todaydata<=480) {    //只多出一天的数据
-//            NSLog(@"多出了1天的数据");
-//            Byte lastdayarr[bufferDataFor.length-todaydata];   //前一天的数据
-//            for (NSInteger i = 0; i<bufferDataFor.length-todaydata;i++) {
-//                lastdayarr[i] = thisTimeRTByte[i];
-//            }
-//            NSString *lastRTpaTH = [[[[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:NAMEFORUSER]stringByAppendingPathComponent:@"RTDIR"] stringByAppendingPathComponent:lastdate];
-//            
-//            NSFileManager *fileManager = [NSFileManager defaultManager];
-//            NSFileHandle *lastdayhandl;
-//            if(![fileManager fileExistsAtPath:lastRTpaTH]) //如果不存在
-//            {
-//                NSData *transformstate= [[NSData alloc]initWithData:[[NSString stringWithFormat:@"0"] dataUsingEncoding:NSUTF8StringEncoding]];
-//                // NSData *transformstate = [[NSData alloc] initWithBytes:@"0" length:1];
-//                [fileManager createFileAtPath:lastRTpaTH contents:transformstate attributes:nil];
-//                lastdayhandl = [NSFileHandle fileHandleForWritingAtPath:lastRTpaTH];
-//                //                [lastdayhandl writeData:transformstate];
-//                [lastdayhandl seekToEndOfFile];
-//                
-//            }
-//            else
-//            {
-//                lastdayhandl = [NSFileHandle fileHandleForUpdatingAtPath:lastRTpaTH];
-//                [lastdayhandl seekToEndOfFile];
-//            }
-//            //写进前一天的文件中
-//            NSData *data1= [[NSData alloc]initWithBytes:lastdayarr length:bufferDataFor.length-todaydata];
-//            [lastdayhandl writeData:data1];
-//            [lastdayhandl closeFile];
-//            
-//            NSFileHandle*fh1 = [NSFileHandle fileHandleForWritingAtPath:lastRTpaTH];
-//            [fh1 seekToFileOffset:0];
-//            NSData *data2= [[NSData alloc] initWithData:[[NSString stringWithFormat:@"0"] dataUsingEncoding:NSUTF8StringEncoding]];
-//            [fh1 writeData:data2];
-//            [fh1 closeFile];
-//            
-//            NSLog(@"多出了1天的数据：写完");
-//        }
-//        
-//        //多出2天的数据
-//        //if (bufferDataFor.length-todaydata>480&&bufferDataFor.length-todaydata<=960) {
-//        if (bufferDataFor.length-todaydata>480) {
-//            NSLog(@"多出了2天的数据");
-//            //写进前一天的文件中
-//            Byte lastdayarr[480];
-//            for (NSInteger i = 0; i<480;i++) {
-//                lastdayarr[i] = thisTimeRTByte[i+bufferDataFor.length-todaydata-480];
-//            }
-//            NSString *lastRTpaTH = [[[[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:NAMEFORUSER]stringByAppendingPathComponent:@"RTDIR"] stringByAppendingPathComponent:lastdate];
-//            
-//            NSFileManager *fileManager = [NSFileManager defaultManager];
-//            NSFileHandle *lastdayhandl;
-//            if(![fileManager fileExistsAtPath:lastRTpaTH]) //如果不存在
-//            {
-//                NSData *transformstate= [[NSData alloc]initWithData:[[NSString stringWithFormat:@"0"] dataUsingEncoding:NSUTF8StringEncoding]];
-//                //  NSData *transformstate = [[NSData alloc] initWithBytes:@"0" length:1];
-//                [fileManager createFileAtPath:lastRTpaTH contents:transformstate attributes:nil];
-//                lastdayhandl = [NSFileHandle fileHandleForWritingAtPath:lastRTpaTH];
-//                //                [lastdayhandl writeData:transformstate];                [lastdayhandl seekToEndOfFile];
-//            }
-//            else
-//            {
-//                lastdayhandl = [NSFileHandle fileHandleForUpdatingAtPath:lastRTpaTH];
-//                [lastdayhandl seekToEndOfFile];
-//            }
-//            
-//            NSData *data= [[NSData alloc]initWithBytes:lastdayarr length:480];
-//            [lastdayhandl writeData:data];
-//            [lastdayhandl closeFile];
-//            
-//            NSFileHandle*fh1 = [NSFileHandle fileHandleForWritingAtPath:lastRTpaTH];
-//            [fh1 seekToFileOffset:0];
-//            NSData *data2= [[NSData alloc] initWithData:[[NSString stringWithFormat:@"0"] dataUsingEncoding:NSUTF8StringEncoding]];
-//            [fh1 writeData:data2];
-//            [fh1 closeFile];
-//            NSLog(@"2天数据:前一天写完");
-//            
-//            //写进大前天的文件中
-//            Byte thirdayarr[bufferDataFor.length-todaydata-480];
-//            for (NSInteger i = 0; i<bufferDataFor.length-todaydata-480;i++) {
-//                thirdayarr[i] = thisTimeRTByte[i];
-//            }
-//            NSString *thirRTpaTH = [[[[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:NAMEFORUSER]stringByAppendingPathComponent:@"RTDIR"] stringByAppendingPathComponent:threedate];
-//            
-//            NSFileManager *fileManager1 = [NSFileManager defaultManager];
-//            NSFileHandle *lastdayhandl1;
-//            if(![fileManager1 fileExistsAtPath:thirRTpaTH]) //如果不存在
-//            {
-//                NSData *transformstate= [[NSData alloc]initWithData:[[NSString stringWithFormat:@"0"] dataUsingEncoding:NSUTF8StringEncoding]];
-//                //  NSData *transformstate = [[NSData alloc] initWithBytes:@"0" length:1];
-//                [fileManager1 createFileAtPath:thirRTpaTH contents:transformstate attributes:nil];
-//                lastdayhandl1 = [NSFileHandle fileHandleForWritingAtPath:thirRTpaTH];
-//                //                 [lastdayhandl1 writeData:transformstate];
-//                [lastdayhandl1 seekToEndOfFile];
-//            }
-//            else
-//            {
-//                lastdayhandl1 = [NSFileHandle fileHandleForUpdatingAtPath:thirRTpaTH];
-//                [lastdayhandl1 seekToEndOfFile];
-//            }
-//            //写进前一天的文件中
-//            NSData *data1= [[NSData alloc]initWithBytes:thirdayarr length:bufferDataFor.length-todaydata-480];
-//            [lastdayhandl1 writeData:data1];
-//            [lastdayhandl1 closeFile];
-//            
-//            NSFileHandle*fh2 = [NSFileHandle fileHandleForWritingAtPath:thirRTpaTH];
-//            [fh2 seekToFileOffset:0];
-//            NSData *data3= [[NSData alloc] initWithData:[[NSString stringWithFormat:@"0"] dataUsingEncoding:NSUTF8StringEncoding]];
-//            [fh2 writeData:data3];
-//            [fh2 closeFile];
-//            NSLog(@"2天数据:大前天写完");
-//        }
-//        
-//        
-//        
-//    }
-//    else{
-//        NSData *data= [[NSData alloc]initWithData:bufferDataFor];
-//        [fh writeData:data];
-//        [fh closeFile];
-//        
-//        NSFileHandle*fh1 = [NSFileHandle fileHandleForWritingAtPath:rthistoryPath];
-//        [fh1 seekToFileOffset:0];
-//        NSData *data1= [[NSData alloc] initWithData:[[NSString stringWithFormat:@"0"] dataUsingEncoding:NSUTF8StringEncoding]];
-//        [fh1 writeData:data1];
-//        [fh1 closeFile];
-//        
-//        NSLog(@"只有一天数据写完");
-//    }
-//    /****************辐射历史数据处理完毕********************************/
-//    
-//    
-//    /****************计步历史数据处理********************************/
-//    
-//    NSLog(@"计步：需要接收的长度为%ld",bufferDataFortwo.length);
-//    Byte *thisTimeSPByte = (Byte *)[bufferDataFortwo bytes];     //
-//    
-//    //判断当收到数据大于今天最多保存数据量时的处理
-//    if (bufferDataFortwo.length>todaydata) {
-//        /***********************今天的文件中只保存今天的数据**************************************/
-//        Byte todayarry[todaydata];  //今天的数据
-//        for (NSInteger i = 0; i<todaydata; i++) {
-//            todayarry[i] = thisTimeSPByte[i+bufferDataFortwo.length-todaydata];
-//        }
-//        NSData *data= [[NSData alloc]initWithBytes:todayarry length:todaydata];
-//        [fhand writeData:data];
-//        [fhand closeFile];
-//        
-//        NSFileHandle*fh1 = [NSFileHandle fileHandleForWritingAtPath:stepshistoryPath];
-//        [fh1 seekToFileOffset:0];
-//        NSData *data1= [[NSData alloc] initWithData:[[NSString stringWithFormat:@"0"] dataUsingEncoding:NSUTF8StringEncoding]];
-//        [fh1 writeData:data1];
-//        [fh1 closeFile];
-//        
-//        NSLog(@"计步：今天的数据已写完");
-//        /**********************************根据数据大小将数据分别保存到前几天的文件中*******************************************/
-//        
-//        if (bufferDataFortwo.length-todaydata<=480) {    //只多出一天的数据
-//            NSLog(@"计步：多出了1天的数据");
-//            Byte lastdayarr[bufferDataFortwo.length-todaydata];   //前一天的数据
-//            for (NSInteger i = 0; i<bufferDataFortwo.length-todaydata;i++) {
-//                lastdayarr[i] = thisTimeSPByte[i];
-//            }
-//            NSString *lastSPpaTH = [[[[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:NAMEFORUSER]stringByAppendingPathComponent:@"SPDIR"] stringByAppendingPathComponent:lastdate];
-//            
-//            NSFileManager *fileManager = [NSFileManager defaultManager];
-//            NSFileHandle *lastdayhandl;
-//            if(![fileManager fileExistsAtPath:lastSPpaTH]) //如果不存在
-//            {
-//                NSData *transformstate= [[NSData alloc]initWithData:[[NSString stringWithFormat:@"0"] dataUsingEncoding:NSUTF8StringEncoding]];
-//                //  NSData *transformstate = [[NSData alloc] initWithBytes:@"0" length:1];
-//                [fileManager createFileAtPath:lastSPpaTH contents:transformstate attributes:nil];
-//                lastdayhandl = [NSFileHandle fileHandleForWritingAtPath:lastSPpaTH];
-//                //                 [lastdayhandl writeData:transformstate];
-//                [lastdayhandl seekToEndOfFile];
-//            }
-//            else
-//            {
-//                lastdayhandl = [NSFileHandle fileHandleForUpdatingAtPath:lastSPpaTH];
-//                [lastdayhandl seekToEndOfFile];
-//            }
-//            //写进前一天的文件中
-//            NSData *data1= [[NSData alloc]initWithBytes:lastdayarr length:bufferDataFortwo.length-todaydata];
-//            [lastdayhandl writeData:data1];
-//            [lastdayhandl closeFile];
-//            
-//            NSFileHandle*fh1 = [NSFileHandle fileHandleForWritingAtPath:lastSPpaTH];
-//            [fh1 seekToFileOffset:0];
-//            NSData *data2= [[NSData alloc] initWithData:[[NSString stringWithFormat:@"0"] dataUsingEncoding:NSUTF8StringEncoding]];
-//            [fh1 writeData:data2];
-//            [fh1 closeFile];
-//            
-//            NSLog(@"计步：多出了1天的数据：写完");
-//        }
-//        
-//        //多出2天的数据
-//        //if (bufferDataFortwo.length-todaydata>480&&bufferDataFortwo.length-todaydata<=960) {
-//        if (bufferDataFortwo.length-todaydata>480) {
-//            NSLog(@"计步：多出了2天的数据");
-//            //写进前一天的文件中
-//            Byte lastdayarr[480];
-//            for (NSInteger i = 0; i<480;i++) {
-//                lastdayarr[i] = thisTimeSPByte[i+bufferDataFortwo.length-todaydata-480];
-//            }
-//            NSString *lastSPpaTH = [[[[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:NAMEFORUSER]stringByAppendingPathComponent:@"SPDIR"] stringByAppendingPathComponent:lastdate];
-//            
-//            NSFileManager *fileManager = [NSFileManager defaultManager];
-//            NSFileHandle *lastdayhandl;
-//            if(![fileManager fileExistsAtPath:lastSPpaTH]) //如果不存在
-//            {
-//                NSData *transformstate= [[NSData alloc]initWithData:[[NSString stringWithFormat:@"0"] dataUsingEncoding:NSUTF8StringEncoding]];
-//                //  NSData *transformstate = [[NSData alloc] initWithBytes:@"0" length:1];
-//                [fileManager createFileAtPath:lastSPpaTH contents:transformstate attributes:nil];
-//                lastdayhandl = [NSFileHandle fileHandleForWritingAtPath:lastSPpaTH];
-//                //                 [lastdayhandl writeData:transformstate];
-//                [lastdayhandl seekToEndOfFile];
-//            }
-//            else
-//            {
-//                lastdayhandl = [NSFileHandle fileHandleForUpdatingAtPath:lastSPpaTH];
-//                [lastdayhandl seekToEndOfFile];
-//            }
-//            
-//            NSData *data= [[NSData alloc]initWithBytes:lastdayarr length:480];
-//            [lastdayhandl writeData:data];
-//            [lastdayhandl closeFile];
-//            
-//            
-//            NSFileHandle*fh1 = [NSFileHandle fileHandleForWritingAtPath:lastSPpaTH];
-//            [fh1 seekToFileOffset:0];
-//            NSData *data2= [[NSData alloc] initWithData:[[NSString stringWithFormat:@"0"] dataUsingEncoding:NSUTF8StringEncoding]];
-//            [fh1 writeData:data2];
-//            [fh1 closeFile];
-//            NSLog(@"计步：2天数据:前一天写完");
-//            
-//            //写进大前天的文件中
-//            Byte thirdayarr[bufferDataFortwo.length-todaydata-480];
-//            for (NSInteger i = 0; i<bufferDataFortwo.length-todaydata-480;i++) {
-//                thirdayarr[i] = thisTimeSPByte[i];
-//            }
-//            NSString *thirSPpaTH = [[[[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:NAMEFORUSER]stringByAppendingPathComponent:@"SPDIR"] stringByAppendingPathComponent:threedate];
-//            
-//            NSFileManager *fileManager1 = [NSFileManager defaultManager];
-//            NSFileHandle *lastdayhandl1;
-//            if(![fileManager1 fileExistsAtPath:thirSPpaTH]) //如果不存在
-//            {
-//                NSData *transformstate= [[NSData alloc]initWithData:[[NSString stringWithFormat:@"0"] dataUsingEncoding:NSUTF8StringEncoding]];
-//                // NSData *transformstate = [[NSData alloc] initWithBytes:@"0" length:1];
-//                [fileManager1 createFileAtPath:thirSPpaTH contents:transformstate attributes:nil];
-//                lastdayhandl1 = [NSFileHandle fileHandleForWritingAtPath:thirSPpaTH];
-//                //                 [lastdayhandl writeData:transformstate];
-//                [lastdayhandl1 seekToEndOfFile];
-//            }
-//            else
-//            {
-//                lastdayhandl1 = [NSFileHandle fileHandleForUpdatingAtPath:thirSPpaTH];
-//                [lastdayhandl1 seekToEndOfFile];
-//            }
-//            //写进前一天的文件中
-//            NSData *data1= [[NSData alloc]initWithBytes:thirdayarr length:bufferDataFortwo.length-todaydata-480];
-//            [lastdayhandl1 writeData:data1];
-//            [lastdayhandl1 closeFile];
-//            
-//            
-//            NSFileHandle*fh2 = [NSFileHandle fileHandleForWritingAtPath:lastSPpaTH];
-//            [fh2 seekToFileOffset:0];
-//            NSData *data3= [[NSData alloc] initWithData:[[NSString stringWithFormat:@"0"] dataUsingEncoding:NSUTF8StringEncoding]];
-//            [fh2 writeData:data3];
-//            [fh2 closeFile];
-//            NSLog(@"计步：2天数据:大前天写完");
-//        }
-//    }
-//    else{
-//        NSData *data1= [[NSData alloc]initWithData:bufferDataFortwo];
-//        [fhand writeData:data1];
-//        [fhand closeFile];
-//        
-//        NSFileHandle*fh1 = [NSFileHandle fileHandleForWritingAtPath:stepshistoryPath];
-//        [fh1 seekToFileOffset:0];
-//        NSData *data12= [[NSData alloc] initWithData:[[NSString stringWithFormat:@"0"] dataUsingEncoding:NSUTF8StringEncoding]];
-//        [fh1 writeData:data12];
-//        [fh1 closeFile];
-//        
-//        NSLog(@"计步：只有一天数据写完");
-//    }
-//    
-//    /****************计步历史数据处理完毕********************************/
-//   // bufferDataFor = nil;
-//    [bufferDataFor resetBytesInRange:NSMakeRange(0, [bufferDataFor length])];
-//    [bufferDataFor setLength:0];
-//    
-//    [bufferDataFortwo resetBytesInRange:NSMakeRange(0, [bufferDataFor length])];
-//    [bufferDataFortwo setLength:0];
-//
-//   // bufferDataFortwo = nil;
-//    rtfilepackageint = 0;
-//    stepsfilepackageint = 0;
-//    pctimesteps = 1;
-//    pctime = 1;
-//    RTtime = 1;
-//    SPtime = 1;
-//    _alllength = 0;
-//    
-//}
+
 @end
 
 

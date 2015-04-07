@@ -1,18 +1,18 @@
 //
-//  TwoRegistViewController.m
+//  ThreeRegistViewController.m
 //  iSeed
 //
-//  Created by Chan Bill on 15/1/9.
+//  Created by Chan Bill on 15/3/20.
 //  Copyright (c) 2015年 elias kang. All rights reserved.
 //
 
-#import "TwoRegistViewController.h"
+#import "ThreeRegistViewController.h"
 
-@interface TwoRegistViewController ()
+@interface ThreeRegistViewController ()
 
 @end
 
-@implementation TwoRegistViewController
+@implementation ThreeRegistViewController
 {
     XYLoadingView *loading;
     NSUserDefaults *userDefaults;
@@ -36,23 +36,15 @@
     int i;
 }
 
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     BaseURLString = @"http://120.24.237.180:8080/PregnantHealth";
     
-    
-    CGFloat hei;
-    if (iPhone4) {
-        hei = 64;
-    }
-    else
-        hei = 0;
     //TemperatureApp/sendCaptchaByCellphone.jsp
-   // Client = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:BaseURLString]];
+    // Client = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:BaseURLString]];
     
-   userDefaults = [NSUserDefaults standardUserDefaults];
-   
+    userDefaults = [NSUserDefaults standardUserDefaults];
+    
     self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
     
     twoview = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
@@ -78,16 +70,16 @@
     [returnbutton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     [returnbutton addTarget:self action:@selector(returntofirst) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:returnbutton];
-
+    
     UIImageView *image = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"02text_inputbox.png"]];
     image.frame = CGRectMake(25,187, 270, 40);
     phonenum  = [[UITextField alloc]initWithFrame:CGRectMake(37,192, 158,30)];
     getchecknum = [[UIButton alloc]initWithFrame:CGRectMake(200, 192, 79, 30)];
-    phonenum.placeholder = NSLocalizedStringFromTable(@"Registtwo_PhonenumTextField_Text",@"MyLoaclization" , @"");
+    phonenum.placeholder = NSLocalizedStringFromTable(@"Registtwo_EmailnumTextField_Text",@"MyLoaclization" , @"");
     phonenum.textAlignment = NSTextAlignmentCenter;
     phonenum.font = [UIFont systemFontOfSize:14.0];
     phonenum.textColor = [UIColor grayColor];
-    phonenum.keyboardType = UIKeyboardTypeNumberPad;
+   // phonenum.keyboardType = UIKeyboardTypeNumberPad;
     [getchecknum setTitle:NSLocalizedStringFromTable(@"Registtwo_Getcheck_Text",@"MyLoaclization" , @"") forState:UIControlStateNormal];
     [getchecknum setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [getchecknum setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
@@ -118,20 +110,20 @@
     checknum.delegate = self;
     phonenum.returnKeyType = UIReturnKeyDone;
     checknum.returnKeyType = UIReturnKeyDone;
-   // phonenum.keyboardType = UIKeyboardTypeNamePhonePad;
+    // phonenum.keyboardType = UIKeyboardTypeNamePhonePad;
     
     [twoview addSubview:image];
     [twoview addSubview:image1];
     [twoview addSubview:checknum];
-   // [twoview addSubview:aggetchecknum];
+    // [twoview addSubview:aggetchecknum];
     [twoview addSubview:phonenum];
     [twoview addSubview:getchecknum];
-  //01text_inputbox
+    //01text_inputbox
     UIImageView *image2 = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"01text_inputbox.png"]];
     image2.frame = CGRectMake(25, 309, 270, 40);
     UIImageView *image3 = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"01text_inputbox.png"]];
     image3.frame = CGRectMake(25, 369, 270, 40);
-
+    
     
     passwd = [[UITextField alloc] initWithFrame:CGRectMake(37, 314, 240, 30)];
     checkpasswd = [[UITextField alloc]initWithFrame:CGRectMake(37, 374, 240, 30)];
@@ -150,17 +142,22 @@
     checkpasswd.returnKeyType = UIReturnKeyDone;
     checkpasswd.secureTextEntry = YES;
     passwd.secureTextEntry = YES;
-   // [checkpasswd addTarget:self action:@selector(moveview) forControlEvents:UIControlEventTouchUpInside];
+    // [checkpasswd addTarget:self action:@selector(moveview) forControlEvents:UIControlEventTouchUpInside];
     
     [twoview addSubview:image2];
     [twoview addSubview:image3];
     [twoview addSubview:passwd];
     [twoview addSubview:checkpasswd];
-
+    
     UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hidenKeyboard)];
     gesture.numberOfTapsRequired = 1;
     [self.view addGestureRecognizer:gesture];
- 
+    CGFloat hei;
+    if (iPhone4) {
+        hei = 64;
+    }
+    else
+        hei = 0;
     
     registbutton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     registbutton.frame = CGRectMake(100, 480-hei, 100, 50);
@@ -171,24 +168,24 @@
     registbutton.titleLabel.font = [UIFont systemFontOfSize:22.0];
     [registbutton addTarget:self action:@selector(isNetwork) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:registbutton];
-
- 
+    
+    
     // Do any additional setup after loading the view from its nib.
 }
 -(BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
     if (textField==checkpasswd) {
         
-    
-    NSTimeInterval animationDuration=0.30f;
-    [UIView beginAnimations:@"ResizeForKeyboard" context:nil];
-    [UIView setAnimationDuration:animationDuration];
-    float width = self.view.frame.size.width;
-    float height = self.view.frame.size.height;
-    //上移30个单位，按实际情况设置
-    CGRect rect=CGRectMake(0.0f,-60,width,height);
-    twoview.frame=rect;
-    [UIView commitAnimations];
+        
+        NSTimeInterval animationDuration=0.30f;
+        [UIView beginAnimations:@"ResizeForKeyboard" context:nil];
+        [UIView setAnimationDuration:animationDuration];
+        float width = self.view.frame.size.width;
+        float height = self.view.frame.size.height;
+        //上移30个单位，按实际情况设置
+        CGRect rect=CGRectMake(0.0f,-60,width,height);
+        twoview.frame=rect;
+        [UIView commitAnimations];
     }
     return YES;
 }
@@ -238,8 +235,8 @@
     CGRect rect=CGRectMake(0.0f,0.0f,width,height);
     twoview.frame=rect;
     [UIView commitAnimations];
-
-
+    
+    
 }
 -(void)isNetwork
 {
@@ -276,7 +273,7 @@
     else
     {
         if ([pwd isEqual:pwdcheck]) {
-          //  [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
+            //  [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
             NSMutableDictionary *parameters = [[NSMutableDictionary alloc]init];
             loading = [XYLoadingView loadingViewWithMessage:NSLocalizedStringFromTable(@"RLoadingview_Message",@"MyLoaclization" , @"")];
             [loading show];
@@ -287,35 +284,35 @@
             NSString *order = @"register.jsp";
             [self postHttpUrl:order postInfo:parameters state:1];
             NSLog(@"parameters = %@",parameters);
-
+            
             
             
         }
         else{
-        [FVCustomAlertView showDefaultErrorAlertOnView:self.view withTitle:NSLocalizedStringFromTable(@"Registtwo_Passwdnotsuit",@"MyLoaclization" , @"")];
-        [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(rmalert) userInfo:nil repeats:NO];
+            [FVCustomAlertView showDefaultErrorAlertOnView:self.view withTitle:NSLocalizedStringFromTable(@"Registtwo_Passwdnotsuit",@"MyLoaclization" , @"")];
+            [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(rmalert) userInfo:nil repeats:NO];
         }
     }
-
-
-
+    
+    
+    
 }
 -(void)getchecknum
 {
     getchecknum.enabled =NO;
-
+    
     num = phonenum.text;
-   
+    
     NSMutableDictionary *parameters = [[NSMutableDictionary alloc]init];
-    [parameters setValue:num forKey:@"phoneNo"];
-   // [parameters setValue:@"15815549151" forKey:@"phoneNo"];
+    [parameters setValue:num forKey:@"email"];
+    // [parameters setValue:@"15815549151" forKey:@"phoneNo"];
     [parameters setValue:@"1" forKey:@"type"];
-    NSString *order = @"sendCaptchaByCellphone.jsp";
+    NSString *order = @"sendCaptchaByEmail.jsp";
     [self postHttpUrl:order postInfo:parameters state:0];
     NSLog(@"parameters = %@",parameters);
-   
+    
     [NSTimer scheduledTimerWithTimeInterval:60 target:self selector:@selector(changetime) userInfo:nil repeats:NO];
-   
+    
 }
 -(void)changetime
 {
@@ -326,7 +323,7 @@
 -(void)aggetchenum
 {
     [self getchecknum];
-
+    
 }
 -(void)returntofirst
 {
@@ -345,10 +342,10 @@
 //0 获取验证码    1 注册    2 登录   3上传信息
 {
     
-  
+    
     NSURL * url = [NSURL URLWithString:BaseURLString];
-
-  
+    
+    
     
     AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
     
@@ -359,17 +356,17 @@
         NSData *resData = [[NSData alloc] initWithData:[requestTmp dataUsingEncoding:NSUTF8StringEncoding]];
         //系统自带JSON解析
         NSDictionary *resultDic = [NSJSONSerialization JSONObjectWithData:resData options:NSJSONReadingMutableLeaves error:nil];
-        NSLog(@"result = %@",[resultDic objectForKey:@"result"]);
+        NSLog(@"result = %@",resultDic);
         [loading dismiss];
         
-    //    [AFNetworkActivityIndicatorManager sharedManager].enabled = NO;
+        //    [AFNetworkActivityIndicatorManager sharedManager].enabled = NO;
         //注册成功
         if (state==1) {
             if ([[resultDic objectForKey:@"result"] isEqual:@"true"]) {
                 //创建用户个人信息文件夹
                 [FVCustomAlertView showDefaultDoneAlertOnView:self.view withTitle:NSLocalizedStringFromTable(@"Registtwo_Alretsucces_Tiltle",@"MyLoaclization" , @"")];
                 [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(rmalert) userInfo:nil repeats:NO];
-
+                
                 
                 imageDir = [NSString stringWithFormat:@"%@/Documents/%@", NSHomeDirectory(),num];//原来是参数是phonenum.text;
                 
@@ -400,14 +397,14 @@
                 {
                     [fileManager createDirectoryAtPath:spdir withIntermediateDirectories:YES attributes:nil error:nil];
                 }
-     
+                
                 [self initwithDB];
                 registbutton.enabled = NO;
-               
+                
                 [userDefaults setValue:num forKey:USERDEFAULTS_USERNAME];
                 [userDefaults setValue:pwd forKey:USERDEFAULTS_PASSWD];
                 [userDefaults setValue:@"1" forKey:USERDEFAULTS_LOGINSTATE];
-               
+                
                 //注册成功后插入新表中
                 NSString *sql = [NSString stringWithFormat:
                                  @"INSERT INTO '%@' ('%@', '%@', '%@', '%@', '%@',state) VALUES ('%@', '%@', '%@', '%@', '%@', '%@')",
@@ -425,7 +422,7 @@
                 [self postHttpUrl:order postInfo:parameters state:2];
                 NSLog(@"登录  parameters = %@",parameters);
             }
-                        //注册失败
+            //注册失败
             else if ([[resultDic objectForKey:@"result"] isEqual:@"captchfalse"])
             {
                 [FVCustomAlertView showDefaultErrorAlertOnView:self.view withTitle:NSLocalizedStringFromTable(@"Registtwo_Checknim_faile",@"MyLoaclization" , @"")];
@@ -438,7 +435,7 @@
                 [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(rmalert) userInfo:nil repeats:NO];
                 
             }
-
+            
         }
         
         //登录，
@@ -451,7 +448,7 @@
                 [parameters setValue:[userDefaults objectForKey:USERDEFAULTS_WEIGHT] forKey:@"weight"];
                 [parameters setValue:[userDefaults objectForKey:USERDEFAULTS_AGE] forKey:@"age"];
                 [parameters setValue:[userDefaults objectForKey:USERDEFAULTS_BIRTH] forKey:@"birthDate"];
-     
+                
                 NSString *order = @"createGravidaInfo.jsp";
                 [self postHttpUrl:order postInfo:parameters state:3];
                 NSLog(@"上传数据的parameters = %@",parameters);
@@ -470,13 +467,13 @@
         if (state==3) {
             if ([[resultDic objectForKey:@"result"] isEqual:@"true"]) {
                 
-            [(AppDelegate*)[UIApplication sharedApplication].delegate setsidemenu];
+                [(AppDelegate*)[UIApplication sharedApplication].delegate setsidemenu];
             }
             else{
-            //归档
-            NSString *sql1 = [NSString stringWithFormat:@"update '%@' set state ='%@' where ID='%d'",TABLENAME,@"1",1];
-            [self execSql:sql1];
-             [(AppDelegate *)[UIApplication sharedApplication].delegate setlogin];
+                //归档
+                NSString *sql1 = [NSString stringWithFormat:@"update '%@' set state ='%@' where ID='%d'",TABLENAME,@"1",1];
+                [self execSql:sql1];
+                [(AppDelegate *)[UIApplication sharedApplication].delegate setlogin];
             }
         }
         
@@ -499,20 +496,20 @@
                 [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(rmalert) userInfo:nil repeats:NO];
                 
             }
-    
+            
         }
-
+        
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [loading dismiss];
         //出错处理多种情况
         if (state==2|state==3) {
-           // [userDefaults setValue:@"1" forKey:USERDEFAULTS_SENDTOWEB];
+            // [userDefaults setValue:@"1" forKey:USERDEFAULTS_SENDTOWEB];
             NSString *sql1 = [NSString stringWithFormat:@"update '%@' set state ='%@' where ID='%d'",TABLENAME,@"1",1];
             //  NSString *sql2 = [NSString stringWithFormat:@"delete from '%@'  where ID = '%d'",TABLENAME,2];
             
             [self execSql:sql1];
-             [(AppDelegate *)[UIApplication sharedApplication].delegate setlogin];
+            [(AppDelegate *)[UIApplication sharedApplication].delegate setlogin];
         }
         else
         {
@@ -538,11 +535,11 @@
         NSLog(@"数据库打开失败");
     }
     else{
-    NSLog(@"创建数据库成功");
-    
-    // NSString *sqlCreateTable = @"CREATE TABLE IF NOT EXISTS PERSONINFO (ID INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, age TEXT, address TEXT,weight TEXT)";
-    NSString *sqlCreateTable = @"CREATE TABLE IF NOT EXISTS INFORPERSONN (ID INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, age TEXT, birth TEXT, weight TEXT, high TEXT, state TEXT)";
-    [self execSql:sqlCreateTable];
+        NSLog(@"创建数据库成功");
+        
+        // NSString *sqlCreateTable = @"CREATE TABLE IF NOT EXISTS PERSONINFO (ID INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, age TEXT, address TEXT,weight TEXT)";
+        NSString *sqlCreateTable = @"CREATE TABLE IF NOT EXISTS INFORPERSONN (ID INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, age TEXT, birth TEXT, weight TEXT, high TEXT, state TEXT)";
+        [self execSql:sqlCreateTable];
     }
 }
 

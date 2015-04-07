@@ -27,7 +27,7 @@
 -(void)OpenFile:(NSString *)file
 {
     NSData *hexFileData = [NSData dataWithContentsOfFile:file];
-    NSLog(@"hexdata = %@",hexFileData);
+    
     if (hexFileData.length > 0) {
         
         [self convertHexFileToBin:hexFileData];
@@ -45,6 +45,7 @@
 -(void)openFile:(NSURL *)fileURL
 {
     NSData *hexFileData = [NSData dataWithContentsOfURL:fileURL];
+    
     if (hexFileData.length > 0) {
         [self convertHexFileToBin:hexFileData];
         [self.fileDelegate onFileOpened:self.binFileSize];

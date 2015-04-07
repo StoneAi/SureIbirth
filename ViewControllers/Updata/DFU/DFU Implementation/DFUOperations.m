@@ -15,7 +15,9 @@
 
 
 @implementation DFUOperations
-
+{
+    NSString *LocalPath;
+}
 @synthesize dfuDelegate;
 @synthesize dfuRequests;
 @synthesize binFileSize;
@@ -114,7 +116,26 @@ NSDate *startTime, *finishTime;
     [dfuRequests startDFU:firmwareType];
     [dfuRequests writeFileSize:(uint32_t)fileRequests.binFileSize];
 }
-
+//[NSString stringWithFormat:@"%@/%@/%@",NSHomeDirectory(),@"Documents",@"s110_v0_0.29e.hex"]
+-(void)performOldDFUOnLocalFile:(NSString *)firmwareURL
+{
+    LocalPath = firmwareURL;
+    isPerformedOldDFU = YES;
+    if (firmwareURL && self.dfuFirmwareType == APPLICATION) {
+        [self initFirstFileOperations];
+        [self initParameters];
+        [fileRequests OpenFile:firmwareURL];
+        [dfuRequests enableNotification];
+        [dfuRequests startOldDFU];
+        [dfuRequests writeFileSizeForOldDFU:(uint32_t)fileRequests.binFileSize];
+    }
+    else {
+        NSString *errorMessage = [NSString stringWithFormat:@"Old DFU only supports Application upload"];
+        [dfuDelegate onError:errorMessage];
+        [dfuRequests resetSystem];
+    }
+    
+}
 -(void)performOldDFUOnFile:(NSURL *)firmwareURL
 {
     isPerformedOldDFU = YES;
@@ -219,13 +240,15 @@ NSDate *startTime, *finishTime;
     NSString *errorMessage = [NSString stringWithFormat:@"Error on StartDFU\n Message: %@",[self responseErrorMessage:dfuResponse.responseStatus]];
     switch (dfuResponse.responseStatus) {
         case OPERATION_SUCCESSFUL_RESPONSE:
-            NSLog(@"successfully received startDFU notification");
+            NSLog(@"successfully received startDFU notification");//成功  传送文件
             [self startSendingFile];
             break;
         case OPERATION_NOT_SUPPORTED_RESPONSE:
             if (!isPerformedOldDFU) {
                 NSLog(@"device has old DFU. switching to old DFU ...");
+                //remove 19
                 [self performOldDFUOnFile:firmwareFile];
+              //  [self performOldDFUOnLocalFile:LocalPath];
             }
             else {
                 NSLog(@"Operation not supported");

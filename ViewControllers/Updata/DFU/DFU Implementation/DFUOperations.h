@@ -63,5 +63,5 @@
 -(void)performOldDFUOnFile:(NSURL *)firmwareURL;
 -(void)performDFUOnLocalFile:(NSString *)firmwareURL firmwareType:(DfuFirmwareTypes)firmwareType;
 -(void)cancelDFU;
-
+-(void)performOldDFUOnLocalFile:(NSString *)firmwareURL;
 @end

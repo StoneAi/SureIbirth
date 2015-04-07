@@ -10,6 +10,6 @@
 #import "DFUOperations.h"
 #import <CoreBluetooth/CoreBluetooth.h>
 #import "ScannerDelegate.h"
-@interface DFUViewController : UIViewController<DFUOperationsDelegate,ScannerDelegate,CBCentralManagerDelegate>
+@interface DFUViewController : UIViewController<DFUOperationsDelegate,CBCentralManagerDelegate>
 @property (strong, nonatomic) CBCentralManager *bluetoothManager;
 @end

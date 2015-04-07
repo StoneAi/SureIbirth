@@ -65,7 +65,10 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     userDefaults = [NSUserDefaults standardUserDefaults];
     //[self initwithDB];
-    [self readfromsqlite];
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        [self readfromsqlite];
+    });
+    
     return self;
 }
 
@@ -132,7 +135,7 @@
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     
     UIButton *rbutton = [UIButton buttonWithType:UIButtonTypeCustom];
-    rbutton.frame = CGRectMake(0, 0, 20,16);
+    rbutton.frame = CGRectMake(0, 0, 22,22);
     [rbutton setImage:[UIImage imageNamed:InforSaveImage] forState:UIControlStateNormal];
    [rbutton addTarget:self action:@selector(MakeSure) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *rightButton = [[UIBarButtonItem alloc]initWithCustomView:rbutton];
@@ -599,7 +602,7 @@
         
      
     }
-    cell.textLabel.highlightedTextColor = CELLTEXTLABELHIGHTCOLOR;
+   // cell.textLabel.highlightedTextColor = CELLTEXTLABELHIGHTCOLOR;
     
     cell.selectedBackgroundView = [[UIView alloc]initWithFrame:cell.frame];
     
@@ -797,7 +800,7 @@
 //state 0 登录   1 上传   2  监测到注册时上传失败   3上传失败重新登录上传
 {
     
-        NSURL * url = [NSURL URLWithString:@"http://115.29.205.2:8080/PregnantHealth"];
+        NSURL * url = [NSURL URLWithString:@"http://120.24.237.180:8080/PregnantHealth"];
         AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
         
         
@@ -823,44 +826,46 @@
                     [data writeToFile:imagephoto atomically:NO];
                     
                     //上传头像
-                    
-                    // something
-                    NSString *RTorder =@"uploadHeadPhoto.jsp";
-                    NSMutableURLRequest *request = [httpClient multipartFormRequestWithMethod:@"POST" path:RTorder parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-//                        NSData *photodata;
-//                        photodata = [self imageWithImage:myimage scaledToSize:CGSizeMake(20, 20)];
-                        
-                        [formData appendPartWithFileData:data name:@"header.jpg" fileName:@"header.jpg" mimeType:@"multipart/form-data; boundary=Boundary+0xAbCdEfGbOuNdArY"];
-                        // [formData appendPartWithFormData:RTdata name:str];
-                        NSLog(@"上传头像");
-         
-                    }];
-                    AFHTTPRequestOperation *op = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-                    [httpClient.operationQueue addOperation:op];
-                    
-                    [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-                        NSString *requestTmp = [NSString stringWithString:operation.responseString];
-                        NSData *resData = [[NSData alloc] initWithData:[requestTmp dataUsingEncoding:NSUTF8StringEncoding]];
-                        //系统自带JSON解析
-                        NSDictionary *resultDic = [NSJSONSerialization JSONObjectWithData:resData options:NSJSONReadingMutableLeaves error:nil];
-                        NSLog(@" 头像resultDic = %@",resultDic);
-                        NSLog(@"上传头像result = %@",[resultDic objectForKey:@"result"]);
-                      
-                        if ([[resultDic objectForKey:@"result"] isEqual:@"true"]) {
-                            NSLog(@"头像上传完成");
-   
-                        }
-                        if ([[resultDic objectForKey:@"result"] isEqual:@"false"]) {
-                            NSLog(@"头像上传失败");
+                    if (data!=nil) {
+                        // something
+                        NSString *RTorder =@"uploadHeadPhoto.jsp";
+                        NSMutableURLRequest *request = [httpClient multipartFormRequestWithMethod:@"POST" path:RTorder parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+                            //                        NSData *photodata;
+                            //                        photodata = [self imageWithImage:myimage scaledToSize:CGSizeMake(20, 20)];
                             
+                            [formData appendPartWithFileData:data name:@"header.jpg" fileName:@"header.jpg" mimeType:@"multipart/form-data; boundary=Boundary+0xAbCdEfGbOuNdArY"];
+                            // [formData appendPartWithFormData:RTdata name:str];
+                            NSLog(@"上传头像");
                             
-                        }
+                        }];
+                        AFHTTPRequestOperation *op = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+                        [httpClient.operationQueue addOperation:op];
                         
-                    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                        [loading dismiss];
-                        NSLog(@"上传失败->%@", error);
-                        
-                    }];
+                        [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+                            NSString *requestTmp = [NSString stringWithString:operation.responseString];
+                            NSData *resData = [[NSData alloc] initWithData:[requestTmp dataUsingEncoding:NSUTF8StringEncoding]];
+                            //系统自带JSON解析
+                            NSDictionary *resultDic = [NSJSONSerialization JSONObjectWithData:resData options:NSJSONReadingMutableLeaves error:nil];
+                            NSLog(@" 头像resultDic = %@",resultDic);
+                            NSLog(@"上传头像result = %@",[resultDic objectForKey:@"result"]);
+                            
+                            if ([[resultDic objectForKey:@"result"] isEqual:@"true"]) {
+                                NSLog(@"头像上传完成");
+                                
+                            }
+                            if ([[resultDic objectForKey:@"result"] isEqual:@"false"]) {
+                                NSLog(@"头像上传失败");
+                                
+                                
+                            }
+                            
+                        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                            [loading dismiss];
+                            NSLog(@"上传失败->%@", error);
+                            
+                        }];
+                    }
+                    
                     
                     [loading dismiss];
                     XYAlertView *alertView3 = [XYAlertView alertViewWithTitle:nil

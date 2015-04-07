@@ -40,6 +40,8 @@
 -(void) clearndata;
 -(int)readBattry;
 -(void)readShankState;
+-(void)readFirm;
+-(void)DFU;
 //-(void) HexToDec;
 @end
 

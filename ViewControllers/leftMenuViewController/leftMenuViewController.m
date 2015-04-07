@@ -47,7 +47,10 @@
     database_path = [NSString stringWithFormat:@"%@/Documents/%@/%@", NSHomeDirectory(),[userDefaults objectForKey:USERDEFAULTS_USERNAME],DBNAME];
     NSLog(@"%@",database_path);
     // [self initwithDB];
-    [self readfromsqlite];
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+       [self readfromsqlite];
+    });
+    
     
     return self;
 }
@@ -64,7 +67,14 @@
     //[self initwithDB];
     
     myimageview = [[UIImageView alloc]init];
-    myimageview.frame = CGRectMake(70, 110, 100,100);
+    
+    CGFloat hei;
+    if (iPhone4) {
+        hei = 64;
+    }
+    else
+        hei = 0;
+    myimageview.frame = CGRectMake(70, 110-hei, 100,100);
     NSString *imagehead  = [[[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:NAMEFORUSER]stringByAppendingPathComponent:@"imagephoto"];
     NSFileHandle *fh = [NSFileHandle fileHandleForReadingAtPath:imagehead];
     NSData *mydata = [fh readDataToEndOfFile];
@@ -80,8 +90,7 @@
     
     
     
-    
-    _name = [[UILabel alloc]initWithFrame:CGRectMake(100, 190, 140, 30)];
+    _name = [[UILabel alloc]initWithFrame:CGRectMake(100, 190-hei, 140, 30)];
     _name.text = RDname;
     _name.textColor = CELLTEXTLABELHIGHTCOLOR;
     _name.font = [UIFont systemFontOfSize:18.0];
@@ -129,7 +138,7 @@
             
             NSString *order = @"getGravidaInfo.jsp";
             [self getHttpUrl:order state:0];
-            
+            //[self GetFirmware];
 //            NSString *order1 = @"getHeadPhoto.jsp";
 //            [self getHttpUrl:order1 state:1];
            
@@ -140,7 +149,7 @@
 -(void)getHttpUrl:(NSString *)urlString state:(int)sta
 {
    
-    NSURL * url = [NSURL URLWithString:@"http://115.29.205.2:8080/PregnantHealth"];
+    NSURL * url = [NSURL URLWithString:@"http://120.24.237.180:8080/PregnantHealth"];
     AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
     
     [httpClient getPath:urlString parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -200,15 +209,33 @@
                 dispatch_async(dispatch_get_global_queue(0, 0), ^{
 
                        //下载头像，并保存到文件中
-               NSData * data = [NSData dataWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://115.29.205.2:8080/%@",[resultDic objectForKey:@"filePath"]]]];
+               NSData * data = [NSData dataWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://120.24.237.180:8080/%@",[resultDic objectForKey:@"filePath"]]]];
               // [myimageview setImage:[UIImage imageWithData:data]];
                NSString *imagehead  = [[[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:NAMEFORUSER]stringByAppendingPathComponent:@"imagephoto"];
-               [data writeToFile:imagehead atomically:NO];
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        myimageview.image = [UIImage imageWithData:data];
+              //       NSLog(@"data = %@,dizhi = %@",data,imagehead);
+//                    NSFileManager *fileManager = [NSFileManager defaultManager];
+//                    NSLog(@"data = %@",data);
+//                if(![fileManager fileExistsAtPath:imagehead]) //如果不存在
+//                {
+//                    [fileManager createFileAtPath:imagehead contents:nil attributes:nil];
+//                    NSFileHandle *handl = [NSFileHandle fileHandleForWritingAtPath:imagehead];
+//                    [handl writeData:data];
+//                }
+//                else
+                    [data writeToFile:imagehead atomically:NO];
+               
+                    
+                NSFileHandle *fh = [NSFileHandle fileHandleForReadingAtPath:imagehead];
+                NSData *mydata = [fh readDataToEndOfFile];
+                    
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    if (mydata.length!=0) {
+                        myimageview.image = [UIImage imageWithData:mydata];
+                    }
+
                     });
                 });
-                 //  });
+                
                 
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                 NSLog(@"由于网络原因失败error111 = %@",error.localizedDescription);
@@ -222,6 +249,8 @@
     }];
     
 }
+
+
 
 
 #pragma mark 数据库模块
@@ -570,7 +599,8 @@
         
         
     }
-    
+   // cell.textLabel.font = [UIFont systemFontOfSize:15.0];
+    cell.textLabel.font = [UIFont boldSystemFontOfSize:18.0];
     cell.imageView.contentMode = UIViewContentModeCenter;
     
     cell.textLabel.highlightedTextColor = [UIColor whiteColor];

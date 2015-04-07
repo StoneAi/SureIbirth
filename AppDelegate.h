@@ -27,6 +27,8 @@
 @property (strong, nonatomic) UIWindow *window;
 @property (nonatomic)BOOL  isAppNeedUpdate;//是否有软件需要更新
 @property (nonatomic) NSString *appUpdateURL; //需要更新的地址
+@property (nonatomic)BOOL  isFirmwareNeedUpdate;//是否有软件需要更新
+@property (nonatomic) NSString *FirmwareUpdateURL; //需要更新的地址
 @property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
@@ -39,6 +41,8 @@
 -(void)setlogin;
 -(void)settworegist;
 - (void)saveContext;
+-(void)setthreeregist;
+-(void)setforget;
 - (NSURL *)applicationDocumentsDirectory;
 
 

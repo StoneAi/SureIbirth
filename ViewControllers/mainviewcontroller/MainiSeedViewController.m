@@ -13,7 +13,7 @@
 #import "FVCustomAlertView.h"
 #import "AFNetworkReachabilityManager.h"
 #import "AppDelegate.h"
-#import "SPView.h"
+
 @interface MainiSeedViewController ()
 @property (strong,nonatomic) NSString *usrname;
 
@@ -29,8 +29,8 @@
     NSMutableArray *RssiArray;
     NSUserDefaults *user;
     UILabel *simlabel;
-    NSMutableArray *arraychar;
-    SPView *Spcharview;
+   // NSMutableArray *arraychar;
+   
 }
 @synthesize customview;
 @synthesize my;
@@ -43,20 +43,21 @@ static int i,a1,a2,a3,a4,a5,aver,j;
 - (void)postHttpUrl:(NSString *)urlString postInfo:(NSDictionary *)info state:(int)state
 //
 {
-    NSURL * url = [NSURL URLWithString:@"http://115.29.205.2:8080/PregnantHealth"];
+    NSURL * url = [NSURL URLWithString:@"http://120.24.237.180:8080/PregnantHealth"];
     AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
     
     
-    [httpClient postPath:urlString parameters:info success:^(AFHTTPRequestOperation *operation,id responseObject) {
+    [httpClient getPath:urlString parameters:info success:^(AFHTTPRequestOperation *operation,id responseObject) {
         
         NSString *requestTmp = [NSString stringWithString:operation.responseString];
         NSData *resData = [[NSData alloc] initWithData:[requestTmp dataUsingEncoding:NSUTF8StringEncoding]];
         //系统自带JSON解析
         NSDictionary *resultDic = [NSJSONSerialization JSONObjectWithData:resData options:NSJSONReadingMutableLeaves error:nil];
-        NSLog(@"ok result = %@",[resultDic objectForKey:@"result"]);
+        NSLog(@"ok result = %@",resultDic);
         
-        
-        
+      //  NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://120.24.237.180:8080/PregnantHealth/upload/radiation/109/2015-04-02"]]];
+        NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://120.24.237.180:8080/upload/radiation/109/2015-04-02"]]];
+        NSLog(@"data.length = %ld",data.length);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"由于网络原因失败error = %@",error.localizedDescription);
         
@@ -69,7 +70,7 @@ static int i,a1,a2,a3,a4,a5,aver,j;
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.center = CGPointMake([UIScreen mainScreen].bounds.size.width/2, [UIScreen mainScreen].bounds.size.height/2);
-    arraychar = [NSMutableArray array];
+   // arraychar = [NSMutableArray array];
     //self.view.backgroundColor = [UIColor blueColor];
     _blesta = 0;
     user = [NSUserDefaults standardUserDefaults];
@@ -149,7 +150,7 @@ static int i,a1,a2,a3,a4,a5,aver,j;
     customview.progressTotal = 10;
     customview.clockwise = NO;
     
-    customview.theme.thickness = 30;
+    customview.theme.thickness = 35;
     customview.theme.sliceDividerHidden = NO;
     customview.theme.sliceDividerColor = [UIColor whiteColor];
     customview.theme.sliceDividerThickness = 2;
@@ -178,12 +179,28 @@ static int i,a1,a2,a3,a4,a5,aver,j;
     
 
  
-    simlabel = [[UILabel alloc] initWithFrame:CGRectMake(110, 200, 40, 40)];
+    simlabel = [[UILabel alloc] initWithFrame:CGRectMake(110, 200, 50, 40)];
     simlabel.font = [UIFont systemFontOfSize:25];
     simlabel.center = CGPointMake(self.view.center.x, self.view.center.y-30);
     simlabel.textAlignment = NSTextAlignmentCenter;
     [self.view addSubview:simlabel];
     
+//    UIButton* butt = [[UIButton alloc]initWithFrame:CGRectMake(50, 420, 50, 50) ];
+//    butt.backgroundColor = [UIColor blackColor];
+//    [butt addTarget:self action:@selector(bu) forControlEvents:UIControlEventTouchUpInside];
+//    [self.view addSubview:butt];
+    
+}
+
+-(void)bu
+{
+    NSMutableDictionary *paramare = [[NSMutableDictionary alloc] init];
+    [paramare setObject:@"2015-04-03" forKey:@"fileName"];
+    [self postHttpUrl:@"downloadRadiationFile.jsp" postInfo:nil state:0];
+    
+    
+    
+    //[self.currentperipheral DFU];
 }
 
 -(void)shareToFD
@@ -259,6 +276,9 @@ static int i,a1,a2,a3,a4,a5,aver,j;
 #pragma mark 连接按钮动作
 -(void)animatbuttonselect
 {
+    if (thread!=nil) {
+        [thread cancel];
+    }
     
         //  NSInteger bluthState = self.my.state;
         NSInteger State = self.my.state;
@@ -274,17 +294,19 @@ static int i,a1,a2,a3,a4,a5,aver,j;
                 break;
             case 5:
             {
-                [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(scanTimer) userInfo:nil repeats:NO];
+                [NSTimer scheduledTimerWithTimeInterval:4 target:self selector:@selector(scanTimer) userInfo:nil repeats:NO];
                 [self.my scanForPeripheralsWithServices:@[BLEdebug.uartServiceUUID] options:@{CBCentralManagerScanOptionAllowDuplicatesKey: [NSNumber numberWithBool:NO]}];
+         //       [self.my scanForPeripheralsWithServices:nil options:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:NO], CBCentralManagerScanOptionAllowDuplicatesKey, nil]];
                 NSLog(@"wait connect peripheral! ");
                 customview.label.font = [UIFont systemFontOfSize:20.0];
                 customview.label.text = NSLocalizedStringFromTable(@"Button_ScanforBle_Title",@"MyLoaclization" , @"");
                 // [self.my scanForPeripheralsWithServices:@[BLEdebug.deviceBattyServiceUUID] options:@{CBCentralManagerScanOptionAllowDuplicatesKey: [NSNumber numberWithBool:NO]}];
                 
                 XYLoadingView *loadingView1 = XYShowLoading(NSLocalizedStringFromTable(@"Loading_Title",@"MyLoaclization" , @""));
-                
-                [loadingView1 performSelector:@selector(dismiss) withObject:nil afterDelay:6];
                 thread = [[NSThread alloc]initWithTarget:self selector:@selector(runthread) object:nil];
+                 //[thread cancel];
+                [loadingView1 performSelector:@selector(dismiss) withObject:nil afterDelay:6];
+                
                 
                 
                 animatbutton.enabled = NO;
@@ -304,46 +326,62 @@ static int i,a1,a2,a3,a4,a5,aver,j;
 {
     [self.my stopScan];
     CBPeripheral *myperipheral;
+    BOOL isold = NO;
     
-    if (CBperArray.count>1) {
-    do{
-        if ([RssiArray objectAtIndex:0]>=[RssiArray objectAtIndex:1]) {
-            [CBperArray removeObjectAtIndex:1];
-            [RssiArray removeObjectAtIndex:1];
+    
+    //优先连接以前连接过的设备,如果没有则优先选择连接信号强度最强的设备
+    if (CBperArray.count>0) {
+        NSLog(@"array = %@",CBperArray);
+        for (CBPeripheral *b in CBperArray) {  //优先保存过的mac
+            if ([[NSString stringWithFormat:@"%@",b.identifier] isEqual:[user objectForKey:USERDEFAULTS_BLENAME]]) {
+                myperipheral = b;
+                NSLog(@"连接上以保存过的ble");
+                isold = YES;
+             
+            }
+            
         }
-        else{
-            [CBperArray removeObjectAtIndex:0];
-            [RssiArray removeObjectAtIndex:0];
-        }
-        i--;
-        NSLog(@"rssiarry = %@",RssiArray);
-        NSLog(@"CBarray = %@",CBperArray);
-        NSLog(@"rcount = %ld  CBcount = %ld",RssiArray.count,CBperArray.count);
-    } while (CBperArray.count>1);
-     
-    }
 
-    myperipheral = [CBperArray objectAtIndex:0];
-    NSLog(@"connect id = %@",myperipheral.identifier);
-    
-    for (CBPeripheral *b in CBperArray) {  //优先保存过的mac
-        if ([[NSString stringWithFormat:@"%@",b.identifier] isEqual:[user objectForKey:USERDEFAULTS_BLENAME]]) {
-            myperipheral = b;
-            NSLog(@"连接上以保存过的ble");
+    }
+        if (!isold) {
+        
+        if (CBperArray.count>1) {
+            do{
+                if ([RssiArray objectAtIndex:0]>=[RssiArray objectAtIndex:1]) {
+                    [CBperArray removeObjectAtIndex:1];
+                    [RssiArray removeObjectAtIndex:1];
+                }
+                else{
+                    [CBperArray removeObjectAtIndex:0];
+                    [RssiArray removeObjectAtIndex:0];
+                }
+                i--;
+                NSLog(@"rssiarry = %@",RssiArray);
+                NSLog(@"CBarray = %@",CBperArray);
+                NSLog(@"rcount = %ld  CBcount = %ld",RssiArray.count,CBperArray.count);
+            } while (CBperArray.count>1);
+            myperipheral = [CBperArray objectAtIndex:0];
         }
+        else if (CBperArray.count == 1)
+        {
+            myperipheral = [CBperArray objectAtIndex:0];
+        }
+        
+        NSLog(@"connect id = %@",myperipheral.identifier);
     }
     
-    
-    
-    
-    [user setObject:[NSString stringWithFormat:@"%@",myperipheral.identifier] forKey:USERDEFAULTS_BLENAME]; //保存mac地址
-    [user synchronize];
-    
-    self.currentperipheral = [[BLEdebug alloc] initwithPeripheral:myperipheral delegate:self];
-    [self.my connectPeripheral:myperipheral options:@{CBConnectPeripheralOptionNotifyOnDisconnectionKey: [NSNumber numberWithBool:YES]}];
-    
+    if (myperipheral!=nil) {
+        [user setObject:[NSString stringWithFormat:@"%@",myperipheral.identifier] forKey:USERDEFAULTS_BLENAME]; //保存mac地址
+        [user synchronize];
+        
+        self.currentperipheral = [[BLEdebug alloc] initwithPeripheral:myperipheral delegate:self];
+        [self.my connectPeripheral:myperipheral options:@{CBConnectPeripheralOptionNotifyOnDisconnectionKey: [NSNumber numberWithBool:YES]}];
+        _blesta=1;
+    }
     [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(BleisState) userInfo:nil repeats:NO];
     
+    [CBperArray removeAllObjects];
+    [RssiArray removeAllObjects];
 }
 -(void)BleisState
 {
@@ -351,13 +389,15 @@ static int i,a1,a2,a3,a4,a5,aver,j;
         customview.label.text =NSLocalizedStringFromTable(@"Button_DisscanforBle_Title",@"MyLoaclization" , @"");
         animatbutton.enabled = YES;
     }
-
+    
+    
 
 }
 
 -(void)runthread
 {
      [self.currentperipheral readBattry];
+    [self.currentperipheral readFirm];
     while (![NSThread currentThread].isCancelled) {
         [self changevalue];
        
@@ -367,8 +407,6 @@ static int i,a1,a2,a3,a4,a5,aver,j;
     
     
 }
-
-
 
 
 -(void)rmalert
@@ -399,7 +437,6 @@ static int i,a1,a2,a3,a4,a5,aver,j;
     [loadingView dismiss];
   //  [FVCustomAlertView showDefaultErrorAlertOnView:self.view withTitle:@"蓝牙连接已断开"];
 }
-
 
 
 #pragma mark 蓝牙模块
@@ -448,7 +485,7 @@ static int i,a1,a2,a3,a4,a5,aver,j;
    // NSInteger RTvalue = rtvv;
     NSLog(@"RTV = %d",rtv);
     NSLog(@"rtvv = %d",rtvv);
-    [arraychar addObject:[NSString stringWithFormat:@"%d",rtvv]];
+  //  [arraychar addObject:[NSString stringWithFormat:@"%d",rtvv]];
   
     [customview setfixedRingone:rtvv/5*3];
 }
@@ -457,7 +494,7 @@ static int i,a1,a2,a3,a4,a5,aver,j;
 -(void) centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI
 {
     NSLog(@"peripheral name = %@ rssi = %@ id = %@", peripheral.name,RSSI,peripheral.identifier);
-    if ([peripheral.name isEqual:@"V0"]) {
+    if ([peripheral.name isEqual:@"V0"]|[peripheral.name isEqual:@"iBirthstone"]) {//iBirthstone
         [RssiArray addObject:RSSI];
         [CBperArray addObject:peripheral];
 //    [self.my stopScan];
@@ -468,7 +505,7 @@ static int i,a1,a2,a3,a4,a5,aver,j;
 
 -(void) centralManager:(CBCentralManager *)central didConnectPeripheral:(CBPeripheral *)peripheral
 {
-    if ([peripheral.name isEqual:@"V0"]) {
+    if ([peripheral.name isEqual:@"V0"]|[peripheral.name isEqual:@"iBirthstone"]) {
         
     
     [self.currentperipheral didconnect];
@@ -502,10 +539,13 @@ static int i,a1,a2,a3,a4,a5,aver,j;
    // [FVCustomAlertView showDefaultErrorAlertOnView:self.view withTitle:@"蓝牙连接已断开"];
     customview.label.text = NSLocalizedStringFromTable(@"Button_DisconnectBle_Title",@"MyLoaclization" , @"");
     customview.label.font = [UIFont systemFontOfSize:20];
+    simlabel.text = @" ";
+    [customview setfixedRingone:0];
     _blesta=0;
    // NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
     [user setObject:@"0" forKey:USERDEFAULTS_BLESTATE];
     [user synchronize];
+    
     
     
 }
@@ -518,9 +558,9 @@ static int i,a1,a2,a3,a4,a5,aver,j;
 
 -(void)threadrun
 {
-   
-    dispatch_async(dispatch_get_global_queue(0,0), ^{
-        
+   //[thread cancel];
+    dispatch_sync(dispatch_get_global_queue(0,0), ^{
+  
         [thread start];
         
     });
@@ -559,7 +599,9 @@ static int i,a1,a2,a3,a4,a5,aver,j;
 
 -(int)readbat
 {
+    
     return [self.currentperipheral readBattry];
+    
 }
 
 -(int)fun:(int)a flag:(int)flag

@@ -7,7 +7,7 @@
 //
 
 #import "DeclearViewController.h"
-
+#import "Config.h"
 @interface DeclearViewController ()
 
 @end
@@ -17,8 +17,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = NSLocalizedStringFromTable(@"tittleLabel_ServicesOrderVC_Text", @"MyLoaclization" , @"");
-    UITextView *mytextView = [[UITextView alloc]initWithFrame:CGRectMake(0, 60, 320, 508)];
+    UITextView *mytextView = [[UITextView alloc]initWithFrame:CGRectMake(10, 60, 300, 508)];
     
+    
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
+    //imageView.image = [UIImage imageNamed:@"homepagebackground1231.png"];
+    [imageView setImage:[UIImage imageNamed:MainViewImage]];
+    imageView.contentMode = UIViewContentModeScaleAspectFill;
+    imageView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    
+    [self.view addSubview:imageView];
     
     mytextView.editable=NO;
     // Do any additional setup after loading the view from its nib.
@@ -29,11 +37,12 @@
     paragraphStyle.firstLineHeadIndent = 20.f;
     paragraphStyle.alignment = NSTextAlignmentJustified;
     
-    NSDictionary *attributes = @{ NSFontAttributeName:[UIFont systemFontOfSize:16], NSParagraphStyleAttributeName:paragraphStyle, NSForegroundColorAttributeName:[UIColor colorWithRed:76./255. green:75./255. blue:71./255. alpha:1]
+    NSDictionary *attributes = @{ NSFontAttributeName:[UIFont systemFontOfSize:14], NSParagraphStyleAttributeName:paragraphStyle, NSForegroundColorAttributeName:[UIColor colorWithRed:76./255. green:75./255. blue:71./255. alpha:1]
                                   };
     NSString *content = NSLocalizedStringFromTable(@"serviceOrderTextView_ServicesOrderVC_Text", @"MyLoaclization" , @"");
     mytextView.attributedText = [[NSAttributedString alloc]initWithString:content attributes:attributes];
     [self.view addSubview:mytextView];
+    mytextView.backgroundColor = [UIColor clearColor];
 }
 
 - (void)didReceiveMemoryWarning {

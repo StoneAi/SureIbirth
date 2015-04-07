@@ -200,6 +200,7 @@
     // Update sensor name
     ScannedPeripheral *peripheral = [peripherals objectAtIndex:indexPath.row];
     cell.textLabel.text = [peripheral name];
+    
     NSLog(@"cell = %@",cell.textLabel.text);
     // Update RSSI indicator
     int RSSI = peripheral.RSSI;
