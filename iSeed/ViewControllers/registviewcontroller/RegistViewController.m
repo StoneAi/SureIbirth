@@ -92,7 +92,7 @@
     nextbutton.frame = CGRectMake(120, 480-hei, 80, 50);
     [nextbutton setTitle:NSLocalizedStringFromTable(@"NextButton_Title",@"MyLoaclization" , @"") forState:UIControlStateNormal];
     [nextbutton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-    
+    [nextbutton setBackgroundColor:[UIColor whiteColor]];
     nextbutton.titleLabel.font = [UIFont systemFontOfSize:22.0];
     [nextbutton addTarget:self action:@selector(nextregist) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:nextbutton];

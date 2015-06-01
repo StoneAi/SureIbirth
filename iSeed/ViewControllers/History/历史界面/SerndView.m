@@ -12,9 +12,10 @@
 
 -(void)layoutIfNeeded
 {
-    UIImageView *myimage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 60, 330, 568)];
-    myimage.image = [UIImage imageNamed:HisBackImage];
-    [self addSubview:myimage];
+    //TODO elias
+//    UIImageView *myimage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 60, 330, 568)];
+//    myimage.image = [UIImage imageNamed:HisBackImage];
+//    [self addSubview:myimage];
  
     if (_firstsize>20&&_firstsize<60) {
         

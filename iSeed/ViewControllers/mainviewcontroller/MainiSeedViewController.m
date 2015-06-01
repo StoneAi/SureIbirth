@@ -23,6 +23,8 @@
 @implementation MainiSeedViewController
 {
     NSThread *thread;
+    NSThread *threadAnimation;
+    NSTimer *timerAnimation;
     int rtv;
     XYLoadingView *loadingView;
     NSMutableArray *CBperArray;
@@ -30,6 +32,16 @@
     NSUserDefaults *user;
     UILabel *simlabel;
     CBPeripheral *simpleperipheral;
+    //TODO elias
+    CAShapeLayer* _gaugeCircleLayer1;
+    UILabel *ralevellab;
+    UILabel *beginnumlab;
+    UILabel *endnumlab;
+    UILabel *raexplab;
+    UILabel *raindexlab;
+    UILabel *rawordslab;
+    leftMenuViewController *left;
+    int rtvv;
    
    // NSMutableArray *arraychar;
    
@@ -44,16 +56,22 @@
 static int i,a1,a2,a3,a4,a5,aver,j;
 
 
-
+//- (void) viewDidDisappear
+//{
+//    [timerAnimation invalidate];
+//    timerAnimation = nil;
+//}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    rtvv = 1;
     self.view.center = CGPointMake([UIScreen mainScreen].bounds.size.width/2, [UIScreen mainScreen].bounds.size.height/2);
    // arraychar = [NSMutableArray array];
     //self.view.backgroundColor = [UIColor blueColor];
     _blesta = 0;
     user = [NSUserDefaults standardUserDefaults];
-    self.view.backgroundColor = [UIColor clearColor];
+    //TODO elias
+    self.view.backgroundColor = [UIColor whiteColor];//[UIColor clearColor];
     NSInteger bluethState = self.my.state;
     CBperArray = [[NSMutableArray alloc]init];
     RssiArray = [[NSMutableArray alloc]init];
@@ -77,13 +95,14 @@ static int i,a1,a2,a3,a4,a5,aver,j;
             break;
     }
     
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
-    //imageView.image = [UIImage imageNamed:@"homepagebackground1231.png"];
-    [imageView setImage:[UIImage imageNamed:MainViewImage]];
-    imageView.contentMode = UIViewContentModeScaleAspectFill;
-    imageView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    
-    [self.view addSubview:imageView];                      //背景图片
+    //TODO elias
+//    UIImageView *imageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
+//    //imageView.image = [UIImage imageNamed:@"homepagebackground1231.png"];
+//    [imageView setImage:[UIImage imageNamed:MainViewImage]];
+//    imageView.contentMode = UIViewContentModeScaleAspectFill;
+//    imageView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+//    
+//    [self.view addSubview:imageView];                      //背景图片
 
     
    
@@ -122,6 +141,7 @@ static int i,a1,a2,a3,a4,a5,aver,j;
     
        
     //圆环配置
+    /*
     CGRect framera = CGRectMake(40, 90, 240, 240);
     
     customview = [self progressViewWithFrame:framera];
@@ -136,12 +156,21 @@ static int i,a1,a2,a3,a4,a5,aver,j;
     customview.label.textColor = CircleTextColor;
     customview.label.text = NSLocalizedStringFromTable(@"Mainview_ConnectBLE", @"MyLoaclization" , @"");
     customview.label.font = [UIFont boldSystemFontOfSize:20];
+    customview.realtimeShow = YES;
+    [self.view addSubview:customview];
+    */
+    
     //customview.label.center = CGPointMake(self.view.center.x, self.view.center.y+40);
     // customview.label.hidden = YES;
-    customview.realtimeShow = YES;
     //customview.backgroundColor = [UIColor colorWithRed:131.0/255 green:204.0/255 blue:210.0/255 alpha:1];
     //customview.fixedringColornums = 60;
-    [self.view addSubview:customview];
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat: @"yyyy-MM-dd"];
+    NSDate *date = [[NSDate alloc]init];
+    _DateLabel.text = [NSString stringWithFormat:@"%@",[date dateStringWithFormat:@"yyyy-MM-dd"]];
+    _DateLabel.textColor = [UIColor grayColor];
+    
     
     
     animatbutton = [[UIButton alloc]initWithFrame:CGRectMake centrlbutton_size];
@@ -150,17 +179,21 @@ static int i,a1,a2,a3,a4,a5,aver,j;
     
     
    // UIButton *shareSDKbutton = [[UIButton alloc]initWithFrame:CGRectMake(270, 100, 25, 19)];
-    UIButton *shareSDKbutton = [[UIButton alloc]initWithFrame:CGRectMake(270, 100, 25, 19)];
-    [shareSDKbutton setImage:[UIImage imageNamed:MainViewShareImage] forState:UIControlStateNormal];
-    [shareSDKbutton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
-    [self.view addSubview:shareSDKbutton];
-    
-    [shareSDKbutton addTarget:self action:@selector(shareToFD) forControlEvents:UIControlEventTouchUpInside];
+    //TODO elias
+//    UIButton *shareSDKbutton = [[UIButton alloc]initWithFrame:CGRectMake(270, 100, 25, 19)];
+//    [shareSDKbutton setImage:[UIImage imageNamed:MainViewShareImage] forState:UIControlStateNormal];
+//    [shareSDKbutton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+//    [self.view addSubview:shareSDKbutton];
+//    
+//    [shareSDKbutton addTarget:self action:@selector(shareToFD) forControlEvents:UIControlEventTouchUpInside];
     
 //单位Label
-    DbmLable = [[UILabel alloc]initWithFrame:CGRectMake(60, 450, 200, 50)];
-    DbmLable.font = [UIFont boldSystemFontOfSize:10];
-    DbmLable.center = CGPointMake(self.view.center.x+48, self.view.center.y-25);
+   // DbmLable = [[UILabel alloc]initWithFrame:CGRectMake(60, 450, 200, 50)];
+   // DbmLable.font = [UIFont boldSystemFontOfSize:10];
+    //TODO elias
+    DbmLable = [[UILabel alloc]initWithFrame:CGRectMake(182, 276, 61, 21)];//187 316 303
+    DbmLable.font = [UIFont boldSystemFontOfSize:9];
+    //DbmLable.center = CGPointMake(self.view.center.x+48, self.view.center.y-25);
     DbmLable.textAlignment = NSTextAlignmentCenter;
     DbmLable.textColor = [UIColor lightGrayColor];
     DbmLable.text = @"mW/㎡";
@@ -168,17 +201,125 @@ static int i,a1,a2,a3,a4,a5,aver,j;
     DbmLable.hidden = YES;
  
  //DbmLabel
-    simlabel = [[UILabel alloc] initWithFrame:CGRectMake(80, 200, 100, 40)];
-    simlabel.font = [UIFont systemFontOfSize:25];
-    simlabel.center = CGPointMake(self.view.center.x, self.view.center.y-30);
+   // simlabel = [[UILabel alloc] initWithFrame:CGRectMake(80, 200, 100, 40)];
+    //simlabel.font = [UIFont systemFontOfSize:25];
+    //TODO elias
+    simlabel = [[UILabel alloc] initWithFrame:CGRectMake(124, 276, 70, 21)];//120 316 244
+    simlabel.font = [UIFont boldSystemFontOfSize:17.0];
+    simlabel.textColor = [UIColor colorWithRed:60.0/255.0 green:184.0/255.0 blue:120.0/255.0 alpha:1.0];//[UIColor colorWithRed:17.0/225.0 green:255.0/255.0 blue:249.0/255.0 alpha:1.0];
+    //simlabel.center = CGPointMake(self.view.center.x, self.view.center.y-30);
     simlabel.textAlignment = NSTextAlignmentCenter;
     [self.view addSubview:simlabel];
     
+    //TODO elias
+    rawordslab = [[UILabel alloc] initWithFrame:CGRectMake(115, 174, 90, 21)]; //214
+    //raindexlab.font = [UIFont boldSystemFontOfSize:71.0];
+    rawordslab.font = [UIFont systemFontOfSize:17.0];
+    rawordslab.text = NSLocalizedStringFromTable(@"Mainview_liveindex", @"MyLoaclization" , @"");
+    rawordslab.textColor = [UIColor lightGrayColor];
+    //raindexlab.center = CGPointMake(self.view.center.x, self.view.center.y-30);
+    rawordslab.textAlignment = NSTextAlignmentCenter;
+    [self.view addSubview:rawordslab];
+    
+    
+    raindexlab = [[UILabel alloc] initWithFrame:CGRectMake(90, 197, 140, 80)];//237
+    //raindexlab.font = [UIFont boldSystemFontOfSize:71.0];
+    raindexlab.font = [UIFont systemFontOfSize:13.0];
+    raindexlab.text = NSLocalizedStringFromTable(@"Mainview_ConnectBLE", @"MyLoaclization" , @"");
+    raindexlab.textColor = CircleTextColor;
+    //raindexlab.center = CGPointMake(self.view.center.x, self.view.center.y-30);
+    raindexlab.textAlignment = NSTextAlignmentCenter;
+    [self.view addSubview:raindexlab];
+    
+    
+    ralevellab = [[UILabel alloc] initWithFrame:CGRectMake(127, 298, 67, 21)];//338
+    ralevellab.font = [UIFont systemFontOfSize:17.0];
+    ralevellab.text = @"SAFE";
+    ralevellab.textColor =  [UIColor colorWithRed:60.0/255.0 green:184.0/255.0 blue:120.0/255.0 alpha:1.0]; // [UIColor colorWithRed:17.0/225.0 green:255.0/255.0 blue:249.0/255.0 alpha:1.0];
+    //ralevellab.center = CGPointMake(self.view.center.x, self.view.center.y-30);
+    ralevellab.textAlignment = NSTextAlignmentCenter;
+    [self.view addSubview:ralevellab];
+    
+    beginnumlab = [[UILabel alloc] initWithFrame:CGRectMake(69, 327, 10, 21)];//367
+    beginnumlab.font = [UIFont systemFontOfSize:17.0];
+    beginnumlab.text = @"0";
+    beginnumlab.textColor = [UIColor colorWithRed:170.0/225.0 green:170.0/255.0 blue:170.0/255.0 alpha:1.0];
+    //beginnumlab.center = CGPointMake(self.view.center.x, self.view.center.y-30);
+    beginnumlab.textAlignment = NSTextAlignmentCenter;
+    [self.view addSubview:beginnumlab];
+    
+    endnumlab = [[UILabel alloc] initWithFrame:CGRectMake(226, 327, 39, 21)];//367
+    endnumlab.font = [UIFont systemFontOfSize:17.0];
+    endnumlab.text = @"100+";
+    endnumlab.textColor = [UIColor colorWithRed:170.0/225.0 green:170.0/255.0 blue:170.0/255.0 alpha:1.0];
+    //endnumlab.center = CGPointMake(self.view.center.x, self.view.center.y-30);
+    endnumlab.textAlignment = NSTextAlignmentCenter;
+    [self.view addSubview:endnumlab];
+    
+    raexplab = [[UILabel alloc] initWithFrame:CGRectMake(83, 327, 154, 21)]; //367
+    raexplab.font = [UIFont systemFontOfSize:11.0];
+    raexplab.text = @"ENJOY YOUR TIME";
+    raexplab.textColor = [UIColor colorWithRed:170.0/225.0 green:170.0/255.0 blue:170.0/255.0 alpha:1.0];
+    //raexplab.center = CGPointMake(self.view.center.x, self.view.center.y-30);
+    raexplab.textAlignment = NSTextAlignmentCenter;
+    [self.view addSubview:raexplab];
+    
+    _belowrauplabel.text = NSLocalizedStringFromTable(@"Mainview_ra_uplabel", @"MyLoaclization" , @"");
+    _belowrabelowlable.text = NSLocalizedStringFromTable(@"Mainview_ra_belowlable", @"MyLoaclization" , @"");
+    _belowstepuplab.text = NSLocalizedStringFromTable(@"Mainview_step_uplable", @"MyLoaclization" , @"");
+    _belowstepbelowlab.text = NSLocalizedStringFromTable(@"Mainview_step_belowlable", @"MyLoaclization" , @"");
+    [self circlelayinit];
     
 //    UIButton* butt = [[UIButton alloc]initWithFrame:CGRectMake(50, 420, 50, 50) ];
 //    butt.backgroundColor = [UIColor blackColor];
 //    [butt addTarget:self action:@selector(bu) forControlEvents:UIControlEventTouchUpInside];
 //    [self.view addSubview:butt];
+    
+}
+
+-(void)circlelayinit
+{
+    CGPoint arcCenter = CGPointMake(CGRectGetMidX(self.view.bounds), CGRectGetMidY(self.view.bounds)-40);
+   
+    
+    UIBezierPath *path = [UIBezierPath bezierPath];
+    
+    [path addArcWithCenter:arcCenter radius:CGRectGetWidth(self.view.bounds) / 3.0f startAngle:(3.0f * M_PI/4) endAngle:(3.0f * M_PI/4) + (6.0f * M_PI/4) clockwise:YES];
+    CAShapeLayer* _gaugeCircleLayer = [CAShapeLayer layer];
+    _gaugeCircleLayer.lineWidth = 2;
+    _gaugeCircleLayer.fillColor = [UIColor clearColor].CGColor;
+    _gaugeCircleLayer.strokeColor = [UIColor lightGrayColor].CGColor;
+    _gaugeCircleLayer.strokeStart = 0;
+    _gaugeCircleLayer.strokeEnd = 1;
+    _gaugeCircleLayer.path = path.CGPath;
+    _gaugeCircleLayer.lineCap = kCALineCapRound;
+    [self.view.layer addSublayer:_gaugeCircleLayer];
+    
+    UIBezierPath *Truepath = [UIBezierPath bezierPath];
+    [Truepath addArcWithCenter:arcCenter radius:CGRectGetWidth(self.view.bounds) / 3.0f startAngle:(3.0f * M_PI/4) endAngle:(3.0f * M_PI/4) + (6.0f * M_PI/4) clockwise:YES];
+    _gaugeCircleLayer1 = [CAShapeLayer layer];
+    _gaugeCircleLayer1.lineWidth = 10;
+    _gaugeCircleLayer1.fillColor = [UIColor clearColor].CGColor;
+    _gaugeCircleLayer1.strokeColor = [UIColor colorWithRed:60.0/255.0 green:184.0/255.0 blue:120.0/255.0 alpha:1.0].CGColor;//[UIColor colorWithRed:17.0/225.0 green:255.0/255.0 blue:249.0/255.0 alpha:1.0].CGColor;
+    _gaugeCircleLayer1.strokeStart = 0;
+    _gaugeCircleLayer1.strokeEnd = 0.0;
+    _gaugeCircleLayer1.path = Truepath.CGPath;
+    _gaugeCircleLayer1.lineCap = kCALineCapRound;
+    [self.view.layer addSublayer:_gaugeCircleLayer1];
+}
+
+//动画
+-(void)changeValue:(float)value
+{
+    _gaugeCircleLayer1.strokeEnd = value;
+    CABasicAnimation *pathAnimation = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
+    pathAnimation.duration = 0.5f;
+    // pathAnimation.fromValue = [NSNumber numberWithFloat:self.value];
+    // pathAnimation.toValue = [NSNumber numberWithFloat:value];
+    pathAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+    [_gaugeCircleLayer1 addAnimation:pathAnimation forKey:@"strokeEndAnimation"];
+    
+    
     
 }
 
@@ -268,7 +409,9 @@ static int i,a1,a2,a3,a4,a5,aver,j;
 {
     if (thread!=nil) {
         [thread cancel];
+       
     }
+
     
         //  NSInteger bluthState = self.my.state;
         NSInteger State = self.my.state;
@@ -288,12 +431,20 @@ static int i,a1,a2,a3,a4,a5,aver,j;
                 [self.my scanForPeripheralsWithServices:@[BLEdebug.uartServiceUUID] options:@{CBCentralManagerScanOptionAllowDuplicatesKey: [NSNumber numberWithBool:NO]}];
          //       [self.my scanForPeripheralsWithServices:nil options:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:NO], CBCentralManagerScanOptionAllowDuplicatesKey, nil]];
                 NSLog(@"wait connect peripheral! ");
-                customview.label.font = [UIFont systemFontOfSize:20.0];
-                customview.label.text = NSLocalizedStringFromTable(@"Button_ScanforBle_Title",@"MyLoaclization" , @"");
+//                customview.label.font = [UIFont systemFontOfSize:20.0];
+//                customview.label.text = NSLocalizedStringFromTable(@"Button_ScanforBle_Title",@"MyLoaclization" , @"");
+                
+                //TODO elias
+                raindexlab.font = [UIFont systemFontOfSize:20.0];
+                raindexlab.text = NSLocalizedStringFromTable(@"Button_ScanforBle_Title",@"MyLoaclization" , @"");
+                
                 // [self.my scanForPeripheralsWithServices:@[BLEdebug.deviceBattyServiceUUID] options:@{CBCentralManagerScanOptionAllowDuplicatesKey: [NSNumber numberWithBool:NO]}];
                 
                 XYLoadingView *loadingView1 = XYShowLoading(NSLocalizedStringFromTable(@"Loading_Title",@"MyLoaclization" , @""));
                 thread = [[NSThread alloc]initWithTarget:self selector:@selector(runthread) object:nil];
+               
+                // threadAnimation = [[NSThread alloc]initWithTarget:self selector:@selector(runthreadAnimation) object:nil];
+                // timerAnimation = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(runthreadAnimation) userInfo:nil repeats:YES];
                  //[thread cancel];
                 [loadingView1 performSelector:@selector(dismiss) withObject:nil afterDelay:6];
                 
@@ -378,7 +529,10 @@ static int i,a1,a2,a3,a4,a5,aver,j;
 -(void)BleisState
 {
     if (_blesta==0) {
-        customview.label.text =NSLocalizedStringFromTable(@"Button_DisscanforBle_Title",@"MyLoaclization" , @"");
+        //customview.label.text =NSLocalizedStringFromTable(@"Button_DisscanforBle_Title",@"MyLoaclization" , @"");
+        
+        //TODO elias
+        raindexlab.text = NSLocalizedStringFromTable(@"Button_DisscanforBle_Title",@"MyLoaclization" , @"");
         animatbutton.enabled = YES;
     }
     
@@ -392,12 +546,32 @@ static int i,a1,a2,a3,a4,a5,aver,j;
     [self.currentperipheral readFirm];
     while (![NSThread currentThread].isCancelled) {
         [self changevalue];
+        
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//          [self changeValue:rtvv];
+//             [_gaugeCircleLayer1 setNeedsDisplay];
+//        });
        
         [NSThread sleepForTimeInterval:1];
-       
+    
     }
     
     
+}
+
+-(void)runthreadAnimation
+{
+  //while (![NSThread currentThread].isCancelled) {
+    
+       
+  //}
+    
+//     while (![NSThread currentThread].isCancelled) {
+//        // [NSThread sleepForTimeInterval:1];
+//     [self changeValue:rtvv];
+//         
+//        
+//     }
 }
 
 
@@ -421,10 +595,17 @@ static int i,a1,a2,a3,a4,a5,aver,j;
 {
     [self.my cancelPeripheralConnection:self.currentperipheral.peripheral];
     self.animatbutton.enabled = YES;
-    customview.label.text = NSLocalizedStringFromTable(@"Button_DisconnectBle_Title",@"MyLoaclization" , @"");
-    customview.label.font = [UIFont systemFontOfSize:20];
+//    customview.label.text = NSLocalizedStringFromTable(@"Button_DisconnectBle_Title",@"MyLoaclization" , @"");
+//    customview.label.font = [UIFont systemFontOfSize:20];
+    
+    //TODO elias
+    raindexlab.text = NSLocalizedStringFromTable(@"Button_DisconnectBle_Title",@"MyLoaclization" , @"");
+    raindexlab.font = [UIFont systemFontOfSize:15];
+    
     [thread cancel];
-  
+    
+//    [threadAnimation cancel];
+    
     refreshbutton.enabled = NO;
     [loadingView dismiss];
     
@@ -466,25 +647,51 @@ static int i,a1,a2,a3,a4,a5,aver,j;
         
     }
    
-
-       int rtvv;
+      //TODO elias
+      // int rtvv;
     if (j<6) {
        rtvv= [self fun:rtv flag:j];
         j++;
     }
     else
        rtvv= [self fun:rtv flag:0];
+    float rtvvfloat = (float)rtvv/100;
+    
+    //TODO elias
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self changeValue:rtvvfloat];
+        
+        [_gaugeCircleLayer1 layoutIfNeeded];
+    });
+    
     if (rtvv>65) {
-        customview.label.textColor = [UIColor redColor];
-        customview.label.text =[NSString stringWithFormat:NSLocalizedStringFromTable(@"Mainview_Danger",@"MyLoaclization" , @"")];
-        customview.label.font = [UIFont boldSystemFontOfSize:32];
-        simlabel.textColor = [UIColor redColor];
+//        customview.label.textColor = [UIColor redColor];
+//        customview.label.text =[NSString stringWithFormat:NSLocalizedStringFromTable(@"Mainview_Danger",@"MyLoaclization" , @"")];
+//        customview.label.font = [UIFont boldSystemFontOfSize:32];
+    
+        
+        //TODO elias
+        ralevellab.text = [NSString stringWithFormat:NSLocalizedStringFromTable(@"Mainview_Danger",@"MyLoaclization" , @"")];
+        ralevellab.textColor = [UIColor colorWithRed:240.0/255.0 green:90.0/255.0 blue:33.0/255.0 alpha:1.0];
+        raindexlab.text = [NSString stringWithFormat:@"%d",rtvv];
+        raindexlab.font = [UIFont boldSystemFontOfSize:71.0];
+        
+        simlabel.textColor = [UIColor colorWithRed:240.0/255.0 green:90.0/255.0 blue:33.0/255.0 alpha:1.0];
+        _gaugeCircleLayer1.strokeColor = [UIColor colorWithRed:240.0/255.0 green:90.0/255.0 blue:33.0/255.0 alpha:1.0].CGColor;
     }
     else{
-        customview.label.text =[NSString stringWithFormat:NSLocalizedStringFromTable(@"Mainview_Safe",@"MyLoaclization" , @"")];
-        customview.label.font = [UIFont boldSystemFontOfSize:32];
-        customview.label.textColor = [UIColor colorWithRed:165.0/255 green:175.0/255 blue:176.0/255 alpha:1];
+//        customview.label.text =[NSString stringWithFormat:NSLocalizedStringFromTable(@"Mainview_Safe",@"MyLoaclization" , @"")];
+//        customview.label.font = [UIFont boldSystemFontOfSize:32];
+//        customview.label.textColor = [UIColor colorWithRed:165.0/255 green:175.0/255 blue:176.0/255 alpha:1];
+        
+        //TODO elias
+        ralevellab.text = [NSString stringWithFormat:NSLocalizedStringFromTable(@"Mainview_Safe",@"MyLoaclization" , @"")];
+        ralevellab.textColor = [UIColor colorWithRed:60.0/255.0 green:184.0/255.0 blue:120.0/255.0 alpha:1.0];//[UIColor colorWithRed:17.0/225.0 green:255.0/255.0 blue:249.0/255.0 alpha:1.0];
+        raindexlab.text = [NSString stringWithFormat:@"%d",rtvv];
+        raindexlab.font = [UIFont boldSystemFontOfSize:71.0];
+        
         simlabel.textColor = [UIColor colorWithRed:165.0/255 green:175.0/255 blue:176.0/255 alpha:1];
+        _gaugeCircleLayer1.strokeColor = [UIColor colorWithRed:60.0/255.0 green:184.0/255.0 blue:120.0/255.0 alpha:1.0].CGColor;
     }
    // simlabel.text = [NSString stringWithFormat:@"%d",rtvv];
      simlabel.text = [NSString stringWithFormat:@"%.2f",[self returnDbm:(float)label1*3600/1024/1000]];
@@ -492,8 +699,8 @@ static int i,a1,a2,a3,a4,a5,aver,j;
     NSLog(@"RTV = %d",rtv);
     NSLog(@"rtvv = %d",rtvv);
   
-  
-    [customview setfixedRingone:rtvv/5*3];
+   
+   // [customview setfixedRingone:rtvv/5*3];
     
      //  DbmLable.text = [NSString stringWithFormat:@"%.2f mW/㎡",[self returnDbm:(float)label1*3600/1024/1000]];
   //  simlabel.hidden = YES;
@@ -544,15 +751,23 @@ static int i,a1,a2,a3,a4,a5,aver,j;
          //[self.currentperipheral diddisconnect];
     }
     [thread cancel];
+//    [threadAnimation cancel];
     
     [self.currentperipheral diddisconnect];
     self.animatbutton.enabled = YES;
     [loadingView dismiss];
    // [FVCustomAlertView showDefaultErrorAlertOnView:self.view withTitle:@"蓝牙连接已断开"];
-    customview.label.text = NSLocalizedStringFromTable(@"Button_DisconnectBle_Title",@"MyLoaclization" , @"");
-    customview.label.font = [UIFont systemFontOfSize:20];
+    
+//    customview.label.text = NSLocalizedStringFromTable(@"Button_DisconnectBle_Title",@"MyLoaclization" , @"");
+//    customview.label.font = [UIFont systemFontOfSize:20];
+    
+    //TODO elias
+    raindexlab.text = NSLocalizedStringFromTable(@"Button_DisconnectBle_Title",@"MyLoaclization" , @"");
+    raindexlab.font = [UIFont systemFontOfSize:15.0];
     simlabel.text = @" ";
-    [customview setfixedRingone:0];
+    
+    //[customview setfixedRingone:0];
+    
     _blesta=0;
    // NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
     [user setObject:@"0" forKey:USERDEFAULTS_BLESTATE];
@@ -574,8 +789,12 @@ static int i,a1,a2,a3,a4,a5,aver,j;
     dispatch_sync(dispatch_get_global_queue(0,0), ^{
   
         [thread start];
-        
+
     });
+    
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//        timerAnimation = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(runthreadAnimation) userInfo:nil repeats:YES];
+//    });
 
 }
 
@@ -591,6 +810,12 @@ static int i,a1,a2,a3,a4,a5,aver,j;
    UIAlertView *promptAlert = (UIAlertView*)[theTimer userInfo];
     [promptAlert dismissWithClickedButtonIndex:0 animated:NO];
     promptAlert =NULL;
+}
+
+-(NSInteger )getblestate
+{
+    //NSLog(@"%ld",mainVC.blesta);
+    return _blesta;
 }
 
 -(void)blehistory
@@ -614,6 +839,27 @@ static int i,a1,a2,a3,a4,a5,aver,j;
     
     return [self.currentperipheral readBattry];
     
+}
+-(void)GetDelegate:(leftMenuViewController *)Controller
+{
+    left = Controller;
+    
+}
+
+- (IBAction)RadiationButton:(id)sender {
+    RtHistoryViewController *history =[[RtHistoryViewController alloc]init];
+    [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:history]
+                                                 animated:NO];
+    history.delegate = self;
+    [self.sideMenuViewController hideMenuViewController];
+}
+
+- (IBAction)WalkButton:(id)sender {
+    SpHistoryViewController *history =[[SpHistoryViewController alloc] init];
+    [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:history]
+                                                 animated:NO];
+    history.delegate = self;
+    [self.sideMenuViewController hideMenuViewController];
 }
 
 -(int)fun:(int)a flag:(int)flag
@@ -836,8 +1082,8 @@ static int i,a1,a2,a3,a4,a5,aver,j;
         NSLog(@"ok result = %@",resultDic);
         
         //  NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://120.24.237.180:8080/PregnantHealth/upload/radiation/109/2015-04-02"]]];
-        NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://120.24.237.180:8080/upload/radiation/109/2015-04-02"]]];
-        NSLog(@"data.length = %ld",data.length);
+//        NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://120.24.237.180:8080/upload/radiation/109/2015-04-02"]]];
+     //   NSLog(@"data.length = %ld",data.length);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"由于网络原因失败error = %@",error.localizedDescription);
         

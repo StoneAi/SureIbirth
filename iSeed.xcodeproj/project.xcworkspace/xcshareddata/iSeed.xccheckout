@@ -6,40 +6,24 @@
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>756BB774-5DB2-4290-B547-D647F3E06C56</string>
-	<key>IDESourceControlProjectName</key>
-	<string>iSeed</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>0C0CE9F429735988B21C2EA29D968B5BF7B3BD55</key>
 		<string>https://github.com/StoneAi/iSeed.git</string>
-		<key>20EABA3B8B7EA6C55B5731C24D58D2E500E93890</key>
-		<string>https://github.com/eliaskang/ibsios.git</string>
 	</dict>
-	<key>IDESourceControlProjectPath</key>
-	<string>iSeed.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>0C0CE9F429735988B21C2EA29D968B5BF7B3BD55</key>
-		<string>../..iSeed/</string>
-		<key>20EABA3B8B7EA6C55B5731C24D58D2E500E93890</key>
-		<string>../..</string>
+		<string>iSeed/</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/eliaskang/ibsios.git</string>
+	<string>https://github.com/StoneAi/iSeed.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>20EABA3B8B7EA6C55B5731C24D58D2E500E93890</string>
+	<string>0C0CE9F429735988B21C2EA29D968B5BF7B3BD55</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
-		<dict>
-			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
-			<string>public.vcs.git</string>
-			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>20EABA3B8B7EA6C55B5731C24D58D2E500E93890</string>
-			<key>IDESourceControlWCCName</key>
-			<string>ibsios</string>
-		</dict>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>

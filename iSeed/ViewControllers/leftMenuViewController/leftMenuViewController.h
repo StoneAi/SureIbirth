@@ -10,10 +10,11 @@
 #import "Config.h"
 #import "SettingTableViewController.h"
 #import "HistoryViewController.h"
-
+#import "RtHistoryViewController.h"
 #import "RESideMenu.h"
 #import "InforViewController.h"
-@interface leftMenuViewController : UIViewController< UITableViewDataSource, UITableViewDelegate,InforViewControllerDelegate,HistoryViewControllerDelegate,SettingTableViewControllerDelegate>
+#import "SpHistoryViewController.h"
+@interface leftMenuViewController : UIViewController< UITableViewDataSource, UITableViewDelegate,InforViewControllerDelegate,HistoryViewControllerDelegate,SettingTableViewControllerDelegate,RtHistoryViewControllerDelegate,SpHistoryViewControllerDelegate>
 {
     sqlite3 *db;
 }

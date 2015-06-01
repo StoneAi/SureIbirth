@@ -19,14 +19,16 @@
     
     self.navigationItem.title = NSLocalizedStringFromTable(@"ConnectVC_Title", @"MyLoaclization" , @"");
     //self.view.backgroundColor = [UIColor colorWithRed:215./255 green:215./255 blue:215./255 alpha:1.0f];
+    //TODO elias
+    self.view.backgroundColor = [UIColor whiteColor];
     
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
-    //imageView.image = [UIImage imageNamed:@"homepagebackground1231.png"];
-    [imageView setImage:[UIImage imageNamed:MainViewImage]];
-    imageView.contentMode = UIViewContentModeScaleAspectFill;
-    imageView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    
-    [self.view addSubview:imageView];
+//    UIImageView *imageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
+//    //imageView.image = [UIImage imageNamed:@"homepagebackground1231.png"];
+//    [imageView setImage:[UIImage imageNamed:MainViewImage]];
+//    imageView.contentMode = UIViewContentModeScaleAspectFill;
+//    imageView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+//    
+//    [self.view addSubview:imageView];
     
     
     UIBarButtonItem *myButton = [[UIBarButtonItem alloc]init];

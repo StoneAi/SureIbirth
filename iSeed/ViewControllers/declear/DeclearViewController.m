@@ -19,14 +19,16 @@
     self.navigationItem.title = NSLocalizedStringFromTable(@"tittleLabel_ServicesOrderVC_Text", @"MyLoaclization" , @"");
     UITextView *mytextView = [[UITextView alloc]initWithFrame:CGRectMake(10, 60, 300, 508)];
     
+    //TODO elias
+    self.view.backgroundColor = [UIColor whiteColor];
     
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
-    //imageView.image = [UIImage imageNamed:@"homepagebackground1231.png"];
-    [imageView setImage:[UIImage imageNamed:MainViewImage]];
-    imageView.contentMode = UIViewContentModeScaleAspectFill;
-    imageView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    
-    [self.view addSubview:imageView];
+//    UIImageView *imageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
+//    //imageView.image = [UIImage imageNamed:@"homepagebackground1231.png"];
+//    [imageView setImage:[UIImage imageNamed:MainViewImage]];
+//    imageView.contentMode = UIViewContentModeScaleAspectFill;
+//    imageView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+//    
+//    [self.view addSubview:imageView];
     
     mytextView.editable=NO;
     // Do any additional setup after loading the view from its nib.

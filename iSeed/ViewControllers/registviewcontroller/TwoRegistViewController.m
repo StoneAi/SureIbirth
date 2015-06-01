@@ -65,7 +65,7 @@
     [nav setBarTintColor:NAVIGATIONBAR_BACKCOLOR];
     [self.view addSubview:nav];
     
-    UILabel *netlable = [[UILabel alloc] initWithFrame:CGRectMake(25, 130, 250, 30)];
+    UILabel *netlable = [[UILabel alloc] initWithFrame:CGRectMake(25, 130, 280, 30)];
     netlable.text = NSLocalizedStringFromTable(@"Rigist_Network",@"MyLoaclization" , @"");
     netlable.textColor = [UIColor grayColor];
     netlable.font = [UIFont systemFontOfSize:14.0];

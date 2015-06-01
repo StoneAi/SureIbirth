@@ -18,13 +18,14 @@
 "LoginL" = "Login";
 
 "LoginRegist" = "Regist";
-"Forgetpsd" = "Forget";
+"Forgetpsd" = "Forget？";
+
 "APPalret" = "Prompt";
 "APPNeedUpdate" = "a new version of APP";
 "APPSure" = "Confirm";
 "APPKnow" = "Know";
 "APPCancle" = "Cancle";
-"change_text" = "account";
+
 "BleAlreadyDisconnect" = "Device disconnected";
 "BleAlreadyDisconnectUpdate" = "Device has been disconnected, please re update data";
 
@@ -38,6 +39,9 @@
 "NameOrPasswdIsNot" = "username or password is wrong";
 "LoginIsfaile" = "login failed, please check the network";
 
+"LoginAccount" = "Do you have an account?";
+"RegisitNow" = "Sign up";
+
 
 /****************修改密码******************/
 "Changepasswd_alret_title" = "Failed to change";
@@ -47,8 +51,14 @@
 "Lable_changepsd_Title" = "Change password";
 
 
-
 /*********************主视图**************************/
+//首视图辐射信息
+"Mainview_liveindex" = "LIVE INDEX";
+//首页下边历史信息
+"Mainview_ra_uplabel" = "Total Radiation";
+"Mainview_ra_belowlable" = "Some decription here";
+"Mainview_step_uplable" = "Walk Status";
+"Mainview_step_belowlable" = "Some decription here";
 //手机蓝牙未打开提醒
 "alert_OpenPhoneBluetooth_Message"  = "Please open the Bluetooth！";
 "alert_OpenPhoneBluetooth_CancelButtonTittle" = "Know";
@@ -75,8 +85,10 @@
 //网络
 "Networking_Isnot" = "The network has been disconnected";
 "LeftVC_table_FirstVC_Title" = "Home";
-"LeftVC_table_HistoryVC_Title" = "History";
-"LeftVC_table_Recommond_Title" = "Recommend";
+//TODO elias
+"LeftVC_table_HistoryVC_Title" = "Total Radiation"; //History
+"LeftVC_table_SPHistoryVC_Title" = "Walk Status";
+"LeftVC_table_Recommond_Title" = "Share";
 "LeftVC_table_Setting_Title" = "Settings";
 
 //分享
@@ -87,6 +99,8 @@
 "Lable_regist_Title" = "Registration";
 "NameTextField_Text" = "Nickname";
 "NextButton_Title" = "Next";
+"Rigist_Network" = "Please make sure the network is available";
+
 
 //和个人信息界面的共享
 "Information_Name" = "Nickname";
@@ -98,23 +112,24 @@
 "Registfaile_Alret_Message" = "Please fill in complete information";
 "Registfaile_Alret_Button" = "Confirm";
 /*******************注册第二视图**********************/
-"Registtwo_PhonenumTextField_Text" = "mobile phone number";
-"Registtwo_EmailnumTextField_Text" = "email";
+"Registtwo_PhonenumTextField_Text" = "Phone number";
+"Registtwo_EmailnumTextField_Text" = "E-mail";
+"change_text" = "Account";
 
 
-"Registtwo_Getcheck_Text" = "verification";
-"Registtwo_PutIncheckNum_Text" = "Please enter the verification code";
+"Registtwo_Getcheck_Text" = "Get Code";
+"Registtwo_PutIncheckNum_Text" = "Enter Code";
 "Registtwo_ReGetcheckNum_Text" = "Re send";
-"PutInPasswd_Text" = "Please enter the password";
-"CheckPasswd_Text" = "Please confirm password";
+"PutInPasswd_Text" = "Set password";
+"CheckPasswd_Text" = "Re-enter password";
 "RegistAlready_Text" = "Regist";
 "Networking_isNot" = "The network is not available";
 
-"Registtwo_Alretfaile_Title" = "Registration failed";
+"Registtwo_Alretfaile_Title" = "Register failed";
 "Registtwo_Alretfaile_Message" = "Please fill in complete information";
 "Registtwo_Alretfaile_Button" = "Confirm";
 
-"Registtwo_Alretsucces_Tiltle" = "Registration successful";
+"Registtwo_Alretsucces_Tiltle" = "Register successful";
 "RLoadingview_Message" = "Please wait...";
 "Registtwo_Passwdnotsuit" = "The password is not the same";
 "Registtwo_Checknim_faile" = "Verification code error";
@@ -187,15 +202,30 @@
 "SettingVC_Declear" = "Disclaimer";
 "SettingVC_TeamIntreduc" = "Team";
 "SettingVC_NoteBook" = "Scene manual";
+"SettingVC_SectionTwo_Title" = "About";
 
 "SettingVC_ConnectBleAlret_Title" = "Not even the device";
 "SettingVC_ConnectBleAlret_Message" = "Please connect device";
 
 
 "SettingVC_SectionOne_Title" = "Function";
-"SettingVC_SectionTwo_Title" = "About";
+"SettingVC_Sec/Users/chanbill/Downloads/iSeed0508new/iSeed/ViewControllers/SpHistoryViewController/SpHistoryViewController.mtionTwo_Title" = "About";
 /*********************历史 视图**************************/
-"HistoryVC_RightButton_Title" = "Update";
+//TODO elias
+"rtHistory_rtindex" = "average index";
+"rtHistory_nodatatext" = "No Data";
+"rtHistory_rtstateOK" = "GOOD";
+"rtHistory_rtstateNO" = "BAD";
+"stepsHistory_stepsindex" = "calorie burned";
+"stepsHistory_calorie" = "calorie";
+"stepsHistory_metre" = "metre";
+"stepsHistory_steps" = "steps";
+"stepsHistory_arrival" = "Today Achieve";
+"stepsHistory_suggestiontext" = "200-300 PER DAY RECOMMEDED";
+"stepsHistory_progressbarnodata" = "No data";
+"stepsHistory_startsynctext" = "Click Sync";
+
+"HistoryVC_RightButton_Title" = "Sync";
 "HistoryVC_UpdateOKAlret_Title" = "Update completed!";
 "HistoryVC_IbirthstoneNoData" = "Ibirthstone not yet saved data";
 
@@ -208,7 +238,7 @@
 "HistoryVC_Alret_CancleButton" = "Cancle";
 
 "HistoryVC_Alret_PushTitle" = "Point out";
-"HistoryVC_Alret_Pushmessage" = "Please open the app notice on Notification Center,then synchronize";
+"HistoryVC_Alret_Pushmessage" = "Please open the app notice on notification Center,then synchronize";//Please open the application notice notification Center
 
 
 "RtLv_Safest" = "Safer";
@@ -220,18 +250,18 @@
 "SpLv_HaveDone" = "Done";
 "SpLv_NeedDone" = "Need";
 "SpLv_HaveToDone" = "Should";
+
+
 /*************************版本更新***************************/
-"UpDate_APPupdate" = "iBirthstone App Version update";
-"UpDate_FirmWareupdate" = "Bluetooth firmware update";
+"UpDate_APPupdate" = "App update";
+"UpDate_FirmWareupdate" = "Firmware update";
 "UpDate_Alret_Titil" = "The present is the latest version!";
 "UpdateFirm_NoScaner" = "Device not found";
-
-
 
 /*********************免责声明 视图**************************/
 //不能删除
 "tittleLabel_ServicesOrderVC_Text" = "Disclaimer";
-"serviceOrderTextView_ServicesOrderVC_Text" = " \‘iBirthstone\’ app（herein after referred to as \‘iBirthstone\’）is a cell phone software developed by SHENZHEN VIPOSE INC（herein after referred to as \‘SHENZHEN VIPOSE INC\’）\n Customers use this software on a voluntary basis and should also be aware of the risks. Vipose will not provide any kind of technical support and warranty and will not take any responsibility for using this product before the customers purchase the technical service of this product.\n We don't take the Responsibility as below situation\n1.network crash or delay.\n2.make sure the application availiable and timeliness any time.\n3.the application are smart phone or tablet's operation system compatible.\n4 user wrong operation cause the problems.\n5.software viruses cause the problems. \n The infomation provided by iBirthstone application are only for your reference,Don't use as Diagnostics Results,medicinal usage.Don't replace doctor and other medical staff's advice。our company will not take the responsibility and legal responsibility if the individual usage don't match our instruction. \n iBirthstone focus on providing the accurate and complete health infomation .but differnt individual and different individual's part have a different temperature measurement and data.so our product won't make sure the information accuracy and completely and don't takethe responsibility for the wrong information and missing.\n SHENZHEN VIPOSE INC will not take any responsibility for the articles and information based on this software.\n Certificate authority based on electronic documents is same as the paper-based ones. They both have the same force of law. By installing \‘iBirthstone\’, you acknowledge that you have read and agreed to the terms of this certification. You are not only granted with the authorities of the above terms but also subject to the restrictions and limitations of it. Any violation of this agreement are directly in breach of the authority and constitute copyright infringement. Vipose has the right to terminate the authority and order to stop the damage. Vipose reserves the right to investigate and affix the responsibility.";
+"serviceOrderTextView_ServicesOrderVC_Text" = "\‘iBirthstone\’ app（herein after referred to as \‘iBirthstone\’）is a cell phone software developed by SHENZHEN VIPOSE INC（herein after referred to as \‘SHENZHEN VIPOSE INC\’）\nCustomers use this software on a voluntary basis and should also be aware of the risks. Vipose will not provide any kind of technical support and warranty and will not take any responsibility for using this product before the customers purchase the technical service of this product.\nWe don't take the Responsibility as below situation\n1.network crash or delay.\n2.make sure the application availiable and timeliness any time.\n3.the application are smart phone or tablet's operation system compatible.\n4.user wrong operation cause the problems.\n5.software viruses cause the problems. \nThe infomation provided by iBirthstone application are only for your reference,Don't use as Diagnostics Results,medicinal usage.Don't replace doctor and other medical staff's advice。our company will not take the responsibility and legal responsibility if the individual usage don't match our instruction. \niBirthstone focus on providing the accurate and complete health infomation .but differnt individual and different individual's part have a different temperature measurement and data.so our product won't make sure the information accuracy and completely and don't takethe responsibility for the wrong information and missing.\n SHENZHEN VIPOSE INC will not take any responsibility for the articles and information based on this software.\nCertificate authority based on electronic documents is same as the paper-based ones. They both have the same force of law. By installing \‘iBirthstone\’, you acknowledge that you have read and agreed to the terms of this certification. You are not only granted with the authorities of the above terms but also subject to the restrictions and limitations of it. Any violation of this agreement are directly in breach of the authority and constitute copyright infringement. Vipose has the right to terminate the authority and order to stop the damage. Vipose reserves the right to investigate and affix the responsibility.";
 //不能删除
 /*********************服务条款 视图**************************/
 "tittleLabel_ServicesListVC_Text" = "service";

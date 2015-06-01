@@ -14,9 +14,11 @@
 }
 -(void)layoutIfNeeded
 {
-    UIImageView *myimage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 60, 330, 568)];
-    myimage.image = [UIImage imageNamed:HisBackImage];
-    [self addSubview:myimage];
+    //TODO elias
+//    UIImageView *myimage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 60, 330, 568)];
+//    myimage.image = [UIImage imageNamed:HisBackImage];
+//    
+//    [self addSubview:myimage];
     if(_firstsize ==0&&_sedsize == 0&&_thirdsize==0)
     {
         FirstView * firstview = [[FirstView alloc]initWithFrame:CGRectMake(110, 320, 2*100, 2*100) color:1 size:100 state:0];

@@ -56,13 +56,21 @@
     }
     else
         hei = 0;
+    UILabel *IBirthstone = [[UILabel alloc] init];
+    IBirthstone.frame = CGRectMake(20, 20, 180, 30);
+    IBirthstone.center = CGPointMake(self.view.center.x, 70-hei);
+    IBirthstone.font = [UIFont boldSystemFontOfSize:28];
+    IBirthstone.textColor = [UIColor blackColor];
+    IBirthstone.text = @"iBirthstone";
+    IBirthstone.textAlignment = NSTextAlignmentCenter;
+    [self.view addSubview:IBirthstone];
     
-    self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    self.view.backgroundColor = [UIColor whiteColor];
     UIImageView *img = [[UIImageView alloc]initWithImage:[UIImage imageNamed:LoginLogo]];
-    img.frame = CGRectMake(50, 70-hei, 220, 236);
+    img.frame = CGRectMake(20, 100-hei, 280, 228);
     [self.view addSubview:img];
     userDefaults = [NSUserDefaults standardUserDefaults];
-    UIButton *loginbutton = [[UIButton alloc]initWithFrame:CGRectMake(32, 450-hei, 120, 40)];
+    UIButton *loginbutton = [[UIButton alloc]initWithFrame:CGRectMake(80, 460-hei, 160, 50)];
     UIButton *registbutton = [[UIButton alloc]initWithFrame:CGRectMake(168, 450-hei, 120, 41)];
 //    loginbutton.center = CGPointMake(self.view.center.x, 400);
 //    registbutton.center = CGPointMake(self.view.center.x, 480);
@@ -86,18 +94,24 @@
     [registbutton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     
     
-    //[registbutton setTitle:@"注册" forState:UIControlStateNormal];
+    [registbutton setTitle:@"注册" forState:UIControlStateNormal];
     
-    UIButton *gotovipose = [[UIButton alloc]initWithFrame:CGRectMake(81, 530, 158, 30)];
-    [gotovipose setTitle:@"www.vipose.com" forState:UIControlStateNormal];
-    [gotovipose setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    gotovipose.titleLabel.font =[UIFont systemFontOfSize:19.0];
-    [gotovipose addTarget:self action:@selector(gotopress) forControlEvents:UIControlEventTouchUpInside];
+    UILabel *detaillable = [[UILabel alloc] initWithFrame:CGRectMake(30, 530, 200, 30)];
+    detaillable.textColor = [UIColor lightGrayColor];
+    detaillable.text = NSLocalizedStringFromTable(@"LoginAccount", @"MyLoaclization", nil);
+    detaillable.font = [UIFont systemFontOfSize:15.0];
+    [self.view addSubview:detaillable];
+    
+    UIButton *gotovipose = [[UIButton alloc]initWithFrame:CGRectMake(200, 530, 100, 30)];
+    [gotovipose setTitle:NSLocalizedStringFromTable(@"RegisitNow", @"MyLoaclization", nil) forState:UIControlStateNormal];
+    [gotovipose setTitleColor:CELLSELECTCOLOR forState:UIControlStateNormal];
+    gotovipose.titleLabel.font =[UIFont systemFontOfSize:15.0];
+    [gotovipose addTarget:self action:@selector(registpress) forControlEvents:UIControlEventTouchUpInside];
     
     
     [self.view addSubview:gotovipose];
     [self.view addSubview:loginbutton];
-    [self.view addSubview:registbutton];
+    //[self.view addSubview:registbutton];
     
    //    textview = [[UIView alloc]initWithFrame:CGRectMake(0, 330, 320, 90)];
 //    textview.backgroundColor = [UIColor clearColor];
@@ -111,21 +125,28 @@
     tmpview = [[UIView alloc]initWithFrame:CGRectMake(0, 350-hei, 320, 90)];
     tmpview.backgroundColor = [UIColor whiteColor];
     
-    UIImageView *NickImage = [[UIImageView alloc]initWithFrame:CGRectMake(16, 12, 18, 17)];
-    [NickImage setImage:[UIImage imageNamed:LoginNickname]];
-    [tmpview addSubview:NickImage];
+//    UIImageView *NickImage = [[UIImageView alloc]initWithFrame:CGRectMake(16, 12, 18, 17)];
+//    [NickImage setImage:[UIImage imageNamed:LoginNickname]];
+//    [tmpview addSubview:NickImage];
+//    
+//    
+//    UIImageView *PasswdImage = [[UIImageView alloc]initWithFrame:CGRectMake(19, 61, 12, 17)];
+//    [PasswdImage setImage:[UIImage imageNamed:LoginPasswd]];
+//    [tmpview addSubview:PasswdImage];
+    UIView *oneView = [[UIView alloc]initWithFrame:CGRectMake(30, 40, 260, 0.5)];
+    oneView.backgroundColor = [UIColor darkGrayColor];
     
+    UIView *twoView = [[UIView alloc]initWithFrame:CGRectMake(30, 90, 260, 0.5)];
+    twoView.backgroundColor = [UIColor grayColor];
     
-    UIImageView *PasswdImage = [[UIImageView alloc]initWithFrame:CGRectMake(19, 61, 12, 17)];
-    [PasswdImage setImage:[UIImage imageNamed:LoginPasswd]];
-    [tmpview addSubview:PasswdImage];
-    
+    [tmpview addSubview:oneView];
+    [tmpview addSubview:twoView];
     
     [self.view addSubview:tmpview];
     
     
-    loginfield = [[UITextField alloc] initWithFrame:CGRectMake(50, 0, 300, 40)];
-    pwdfield = [[UITextField alloc]initWithFrame:CGRectMake(50, 50, 300, 40)];
+    loginfield = [[UITextField alloc] initWithFrame:CGRectMake(30, 0, 260, 40)];
+    pwdfield = [[UITextField alloc]initWithFrame:CGRectMake(30, 50, 260, 40)];
 //    loginfield = [[UITextField alloc] initWithFrame:CGRectMake(40, 350, 300, 40)];
 //    pwdfield = [[UITextField alloc]initWithFrame:CGRectMake(40, 400, 300, 40)];
     loginfield.delegate = self;
@@ -152,9 +173,10 @@
     
     
    // UIButton *ForgetPSD = [[UIButton alloc]initWithFrame:CGRectMake(208, 405, 80, 30)];
-    UIButton *ForgetPSD = [[UIButton alloc]initWithFrame:CGRectMake(238, 55, 80, 30)];
+    UIButton *ForgetPSD = [[UIButton alloc]initWithFrame:CGRectMake(210, 55, 80, 30)];
     [ForgetPSD setTitle:NSLocalizedStringFromTable(@"Forgetpsd", @"MyLoaclization", nil) forState:UIControlStateNormal];
-    [ForgetPSD setTitleColor:CELLTEXTLABELHIGHTCOLOR forState:UIControlStateNormal];
+    
+    [ForgetPSD setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
     ForgetPSD.titleLabel.font = [UIFont systemFontOfSize:14.0];
     [ForgetPSD addTarget:self action:@selector(forget) forControlEvents:UIControlEventTouchUpInside];
     [tmpview addSubview:ForgetPSD];

@@ -55,14 +55,15 @@
 
 -(void)initWithView
 {
-    
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
-    //imageView.image = [UIImage imageNamed:@"homepagebackground1231.png"];
-    [imageView setImage:[UIImage imageNamed:MainViewImage]];
-    imageView.contentMode = UIViewContentModeScaleAspectFill;
-    imageView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    
-    [self.view addSubview:imageView];
+    //TODO elias
+    self.view.backgroundColor = [UIColor whiteColor];
+//    UIImageView *imageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
+//    //imageView.image = [UIImage imageNamed:@"homepagebackground1231.png"];
+//    [imageView setImage:[UIImage imageNamed:MainViewImage]];
+//    imageView.contentMode = UIViewContentModeScaleAspectFill;
+//    imageView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+//    
+//    [self.view addSubview:imageView];
     
     
     UIView * view1 = [[UIView alloc]initWithFrame:CGRectMake(0, 170, 320, 1)];

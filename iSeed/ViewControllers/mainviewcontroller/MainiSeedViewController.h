@@ -32,6 +32,9 @@
 -(void)WarmingOFF;
 -(void)disconnectBle;
 -(int)readbat;
+- (IBAction)RadiationButton:(id)sender;
+- (IBAction)WalkButton:(id)sender;
+@property (strong, nonatomic) IBOutlet UILabel *DateLabel;
 @property (strong,nonatomic) CBCentralManager *my;
 @property (assign,nonatomic)  int state;
 @property (strong,nonatomic) EKCustomProgressView *customview;
@@ -40,6 +43,11 @@
 @property (strong,nonatomic) UIButton *refreshbutton;
 @property (assign,nonatomic) NSInteger blesta;
 @property (strong,nonatomic) UILabel *DbmLable;
+@property (strong, nonatomic) IBOutlet UILabel *belowrauplabel;
+@property (strong, nonatomic) IBOutlet UILabel *belowrabelowlable;
+@property (strong, nonatomic) IBOutlet UILabel *belowstepuplab;
+@property (strong, nonatomic) IBOutlet UILabel *belowstepbelowlab;
+
 //@property (strong,nonatomic) EKCustomProgressLabel *lable;
 
 @end

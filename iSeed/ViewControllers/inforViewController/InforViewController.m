@@ -84,6 +84,12 @@
     imagev=[[UIButton alloc] initWithFrame:CGRectMake(10, 85, 80, 80)];
     
     [imagev addTarget:self action:@selector(pickphoto) forControlEvents:UIControlEventTouchUpInside];
+   // imagev.layer.cornerRadius = 10;
+    imagev.layer.cornerRadius = imagev.layer.bounds.size.width*0.5;
+    imagev.layer.masksToBounds = YES;
+    imagev.layer.borderWidth = 2;
+    imagev.layer.borderColor = [[UIColor whiteColor] CGColor];
+    
     NSString *imagehead  = [[[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:NAMEFORUSER]stringByAppendingPathComponent:@"imagephoto"];
     NSFileHandle *fh = [NSFileHandle fileHandleForReadingAtPath:imagehead];
     NSData *mydata = [fh readDataToEndOfFile];

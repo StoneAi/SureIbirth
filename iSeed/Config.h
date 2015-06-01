@@ -44,11 +44,14 @@
 //#define VIEWBACKCOLOR     [UIColor colorWithRed: 255.0/255 green: 111.0/255 blue: 132.0/255 alpha: 0.5]             //视图全局颜色
 //modify 1204
 #define VIEWBACKCOLOR     [UIColor colorWithRed: 122.0/255 green: 122.0/255 blue: 122.0/255 alpha: 1.0]             //视图全局颜色
-#define NAVIGATIONBAR_BACKCOLOR   [UIColor colorWithRed: 240.0/255 green: 146.0/255 blue: 174.0/255 alpha: 1.0f]     //导航栏视图颜色
+#define NAVIGATIONBAR_BACKCOLOR   [UIColor colorWithRed: 72.0/255 green: 193.0/255 blue: 201.0/255 alpha: 1.0f]     //导航栏视图颜色 [UIColor colorWithRed: 240.0/255 green: 146.0/255 blue: 174.0/255 alpha: 1.0f]
 #define TABLEVIEWCOLOR   [UIColor colorWithRed: 255.0/255 green: 111.0/255 blue: 132.0/255 alpha: 0]                //表图视图颜色
-#define CELLTEXTLABELHIGHTCOLOR    [UIColor colorWithRed: 117.0/255 green: 193.0/255 blue: 199.0/255 alpha: 1]       //单元字体颜色
+//TODO elias
+#define CELLTEXTLABELHIGHTCOLOR    [UIColor whiteColor]       //单元字体颜色 [UIColor colorWithRed: 117.0/255 green: 193.0/255 blue: 199.0/255 alpha: 1]
+#define SETCELLTEXTLABELCOLOR     [UIColor blackColor]
 //modify 1204
-#define CELLSELECTCOLOR    [UIColor colorWithRed: 240.0/255 green: 146.0/255 blue: 174.0/255 alpha: 1.0f]            //选中单元整个背景颜色
+//TODO elias
+#define CELLSELECTCOLOR    [UIColor colorWithRed: 20.0/255 green: 153.0/255 blue: 155.0/255 alpha: 1.0f]            //选中单元整个背景颜色 [UIColor colorWithRed: 240.0/255 green: 146.0/255 blue: 174.0/255 alpha: 1.0f]
 #define CELLNOMARLCOLOR [UIColor whiteColor]   //单元字体高亮颜色
 
 #define CircleTextColor [UIColor colorWithRed:165.0/255 green:175.0/255 blue:176.0/255 alpha:1]  //环中字体颜色
@@ -63,7 +66,7 @@
 #define NAVIGATIONBAR_SIZE    (0, 20, 320, 40)              //导航栏大小位置
 #define MAINVIEWTABLEVIEW_SIZE    (0, 0, 320, 240)         //主界面表图大小位置
 #define HIGHFORCELL_MAINVIEW     40                         //主界面单元高度
-#define SETTINGTABLEVIEW_SIZE    (0, 60, 320, 500)          //设置界面表图大小位置
+#define SETTINGTABLEVIEW_SIZE    (0, 0, 320, 550)          //设置界面表图大小位置
 #define HIGHFORCELL_SETTINGVIEW     40                      //设置界面单元高度
 #define FIRSTVIEWTABLEVIEW_SIZE   (0, 0, 320, 170)          //首页单元高度
 
@@ -76,7 +79,7 @@
 #define rightbutton @"断开连接"
 #define circle_size (40, 90, 240, 240)
 #define circle_label @"请点击连接设备"
-#define centrlbutton_size (40, 163, 240, 240)
+#define centrlbutton_size (40, 163, 240, 220)
 #define refreshbutton_size (260 , 100, 50, 50)
 #define refreshbutton_title @"刷新"
 #define alertview_title @"请确认是否更新"
@@ -130,7 +133,8 @@
 #define RidemenuButtonImage @"menubar1227.png"
 #define ShareSDKImage @"icon.png"
 
-#define RidemenuImage @"首页背景0309.png"
+//TODO elias
+#define RidemenuImage @"mainview0505.png" //#define RidemenuImage @"首页背景0309.png"
 
 #define HisNodataImage  @"histroycircle1231.png"
 #define HisBackImage  @"首页背景0309.png"
@@ -143,18 +147,20 @@
 #define HisDanger @"害怕0309.png"
 #define HisDangerest @"大哭0309.png"
 
-#define InforDeHeadImage @"头像2-0327.png"
-#define InforBackImage @"个人中心.png"
+//TODO elias
+#define InforDeHeadImage @"B0505.png" // 头像2-0327.png
+#define InforBackImage @"mainview0505.png"
 #define InforSaveImage @"save0320.png"
 
-
-#define LeftHomeImage @ "homepageblue0327.png"   //homepageblue0309
+//TODO elias
+#define LeftHomeImage @ "Wind_Cone0505.png"   //homepageblue0309 homepageblue0327.png
 #define LeftHomeHighImage @"homepage1227.png"
 #define LeftHistoryImage @ "historyblue0327改.png"   //historyblue0309
 #define LeftHistoryHighImage @"history1227.png"
-#define LeftRecomImage @ "recommendblue0327.png"   //recommendblue0309
+
+#define LeftRecomImage @ "Out0505.png"   //recommendblue0309 Out0505.png recommendblue0327.png
 #define LeftRecomHigeImage @ "recommend1227.png"
-#define LeftSettingImage @ "setblue0327.png"   //setblue0309
+#define LeftSettingImage @ "Settings_Alt0505.png"   //setblue0309 setblue0327.png
 #define LeftSettingHighImage @ "set1227.png"
 
 #define HelpImage @"help0104.png"
@@ -165,19 +171,20 @@
 #define RegistOneReImage @"btn_arrow_back.png"
 
 #define SettingCancaleImage @"矩形2.png"
-#define SettingBatteryImage @ "battery0327改.png"
-#define SettingShakeImage @ "shake0327.png"
+//TODO elias
+#define SettingBatteryImage @ "battery0505.png"  //battery0327改.png
+#define SettingShakeImage @ "viberation0505.png"  //shake0327.png
 #define SettingHelpImage @ "helpblue0327.png" //helpblue0309
 #define SettingHelpHighImage @ "help1205.png"
-#define SettingRelationImage @ "relationblue0327.png"   //relationblue0309
+#define SettingRelationImage @ "Phone0505.png"   //relationblue0309  relationblue0327.png
 #define SettingRelationHighImage @"relation1205.png"
-#define SettingStatementImage @ "statementblue0327.png"   //statementblue0309
+#define SettingStatementImage @ "Ribbon0505.png"   //statementblue0309  statementblue0327.png
 #define SettingStatementHighImage @"statement1205.png"
 #define SettingIntroImage @"introductionblue0327.png"    //introductionblue0309
 #define SettingIntroHighImage @"introduction1227.png"
 #define SettingUpdateImage @ "refresh1226.png"
 #define SettingUpdateHighImage @ "refreshblue0327.png"
-#define SettingUserBookimage @"notebook0327.png"
+#define SettingUserBookimage @"Book0505.png"   // notebook0327.png
 #define SettingUserBookHighimage @"notebook0320.png"
 #define SettingBackground @"设置背景.png"
 
@@ -193,9 +200,9 @@
 
 #define LoginNickname @"输入账号0320.png"
 #define LoginPasswd @"密码0320.png"
-#define LoginLogo @"手镯3D图.png"
+#define LoginLogo @"loginibs.png"
 #define LoginzhuceImage @"注册0309.png"
-#define LoginlogImage @"登录0309.png"
+#define LoginlogImage @"btn_sync0507.png"
 #define LoginEditerImage @"账号0309.png"
 
 

@@ -18,7 +18,7 @@
 "LoginL" = "登录";
 
 "LoginRegist" = "注册新账户";
-"Forgetpsd" = "忘记密码";
+"Forgetpsd" = "忘记密码？";
 
 "APPalret" = "提示";
 "APPNeedUpdate" = "有新的APP版本";
@@ -30,8 +30,8 @@
 "BleAlreadyDisconnectUpdate" = "蓝牙连接已断开,请重新更新数据";
 
 /***************登录*************/
-"LoginInputname" = "请输入账号";
-"LoginInputPasswd" = "请输入密码";
+"LoginInputname" = "账号";
+"LoginInputPasswd" = "密码";
 "LoginInputCorrectNum" = "请输入正确形式的账号密码";
 "LoginSure" = "确定";
 "LoginWait" = "请等待...";
@@ -39,7 +39,8 @@
 
 "NameOrPasswdIsNot" = "账号或者密码错误";
 "LoginIsfaile" = "登录失败,请检查网络";
-
+"LoginAccount" = "你还没有iBirthstone账户？";
+"RegisitNow" = "立即注册";
 
 /****************修改密码******************/
 "Changepasswd_alret_title" = "修改密码失败";
@@ -52,6 +53,13 @@
 
 
 /*********************主视图**************************/
+//首视图辐射信息
+"Mainview_liveindex" = "辐射指数";
+//首页下边历史信息
+"Mainview_ra_uplabel" = "辐射总量";
+"Mainview_ra_belowlable" = "每日辐射问题统计";
+"Mainview_step_uplable" = "健康计步";
+"Mainview_step_belowlable" = "每日步行消耗热量";
 //手机蓝牙未打开提醒
 "alert_OpenPhoneBluetooth_Message"  = "请先打开手机蓝牙！";
 "alert_OpenPhoneBluetooth_CancelButtonTittle" = "知道了";
@@ -84,8 +92,9 @@
 //网络
 "Networking_Isnot" = "网络已断开";
 "LeftVC_table_FirstVC_Title" = "首页";
-"LeftVC_table_HistoryVC_Title" = "历史";
-"LeftVC_table_Recommond_Title" = "推荐";
+"LeftVC_table_HistoryVC_Title" = "辐射";
+"LeftVC_table_SPHistoryVC_Title" = "计步";
+"LeftVC_table_Recommond_Title" = "分享";
 "LeftVC_table_Setting_Title" = "设置";
 
 //分享
@@ -194,6 +203,7 @@
 
 "SettingVC_Battary" = "  手环电量";
 "SettingVC_Sharke" = "振动开关";
+"SettingVC_DangerAction" = "危险动作";
 "SettingVC_Help" = "使用帮助";
 "SettingVC_Connect" = "联系我们";
 "SettingVC_Update" = "版本更新";
@@ -202,13 +212,26 @@
 "SettingVC_NoteBook" = "场景说明";
 "SettingVC_ConnectBleAlret_Title" = "未接连蓝牙";
 "SettingVC_ConnectBleAlret_Message" = "请连接蓝牙";
-
+"stepsHistory_arrival" = "今日达成";
+"stepsHistory_suggestiontext" = "建议每天步行消耗200-300卡路里";
+"stepsHistory_progressbarnodata" = "暂无数据";
+"stepsHistory_startsynctext" = "点击同步";
 
 "SettingVC_SectionOne_Title" = "功能设置";
 "SettingVC_SectionTwo_Title" = "关于";
 /*********************历史 视图**************************/
-"HistoryVC_RightButton_Title" = "更新";
-"HistoryVC_UpdateOKAlret_Title" = "更新已完成!";
+//TODO elias
+"rtHistory_rtindex" = "平均指数";
+"rtHistory_nodatatext" = "暂无数据";
+"rtHistory_rtstateOK" = "情况良好";
+"rtHistory_rtstateNO" = "情况不好";
+"stepsHistory_stepsindex" = "热量消耗";
+"stepsHistory_calorie" = "卡路里";
+"stepsHistory_metre" = "米";
+"stepsHistory_steps" = "步";
+
+"HistoryVC_RightButton_Title" = "同步";
+"HistoryVC_UpdateOKAlret_Title" = "同步已完成!";
 "HistoryVC_IbirthstoneNoData" = "手环还未保存数据";
 
 "HistoryVC_ConnectBLE" = "请先连接蓝牙";

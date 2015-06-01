@@ -47,11 +47,14 @@
     UIView *view = [[UIView alloc]initWithFrame:CGRectMake UIVIEW_SIZE];
     self.view=view;
     
-    UIImageView *screen = [[UIImageView alloc]initWithFrame:CGRectMake(0, 60, 320, 568)];
-    [screen setImage:[UIImage imageNamed:SettingBackground]];
-    [self.view addSubview:screen];
-   // self.view.backgroundColor = VIEWBACKCOLOR;
-    self.view.backgroundColor = [UIColor colorWithRed: 165.0/255 green: 175.0/255 blue: 176.0/255 alpha: 0];
+//    UIImageView *screen = [[UIImageView alloc]initWithFrame:CGRectMake(0, 60, 320, 568)];
+//    [screen setImage:[UIImage imageNamed:SettingBackground]];
+//    [self.view addSubview:screen];
+//   // self.view.backgroundColor = VIEWBACKCOLOR;
+//    self.view.backgroundColor = [UIColor colorWithRed: 165.0/255 green: 175.0/255 blue: 176.0/255 alpha: 0];
+    
+    //TODO elias
+    self.view.backgroundColor = [UIColor whiteColor];
 
     UITableView *table = [[UITableView alloc]initWithFrame:CGRectMake SETTINGTABLEVIEW_SIZE style:UITableViewStylePlain];
     self.navigationItem.title =NSLocalizedStringFromTable(@"SettingVC_Title", @"MyLoaclization" , @"");
@@ -170,11 +173,11 @@
     
     // Return the number of rows in the section.
   //  NSString *story = [stories objectAtIndex:section];
-    if (section==0) {
-        return 2;
+    if (section== 0) {
+        return 2;  //3
     }
     else
-       return 5;
+       return 3; //4
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     
@@ -195,7 +198,8 @@
     UITableViewCell *cell = [tableView dequeueReusableHeaderFooterViewWithIdentifier:cellID];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    cell.textLabel.highlightedTextColor = CELLTEXTLABELHIGHTCOLOR;
+    //TODO elias
+    cell.textLabel.highlightedTextColor = SETCELLTEXTLABELCOLOR;//CELLTEXTLABELHIGHTCOLOR;
     //根据不同区的不同行创建不同风格的cell
     if (indexPath.section==0) {
         
@@ -204,7 +208,8 @@
             if (cell==nil) {
          
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellID];
-                cell.detailTextLabel.textColor = CELLTEXTLABELHIGHTCOLOR;
+                //TODO elias
+                cell.detailTextLabel.textColor = SETCELLTEXTLABELCOLOR;//CELLTEXTLABELHIGHTCOLOR;
             if ([userDefaults objectForKey:USERDEFAULTS_BATTRY]==nil) {
               cell.detailTextLabel.text = @"- -";
             }
@@ -262,6 +267,41 @@
              cell.textLabel.text = NSLocalizedStringFromTable(@"SettingVC_Sharke", @"MyLoaclization" , @"");
             }
         }
+        if (indexPath.row==2)
+        {
+            if (cell==nil) {
+                
+                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
+                UISwitch *switchview = [[UISwitch alloc] initWithFrame:CGRectZero];
+                switchview.onTintColor = [UIColor whiteColor];//[UIColor whiteColor]
+                switchview.thumbTintColor = CELLSELECTCOLOR;//CELLSELECTCOLOR
+                [switchview addTarget:self action:@selector(switchchange:) forControlEvents:UIControlEventValueChanged];
+                
+                //           震动开关的打开关闭
+                
+                NSLog(@"振动开关为%@",[userDefaults objectForKey:USERDEFAULTS_SHANKE]);
+                if ([[userDefaults objectForKey:USERDEFAULTS_SHANKE] isEqual:@"0"]) {
+                    [switchview setOn:NO];
+                }
+                if ([[userDefaults objectForKey:USERDEFAULTS_SHANKE] isEqual:@"1"]) {
+                    [switchview setOn:YES];
+                    
+                }
+                
+                
+                cell.accessoryView = switchview;
+                UIImage *icon = [UIImage imageNamed:@"Attention0505.png" ];
+                CGSize itemSize = CGSizeMake(20,20 );
+                UIGraphicsBeginImageContextWithOptions(itemSize, NO ,0.0);
+                CGRect imageRect = CGRectMake(0.0, 0.0, itemSize.width, itemSize.height);
+                [icon drawInRect:imageRect];
+                cell.imageView.image = UIGraphicsGetImageFromCurrentImageContext();
+                UIGraphicsEndImageContext();
+                //  cell.imageView.image = [UIImage imageNamed:@"homepage1128.png"];
+                //cell.imageView.highlightedImage = [UIImage imageNamed:@"shakegreen1202.png"];
+                cell.textLabel.text = NSLocalizedStringFromTable(@"SettingVC_DangerAction", @"MyLoaclization" , @"");
+            }
+        }
     }
     else if(indexPath.section==1){
         if (cell==nil) {
@@ -274,7 +314,7 @@
             cell.textLabel.text = NSLocalizedStringFromTable(@"SettingVC_NoteBook", @"MyLoaclization" , @"");
             UIImage *icon = [UIImage imageNamed:SettingUserBookimage ];
             
-            CGSize itemSize = CGSizeMake(20, 22);
+            CGSize itemSize = CGSizeMake(20, 20);
             
             UIGraphicsBeginImageContextWithOptions(itemSize, NO ,0.0);
             
@@ -293,7 +333,7 @@
             UIGraphicsBeginImageContextWithOptions(itemSize1, NO ,0.0);
             CGRect imageRect1 = CGRectMake(0.0, 0.0, itemSize1.width, itemSize1.height);
             [icon1 drawInRect:imageRect1];
-            cell.imageView.highlightedImage = UIGraphicsGetImageFromCurrentImageContext();
+          //  cell.imageView.highlightedImage = UIGraphicsGetImageFromCurrentImageContext();
             UIGraphicsEndImageContext();
             
             // cell.imageView.highlightedImage = [UIImage imageNamed:SettingIntroHighImage];
@@ -332,7 +372,7 @@
             cell.textLabel.text = NSLocalizedStringFromTable(@"SettingVC_Connect", @"MyLoaclization" , @"");
             UIImage *icon = [UIImage imageNamed:SettingRelationImage];
             
-            CGSize itemSize = CGSizeMake(20, 14);
+            CGSize itemSize = CGSizeMake(20, 20);
             
             UIGraphicsBeginImageContextWithOptions(itemSize, NO ,0.0);
             
@@ -351,7 +391,7 @@
             UIGraphicsBeginImageContextWithOptions(itemSize1, NO ,0.0);
             CGRect imageRect1 = CGRectMake(0.0, 0.0, itemSize1.width, itemSize1.height);
             [icon1 drawInRect:imageRect1];
-            cell.imageView.highlightedImage = UIGraphicsGetImageFromCurrentImageContext();
+           // cell.imageView.highlightedImage = UIGraphicsGetImageFromCurrentImageContext();
             UIGraphicsEndImageContext();
             // cell.imageView.highlightedImage = [UIImage imageNamed:SettingHelpHighImage];
             cell.imageView.contentMode = UIViewContentModeCenter;
@@ -402,7 +442,7 @@
             cell.textLabel.text = NSLocalizedStringFromTable(@"SettingVC_Declear", @"MyLoaclization" , @"");
             UIImage *icon = [UIImage imageNamed:SettingStatementImage];
             
-            CGSize itemSize = CGSizeMake(20, 22);
+            CGSize itemSize = CGSizeMake(20, 20);
             
             UIGraphicsBeginImageContextWithOptions(itemSize, NO ,0.0);
             
@@ -421,7 +461,7 @@
             UIGraphicsBeginImageContextWithOptions(itemSize1, NO ,0.0);
             CGRect imageRect1 = CGRectMake(0.0, 0.0, itemSize1.width, itemSize1.height);
             [icon1 drawInRect:imageRect1];
-            cell.imageView.highlightedImage = UIGraphicsGetImageFromCurrentImageContext();
+          //  cell.imageView.highlightedImage = UIGraphicsGetImageFromCurrentImageContext();
             UIGraphicsEndImageContext();
             
            // cell.imageView.highlightedImage = [UIImage imageNamed:SettingStatementHighImage];
@@ -451,7 +491,7 @@
             UIGraphicsBeginImageContextWithOptions(itemSize1, NO ,0.0);
             CGRect imageRect1 = CGRectMake(0.0, 0.0, itemSize1.width, itemSize1.height);
             [icon1 drawInRect:imageRect1];
-            cell.imageView.highlightedImage = UIGraphicsGetImageFromCurrentImageContext();
+           // cell.imageView.highlightedImage = UIGraphicsGetImageFromCurrentImageContext();
             UIGraphicsEndImageContext();
             
            // cell.imageView.highlightedImage = [UIImage imageNamed:SettingIntroHighImage];
@@ -470,7 +510,8 @@
     cell.textLabel.highlightedTextColor = CELLNOMARLCOLOR;
     cell.selectedBackgroundView = [[UIView alloc]initWithFrame:cell.frame];
     cell.selectedBackgroundView.backgroundColor = CELLSELECTCOLOR;
-    cell.textLabel.textColor = CELLTEXTLABELHIGHTCOLOR;
+    //TODO elias
+    cell.textLabel.textColor = SETCELLTEXTLABELCOLOR;//CELLTEXTLABELHIGHTCOLOR;
     
     //   cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     return cell;

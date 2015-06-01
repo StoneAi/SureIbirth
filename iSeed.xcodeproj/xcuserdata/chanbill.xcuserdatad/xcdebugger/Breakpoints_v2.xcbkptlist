@@ -280,6 +280,7 @@
                   continueAfterRunningActions = "No"
                   symbolName = "-[FLDemoView fifthview]"
                   moduleName = "iBirthstone"
+                  usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/chanbill/Desktop/iSeed-1-2/iSeed/%E5%8E%86%E5%8F%B2%E7%95%8C%E9%9D%A2/FLDemoView.h"
                   timestampString = "445161907.296087"
                   startingColumnNumber = "9223372036854775807"
@@ -294,6 +295,7 @@
                   continueAfterRunningActions = "No"
                   symbolName = "-[FLDemoView setFifthview:]"
                   moduleName = "iBirthstone"
+                  usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/chanbill/Desktop/iSeed-1-2/iSeed/%E5%8E%86%E5%8F%B2%E7%95%8C%E9%9D%A2/FLDemoView.h"
                   timestampString = "445161907.297276"
                   startingColumnNumber = "9223372036854775807"
@@ -430,6 +432,38 @@
             startingLineNumber = "59"
             endingLineNumber = "59"
             landmarkName = "-PostCom:postInfo:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "iSeed/ViewControllers/mainviewcontroller/MainiSeedViewController.m"
+            timestampString = "453805701.506625"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "853"
+            endingLineNumber = "853"
+            landmarkName = "-RadiationButton:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "iSeed/ViewControllers/leftMenuViewController/leftMenuViewController.m"
+            timestampString = "453950095.737757"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "718"
+            endingLineNumber = "718"
+            landmarkName = "-tableView:didSelectRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

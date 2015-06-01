@@ -13,6 +13,9 @@
 #define AlertViewWidth 280.0f
 #define AlertViewHeight 175.0f
 
+
+#define alartBackimage @"alertView0505.png"
+#define alartButtonimage @"alertView_button_0505.png"
 CGRect XYScreenBounds()
 {
     CGRect bounds = [UIScreen mainScreen].bounds;
@@ -66,14 +69,9 @@ static XYAlertViewManager *sharedAlertViewManager = nil;
 
 -(UIImage*)buttonImageByStyle:(XYButtonStyle)style state:(UIControlState)state
 {
-    switch(style)
-    {
-        default:
-        case XYButtonStyleGray:
-            return [[UIImage imageNamed:(state == UIControlStateNormal ? @"alertView_button_0309@2x" : @"alertView_button_0309@2x")] stretchableImageWithLeftCapWidth:22 topCapHeight:22];
-        case XYButtonStyleGreen:
-            return [[UIImage imageNamed:(state == UIControlStateNormal ? @"alertView_button_0309@2x.png" : @"alertView_button_0309@2x.png")] stretchableImageWithLeftCapWidth:22 topCapHeight:22];
-    }
+    
+            return [[UIImage imageNamed:(state == UIControlStateNormal ? alartButtonimage : alartButtonimage)] stretchableImageWithLeftCapWidth:22 topCapHeight:22];
+    
 }
 
 -(void)prepareLoadingToDisplay:(XYLoadingView*)entity
@@ -114,7 +112,7 @@ static XYAlertViewManager *sharedAlertViewManager = nil;
     }
 
     _alertView = nil;
-    _alertView = [[UIImageView alloc] initWithImage:[[UIImage imageNamed:@"alertView0309@2x.png"] stretchableImageWithLeftCapWidth:34 topCapHeight:44]];
+    _alertView = [[UIImageView alloc] initWithImage:[[UIImage imageNamed:alartBackimage] stretchableImageWithLeftCapWidth:34 topCapHeight:44]];
     _alertView.userInteractionEnabled = YES;
     _alertView.frame = CGRectMake(0, 0, AlertViewWidth, AlertViewHeight);
     _alertView.center = CGPointMake(screenBounds.size.width / 2, screenBounds.size.height / 2);

@@ -212,8 +212,9 @@
         [[UINavigationBar appearance] setBarTintColor:NAVIGATIONBAR_BACKCOLOR];
         [leftMenuVC givemeViewController:mainVC];
         sideMenuViewController = [[RESideMenu alloc]initWithContentViewController:self.navController leftMenuViewController:leftMenuVC rightMenuViewController:nil];
+        //TODO elias
         sideMenuViewController.backgroundImage = [UIImage imageNamed:RidemenuImage];
-
+        // sideMenuViewController.view.backgroundColor = [UIColor whiteColor];
         self.window.rootViewController = sideMenuViewController;
     }
     
@@ -248,7 +249,10 @@
     [[UINavigationBar appearance] setBarTintColor:NAVIGATIONBAR_BACKCOLOR];
     [leftMenuVC givemeViewController:mainVC];
     sideMenuViewController = [[RESideMenu alloc]initWithContentViewController:self.navController leftMenuViewController:leftMenuVC rightMenuViewController:nil];
+    //TODO elias
     sideMenuViewController.backgroundImage = [UIImage imageNamed:RidemenuImage];
+    //sideMenuViewController.view.backgroundColor = [UIColor whiteColor];
+    
     self.window.rootViewController = sideMenuViewController;
 }
 -(void)setregist

@@ -18,7 +18,7 @@
 "LoginL" = "Login";
 
 "LoginRegist" = "Regist";
-"Forgetpsd" = "Forget";
+"Forgetpsd" = "Forget？";
 
 "APPalret" = "Prompt";
 "APPNeedUpdate" = "a new version of APP";
@@ -39,6 +39,8 @@
 "NameOrPasswdIsNot" = "username or password is wrong";
 "LoginIsfaile" = "login failed, please check the network";
 
+"LoginAccount" = "Do you have an account?";
+"RegisitNow" = "Sign up";
 
 
 /****************修改密码******************/
@@ -50,6 +52,13 @@
 
 
 /*********************主视图**************************/
+//首视图辐射信息
+"Mainview_liveindex" = "LIVE INDEX";
+//首页下边历史信息
+"Mainview_ra_uplabel" = "Total Radiation";
+"Mainview_ra_belowlable" = "Some decription here";
+"Mainview_step_uplable" = "Walk Status";
+"Mainview_step_belowlable" = "Some decription here";
 //手机蓝牙未打开提醒
 "alert_OpenPhoneBluetooth_Message"  = "Please open the Bluetooth！";
 "alert_OpenPhoneBluetooth_CancelButtonTittle" = "Know";
@@ -76,8 +85,10 @@
 //网络
 "Networking_Isnot" = "The network has been disconnected";
 "LeftVC_table_FirstVC_Title" = "Home";
-"LeftVC_table_HistoryVC_Title" = "History";
-"LeftVC_table_Recommond_Title" = "Recommend";
+//TODO elias
+"LeftVC_table_HistoryVC_Title" = "Total Radiation"; //History
+"LeftVC_table_SPHistoryVC_Title" = "Walk Status";
+"LeftVC_table_Recommond_Title" = "Share";
 "LeftVC_table_Setting_Title" = "Settings";
 
 //分享
@@ -101,16 +112,16 @@
 "Registfaile_Alret_Message" = "Please fill in complete information";
 "Registfaile_Alret_Button" = "Confirm";
 /*******************注册第二视图**********************/
-"Registtwo_PhonenumTextField_Text" = "mobile phone number";
-"Registtwo_EmailnumTextField_Text" = "email";
-"change_text" = "account";
+"Registtwo_PhonenumTextField_Text" = "Phone number";
+"Registtwo_EmailnumTextField_Text" = "E-mail";
+"change_text" = "Account";
 
 
-"Registtwo_Getcheck_Text" = "verification";
-"Registtwo_PutIncheckNum_Text" = "Please enter the verification code";
+"Registtwo_Getcheck_Text" = "Get Code";
+"Registtwo_PutIncheckNum_Text" = "Enter Code";
 "Registtwo_ReGetcheckNum_Text" = "Re send";
-"PutInPasswd_Text" = "Please enter the password";
-"CheckPasswd_Text" = "Please confirm password";
+"PutInPasswd_Text" = "Set password";
+"CheckPasswd_Text" = "Re-enter password";
 "RegistAlready_Text" = "Regist";
 "Networking_isNot" = "The network is not available";
 
@@ -191,16 +202,30 @@
 "SettingVC_Declear" = "Disclaimer";
 "SettingVC_TeamIntreduc" = "Team";
 "SettingVC_NoteBook" = "Scene manual";
-
+"SettingVC_SectionTwo_Title" = "About";
 
 "SettingVC_ConnectBleAlret_Title" = "Not even the device";
 "SettingVC_ConnectBleAlret_Message" = "Please connect device";
 
 
 "SettingVC_SectionOne_Title" = "Function";
-"SettingVC_SectionTwo_Title" = "About";
+"SettingVC_Sec/Users/chanbill/Downloads/iSeed0508new/iSeed/ViewControllers/SpHistoryViewController/SpHistoryViewController.mtionTwo_Title" = "About";
 /*********************历史 视图**************************/
-"HistoryVC_RightButton_Title" = "Update";
+//TODO elias
+"rtHistory_rtindex" = "average index";
+"rtHistory_nodatatext" = "No Data";
+"rtHistory_rtstateOK" = "GOOD";
+"rtHistory_rtstateNO" = "BAD";
+"stepsHistory_stepsindex" = "calorie burned";
+"stepsHistory_calorie" = "calorie";
+"stepsHistory_metre" = "metre";
+"stepsHistory_steps" = "steps";
+"stepsHistory_arrival" = "Today Achieve";
+"stepsHistory_suggestiontext" = "200-300 PER DAY RECOMMEDED";
+"stepsHistory_progressbarnodata" = "No data";
+"stepsHistory_startsynctext" = "Click Sync";
+
+"HistoryVC_RightButton_Title" = "Sync";
 "HistoryVC_UpdateOKAlret_Title" = "Update completed!";
 "HistoryVC_IbirthstoneNoData" = "Ibirthstone not yet saved data";
 

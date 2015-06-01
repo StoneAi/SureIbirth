@@ -75,6 +75,14 @@
     else
         hei = 0;
     myimageview.frame = CGRectMake(70, 110-hei, 100,100);
+    //myimageview.layer.cornerRadius = 10;
+    myimageview.layer.cornerRadius = myimageview.bounds.size.width*0.5;
+    myimageview.layer.masksToBounds = YES;
+    myimageview.layer.borderWidth = 2;
+    myimageview.layer.borderColor = [[UIColor whiteColor] CGColor];
+    
+    
+    
     NSString *imagehead  = [[[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:NAMEFORUSER]stringByAppendingPathComponent:@"imagephoto"];
     NSFileHandle *fh = [NSFileHandle fileHandleForReadingAtPath:imagehead];
     NSData *mydata = [fh readDataToEndOfFile];
@@ -94,6 +102,7 @@
     _name.text = RDname;
     _name.textColor = CELLTEXTLABELHIGHTCOLOR;
     _name.font = [UIFont systemFontOfSize:18.0];
+    //TODO elias
     _name.backgroundColor = [UIColor clearColor];
     _name.textAlignment = NSTextAlignmentCenter;
     _name.center = CGPointMake(myimageview.center.x, myimageview.center.y+75);
@@ -104,11 +113,12 @@
 
        
     self.tableView = ({
-        UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, (self.view.frame.size.height - 54 * 1) / 2.0f, self.view.frame.size.width-80, 54 * 4) style:UITableViewStylePlain];
+        UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, (self.view.frame.size.height - 54 * 1) / 2.0f, self.view.frame.size.width-80, 54 * 5) style:UITableViewStylePlain];
         tableView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth;
         tableView.delegate = self;
         tableView.dataSource = self;
         tableView.opaque = NO;
+        //TODO elias
         tableView.backgroundColor = [UIColor clearColor];
         tableView.backgroundView = nil;
        
@@ -468,7 +478,7 @@
             UIGraphicsBeginImageContextWithOptions(itemSize1, NO ,0.0);
             CGRect imageRect1 = CGRectMake(0.0, 0.0, itemSize1.width, itemSize1.height);
             [icon1 drawInRect:imageRect1];
-            cell.imageView.highlightedImage = UIGraphicsGetImageFromCurrentImageContext();
+            //cell.imageView.highlightedImage = UIGraphicsGetImageFromCurrentImageContext();
             UIGraphicsEndImageContext();
             
            // cell.imageView.highlightedImage = [UIImage imageNamed:LeftHomeHighImage];
@@ -481,7 +491,7 @@
             
             /*******************缩小图片为22.22***************************/
             
-            UIImage *icon = [UIImage imageNamed:LeftHistoryImage ];
+            UIImage *icon = [UIImage imageNamed:@"Ellipse0505.png"];
             
             CGSize itemSize = CGSizeMake(20, 20);
             
@@ -503,18 +513,57 @@
             UIGraphicsBeginImageContextWithOptions(itemSize1, NO ,0.0);
             CGRect imageRect1 = CGRectMake(0.0, 0.0, itemSize1.width, itemSize1.height);
             [icon1 drawInRect:imageRect1];
-            cell.imageView.highlightedImage = UIGraphicsGetImageFromCurrentImageContext();
+         //   cell.imageView.highlightedImage = UIGraphicsGetImageFromCurrentImageContext();
             UIGraphicsEndImageContext();
             
          //   cell.imageView.highlightedImage = [UIImage imageNamed:LeftHistoryHighImage]; //设置选择此行时的照片
             
             //cell.imageView.image = [UIImage imageNamed:@"history1128.png"];
             
-            
+            //LeftVC_table_SPHistoryVC_Title
             
         }
-        
         else if (indexPath.row == 2) {
+            
+            cell.textLabel.text = NSLocalizedStringFromTable(@"LeftVC_table_SPHistoryVC_Title",@"MyLoaclization" , @"");
+            
+            /*******************缩小图片为22.22***************************/
+            
+            UIImage *icon = [UIImage imageNamed:@"walk status0505.png"];
+            
+            CGSize itemSize = CGSizeMake(20, 20);
+            
+            UIGraphicsBeginImageContextWithOptions(itemSize, NO ,0.0);
+            
+            CGRect imageRect = CGRectMake(0.0, 0.0, itemSize.width, itemSize.height);
+            
+            [icon drawInRect:imageRect];
+            
+            cell.imageView.image = UIGraphicsGetImageFromCurrentImageContext();
+            
+            UIGraphicsEndImageContext();
+            
+            /***********************************************************/
+            
+            
+            UIImage *icon1 = [UIImage imageNamed:LeftHistoryHighImage];
+            CGSize itemSize1 = CGSizeMake(20, 20);
+            UIGraphicsBeginImageContextWithOptions(itemSize1, NO ,0.0);
+            CGRect imageRect1 = CGRectMake(0.0, 0.0, itemSize1.width, itemSize1.height);
+            [icon1 drawInRect:imageRect1];
+            //   cell.imageView.highlightedImage = UIGraphicsGetImageFromCurrentImageContext();
+            UIGraphicsEndImageContext();
+            
+            //   cell.imageView.highlightedImage = [UIImage imageNamed:LeftHistoryHighImage]; //设置选择此行时的照片
+            
+            //cell.imageView.image = [UIImage imageNamed:@"history1128.png"];
+            
+            //LeftVC_table_SPHistoryVC_Title
+            
+        }
+
+        
+        else if (indexPath.row == 3) {
             
             cell.textLabel.text = NSLocalizedStringFromTable(@"LeftVC_table_Recommond_Title",@"MyLoaclization" , @"");
             
@@ -538,14 +587,14 @@
             UIGraphicsBeginImageContextWithOptions(itemSize1, NO ,0.0);
             CGRect imageRect1 = CGRectMake(0.0, 0.0, itemSize1.width, itemSize1.height);
             [icon1 drawInRect:imageRect1];
-            cell.imageView.highlightedImage = UIGraphicsGetImageFromCurrentImageContext();
+          //  cell.imageView.highlightedImage = UIGraphicsGetImageFromCurrentImageContext();
             UIGraphicsEndImageContext();
             
            // cell.imageView.highlightedImage = [UIImage imageNamed:LeftRecomHigeImage];
             
         }
         
-        else if (indexPath.row == 3) {
+        else if (indexPath.row == 4) {
             
             cell.textLabel.text = NSLocalizedStringFromTable(@"LeftVC_table_Setting_Title",@"MyLoaclization" , @"");
             
@@ -569,12 +618,12 @@
             UIGraphicsBeginImageContextWithOptions(itemSize1, NO ,0.0);
             CGRect imageRect1 = CGRectMake(0.0, 0.0, itemSize1.width, itemSize1.height);
             [icon1 drawInRect:imageRect1];
-            cell.imageView.highlightedImage = UIGraphicsGetImageFromCurrentImageContext();
+           // cell.imageView.highlightedImage = UIGraphicsGetImageFromCurrentImageContext();
             UIGraphicsEndImageContext();
             //cell.imageView.highlightedImage = [UIImage imageNamed:LeftSettingHighImage];
             
         }
-        if (indexPath.row == 4) {
+        if (indexPath.row == 5) {
             cell.textLabel.text = @"退出";
             UIImage *icon = [UIImage imageNamed:@ "back" ];
             CGSize itemSize = CGSizeMake(15, 15);
@@ -611,10 +660,11 @@
     
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
-    cell.textLabel.textColor = CELLTEXTLABELHIGHTCOLOR;
+    cell.textLabel.textColor =  CELLTEXTLABELHIGHTCOLOR;
     
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
+    //TODO elias
     cell.backgroundColor = [UIColor clearColor];
     
     return cell;
@@ -654,7 +704,7 @@
 //                                                                 animated:YES];
                     [self.sideMenuViewController setContentViewController: [[UINavigationController alloc] initWithRootViewController:mainVC]
                                                                                       animated:NO];
-
+                 //   [mainVC GetDelegate:self];
                     [self.sideMenuViewController hideMenuViewController];
 
                 }
@@ -662,18 +712,29 @@
                     break;
                     
                 case 1:{
-                    HistoryViewController *history =[[HistoryViewController alloc] init:Face];
+                    RtHistoryViewController *history =[[RtHistoryViewController alloc]init];
                     [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:history]
                                                                  animated:NO];
-                    history.delegate = self;
+                    history.delegate = mainVC;
                     [self.sideMenuViewController hideMenuViewController];
-                    NSLog(@"历史");
+                    NSLog(@"辐射");
+                    
+                }
+                    
+                    break;
+                case 2:{
+                    SpHistoryViewController *history =[[SpHistoryViewController alloc] init];
+                    [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:history]
+                                                                 animated:NO];
+                    history.delegate = mainVC;
+                    [self.sideMenuViewController hideMenuViewController];
+                    NSLog(@"计步");
                     
                 }
                     
                     break;
                     
-                case 2:{
+                case 3:{
 
                     NSString *title = [[NSString alloc]initWithFormat:NSLocalizedStringFromTable(@"share_Tittle_LeftVC_Text",@"MyLoaclization" , @"")];
                     
@@ -766,7 +827,7 @@
                     
                     break;
                     
-                case 3:{
+                case 4:{
                     if (mainVC.blesta==1) {
                         [mainVC readbat];
                     }
