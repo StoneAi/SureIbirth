@@ -74,7 +74,7 @@
     }
     else
         hei = 0;
-    myimageview.frame = CGRectMake(70, 110-hei, 100,100);
+    myimageview.frame = CGRectMake(20, 110-hei, 80,80);
     //myimageview.layer.cornerRadius = 10;
     myimageview.layer.cornerRadius = myimageview.bounds.size.width*0.5;
     myimageview.layer.masksToBounds = YES;
@@ -98,14 +98,14 @@
     
     
     
-    _name = [[UILabel alloc]initWithFrame:CGRectMake(100, 190-hei, 140, 30)];
+    _name = [[UILabel alloc]initWithFrame:CGRectMake(110, 110-hei, 140, 30)];
     _name.text = RDname;
     _name.textColor = CELLTEXTLABELHIGHTCOLOR;
     _name.font = [UIFont systemFontOfSize:18.0];
     //TODO elias
     _name.backgroundColor = [UIColor clearColor];
     _name.textAlignment = NSTextAlignmentCenter;
-    _name.center = CGPointMake(myimageview.center.x, myimageview.center.y+75);
+    _name.center = CGPointMake(myimageview.center.x+80, myimageview.center.y);
     
     [self.view addSubview:informationbutton];
    [self.view addSubview:myimageview];
@@ -113,7 +113,7 @@
 
        
     self.tableView = ({
-        UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, (self.view.frame.size.height - 54 * 1) / 2.0f, self.view.frame.size.width-80, 54 * 5) style:UITableViewStylePlain];
+        UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(20, (self.view.frame.size.height - 54 * 2) / 2.0f, self.view.frame.size.width-100, 54 * 5) style:UITableViewStylePlain];
         tableView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth;
         tableView.delegate = self;
         tableView.dataSource = self;
@@ -128,6 +128,12 @@
     [self.view addSubview:self.tableView];
     self.tableView.scrollEnabled = NO;
     
+    
+    UILabel *Design = [[UILabel alloc]initWithFrame:CGRectMake(50, 540, 140, 20)];
+    Design.text = @"Designed by Vipose";
+    Design.font = [UIFont systemFontOfSize:13];
+    Design.textColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:0.3];
+    [self.view addSubview:Design];
     
     
 }
@@ -491,7 +497,7 @@
             
             /*******************缩小图片为22.22***************************/
             
-            UIImage *icon = [UIImage imageNamed:@"Ellipse0505.png"];
+            UIImage *icon = [UIImage imageNamed:@"Ellipse0505@2x.png"];
             
             CGSize itemSize = CGSizeMake(20, 20);
             
@@ -529,9 +535,9 @@
             
             /*******************缩小图片为22.22***************************/
             
-            UIImage *icon = [UIImage imageNamed:@"walk status0505.png"];
+            UIImage *icon = [UIImage imageNamed:@"walk status0505@2x.png"];
             
-            CGSize itemSize = CGSizeMake(20, 20);
+            CGSize itemSize = CGSizeMake(17, 27);
             
             UIGraphicsBeginImageContextWithOptions(itemSize, NO ,0.0);
             
@@ -547,7 +553,7 @@
             
             
             UIImage *icon1 = [UIImage imageNamed:LeftHistoryHighImage];
-            CGSize itemSize1 = CGSizeMake(20, 20);
+            CGSize itemSize1 = CGSizeMake(20, 24);
             UIGraphicsBeginImageContextWithOptions(itemSize1, NO ,0.0);
             CGRect imageRect1 = CGRectMake(0.0, 0.0, itemSize1.width, itemSize1.height);
             [icon1 drawInRect:imageRect1];
@@ -648,8 +654,8 @@
         
         
     }
-   // cell.textLabel.font = [UIFont systemFontOfSize:15.0];
-    cell.textLabel.font = [UIFont boldSystemFontOfSize:18.0];
+    cell.textLabel.font = [UIFont systemFontOfSize:18.0];
+   // cell.textLabel.font = [UIFont boldSystemFontOfSize:18.0];
     cell.imageView.contentMode = UIViewContentModeCenter;
     
     cell.textLabel.highlightedTextColor = CELLNOMARLCOLOR;
@@ -658,12 +664,12 @@
     
     cell.selectedBackgroundView.backgroundColor = CELLSELECTCOLOR;
     
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+   // cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
     cell.textLabel.textColor =  CELLTEXTLABELHIGHTCOLOR;
     
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    
+//    tableView.separatorColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:0.3];
     //TODO elias
     cell.backgroundColor = [UIColor clearColor];
     

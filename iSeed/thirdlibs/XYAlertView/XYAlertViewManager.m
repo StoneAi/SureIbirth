@@ -14,8 +14,8 @@
 #define AlertViewHeight 175.0f
 
 
-#define alartBackimage @"alertView0505.png"
-#define alartButtonimage @"alertView_button_0505.png"
+#define alartBackimage @"560.png"
+#define alartButtonimage @"alertView_button_gray@2x.png"
 CGRect XYScreenBounds()
 {
     CGRect bounds = [UIScreen mainScreen].bounds;
@@ -134,8 +134,10 @@ static XYAlertViewManager *sharedAlertViewManager = nil;
     _messageLabel.numberOfLines = 3;
     _messageLabel.text = entity.message;
     [_alertView addSubview:_messageLabel];
-
+    
+    
     float buttonWidth = (AlertViewWidth - 100.0f) / entity.buttons.count;
+   
     float buttonPadding = 100.0f / (entity.buttons.count - 1 + 2 * 2);
     
     for(int i = 0; i < entity.buttons.count; i++)
@@ -146,16 +148,30 @@ static XYAlertViewManager *sharedAlertViewManager = nil;
         UIButton *_button = [UIButton buttonWithType:UIButtonTypeCustom];
         [_button setTitle:buttonTitle forState:UIControlStateNormal];
         _button.titleLabel.font = [UIFont boldSystemFontOfSize:16];
-        _button.titleLabel.shadowOffset = CGSizeMake(1, 1);
-        [_button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [_button setTitleShadowColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [_button setBackgroundImage:[self buttonImageByStyle:style state:UIControlStateNormal]
-                           forState:UIControlStateNormal];
-        [_button setBackgroundImage:[self buttonImageByStyle:style state:UIControlStateHighlighted]
-                           forState:UIControlStateHighlighted];
-
-        _button.frame = CGRectMake(buttonPadding * 2 + buttonWidth * i + buttonPadding * i, 107,
-                                   buttonWidth, 44);
+       // _button.titleLabel.shadowOffset = CGSizeMake(1, 1);
+        [_button setTitleColor:[UIColor colorWithRed: 72.0/255 green: 193.0/255 blue: 201.0/255 alpha: 1.0f] forState:UIControlStateNormal];
+       // [_button setTitleShadowColor:[UIColor blackColor] forState:UIControlStateNormal];
+//        [_button setBackgroundImage:[self buttonImageByStyle:style state:UIControlStateNormal]
+//                           forState:UIControlStateNormal];
+//        [_button setBackgroundImage:[self buttonImageByStyle:style state:UIControlStateHighlighted]
+//                           forState:UIControlStateHighlighted];
+        [_button setBackgroundColor:[UIColor whiteColor]];
+        _button.layer.cornerRadius = 22;
+        
+        
+        if (entity.buttons.count==1) {
+//            _button.frame = CGRectMake(97, 107,
+//                                       95, 44);
+            _button.frame = CGRectMake(buttonPadding * 2 + buttonWidth * i + buttonPadding * i, 107,
+                                       buttonWidth, 44);
+        }
+        else
+        {
+            _button.frame = CGRectMake(buttonPadding * 2 + buttonWidth * i + buttonPadding * i, 107,
+                                       buttonWidth, 44);
+        
+        }
+        
         _button.tag = i;
 
         [_button addTarget:self action:@selector(onButtonTapped:) forControlEvents:UIControlEventTouchUpInside];

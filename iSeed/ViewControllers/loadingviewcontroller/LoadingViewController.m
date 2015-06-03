@@ -134,10 +134,10 @@
 //    [PasswdImage setImage:[UIImage imageNamed:LoginPasswd]];
 //    [tmpview addSubview:PasswdImage];
     UIView *oneView = [[UIView alloc]initWithFrame:CGRectMake(30, 40, 260, 0.5)];
-    oneView.backgroundColor = [UIColor darkGrayColor];
+    oneView.backgroundColor = [UIColor colorWithRed:170.0/255 green:170.0/255 blue:170.0/255 alpha:0.3];
     
     UIView *twoView = [[UIView alloc]initWithFrame:CGRectMake(30, 90, 260, 0.5)];
-    twoView.backgroundColor = [UIColor grayColor];
+    twoView.backgroundColor = [UIColor colorWithRed:170.0/255 green:170.0/255 blue:170.0/255 alpha:0.3];
     
     [tmpview addSubview:oneView];
     [tmpview addSubview:twoView];

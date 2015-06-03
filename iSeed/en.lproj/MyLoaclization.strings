@@ -87,7 +87,7 @@
 "LeftVC_table_FirstVC_Title" = "Home";
 //TODO elias
 "LeftVC_table_HistoryVC_Title" = "Total Radiation"; //History
-"LeftVC_table_SPHistoryVC_Title" = "Walk Status";
+"LeftVC_table_SPHistoryVC_Title" = " Walk Status";
 "LeftVC_table_Recommond_Title" = "Share";
 "LeftVC_table_Setting_Title" = "Settings";
 
@@ -212,14 +212,14 @@
 "SettingVC_Sec/Users/chanbill/Downloads/iSeed0508new/iSeed/ViewControllers/SpHistoryViewController/SpHistoryViewController.mtionTwo_Title" = "About";
 /*********************历史 视图**************************/
 //TODO elias
-"rtHistory_rtindex" = "average index";
+"rtHistory_rtindex" = "EVERAGE INDEX";
 "rtHistory_nodatatext" = "No Data";
 "rtHistory_rtstateOK" = "GOOD";
 "rtHistory_rtstateNO" = "BAD";
 "stepsHistory_stepsindex" = "calorie burned";
 "stepsHistory_calorie" = "calorie";
-"stepsHistory_metre" = "metre";
-"stepsHistory_steps" = "steps";
+"stepsHistory_metre" = "Metre";
+"stepsHistory_steps" = "Steps";
 "stepsHistory_arrival" = "Today Achieve";
 "stepsHistory_suggestiontext" = "200-300 PER DAY RECOMMEDED";
 "stepsHistory_progressbarnodata" = "No data";

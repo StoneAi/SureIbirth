@@ -29,6 +29,25 @@
 		FE19DDD61AA95B33006B67FE /* TeamIntrViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE19DDD51AA95B33006B67FE /* TeamIntrViewController.xib */; };
 		FE3033D71B0C698B00447F9F /* loginibs.png in Resources */ = {isa = PBXBuildFile; fileRef = FE3033D61B0C698B00447F9F /* loginibs.png */; };
 		FE3688141A49030800BE1BE5 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FE3688131A49030800BE1BE5 /* libsqlite3.dylib */; };
+		FE46C7E81B1D94F900A9B1F6 /* alertView0505@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FE46C7E11B1D94F900A9B1F6 /* alertView0505@2x.png */; };
+		FE46C7E91B1D94F900A9B1F6 /* alertView_button_0505@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FE46C7E21B1D94F900A9B1F6 /* alertView_button_0505@2x.png */; };
+		FE46C7EA1B1D94F900A9B1F6 /* Ellipse0505@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FE46C7E31B1D94F900A9B1F6 /* Ellipse0505@2x.png */; };
+		FE46C7EB1B1D94F900A9B1F6 /* Out0505@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FE46C7E41B1D94F900A9B1F6 /* Out0505@2x.png */; };
+		FE46C7EC1B1D94F900A9B1F6 /* Settings_Alt0505@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FE46C7E51B1D94F900A9B1F6 /* Settings_Alt0505@2x.png */; };
+		FE46C7ED1B1D94F900A9B1F6 /* walk status0505@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FE46C7E61B1D94F900A9B1F6 /* walk status0505@2x.png */; };
+		FE46C7EE1B1D94F900A9B1F6 /* Wind_Cone0505@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FE46C7E71B1D94F900A9B1F6 /* Wind_Cone0505@2x.png */; };
+		FE46C7F21B1DBCBE00A9B1F6 /* 560.png in Resources */ = {isa = PBXBuildFile; fileRef = FE46C7F11B1DBCBD00A9B1F6 /* 560.png */; };
+		FE46C7F91B1ED5CA00A9B1F6 /* battery05051.png in Resources */ = {isa = PBXBuildFile; fileRef = FE46C7F41B1ED5CA00A9B1F6 /* battery05051.png */; };
+		FE46C7FA1B1ED5CA00A9B1F6 /* Book05051.png in Resources */ = {isa = PBXBuildFile; fileRef = FE46C7F51B1ED5CA00A9B1F6 /* Book05051.png */; };
+		FE46C7FB1B1ED5CA00A9B1F6 /* Phone05051.png in Resources */ = {isa = PBXBuildFile; fileRef = FE46C7F61B1ED5CA00A9B1F6 /* Phone05051.png */; };
+		FE46C7FC1B1ED5CA00A9B1F6 /* Ribbon05051.png in Resources */ = {isa = PBXBuildFile; fileRef = FE46C7F71B1ED5CA00A9B1F6 /* Ribbon05051.png */; };
+		FE46C7FD1B1ED5CA00A9B1F6 /* viberation05051.png in Resources */ = {isa = PBXBuildFile; fileRef = FE46C7F81B1ED5CA00A9B1F6 /* viberation05051.png */; };
+		FE46C8001B1ED6AF00A9B1F6 /* 0001.png in Resources */ = {isa = PBXBuildFile; fileRef = FE46C7FE1B1ED6AF00A9B1F6 /* 0001.png */; };
+		FE46C8011B1ED6AF00A9B1F6 /* 0002.png in Resources */ = {isa = PBXBuildFile; fileRef = FE46C7FF1B1ED6AF00A9B1F6 /* 0002.png */; };
+		FE46C8031B1EE52100A9B1F6 /* alertview_button_05051.png in Resources */ = {isa = PBXBuildFile; fileRef = FE46C8021B1EE52100A9B1F6 /* alertview_button_05051.png */; };
+		FE46C8051B1EEA1B00A9B1F6 /* alertview_button_0505(1).png in Resources */ = {isa = PBXBuildFile; fileRef = FE46C8041B1EEA1B00A9B1F6 /* alertview_button_0505(1).png */; };
+		FE46C8071B1EF25200A9B1F6 /* alertview_button_0505(2).png in Resources */ = {isa = PBXBuildFile; fileRef = FE46C8061B1EF25200A9B1F6 /* alertview_button_0505(2).png */; };
+		FE46C80A1B1EF40300A9B1F6 /* alertView_button_gray@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FE46C8091B1EF40300A9B1F6 /* alertView_button_gray@2x.png */; };
 		FE4BA5F31A708EA00087371C /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE4BA5F11A708DEC0087371C /* SystemConfiguration.framework */; };
 		FE4F2AFD1AC26C380075463F /* btn_call_default0325.png in Resources */ = {isa = PBXBuildFile; fileRef = FE4F2AFA1AC26C380075463F /* btn_call_default0325.png */; };
 		FE4F2AFE1AC26C380075463F /* btn_email.png in Resources */ = {isa = PBXBuildFile; fileRef = FE4F2AFB1AC26C380075463F /* btn_email.png */; };
@@ -392,6 +411,25 @@
 		FE19DDD51AA95B33006B67FE /* TeamIntrViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TeamIntrViewController.xib; sourceTree = "<group>"; };
 		FE3033D61B0C698B00447F9F /* loginibs.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loginibs.png; sourceTree = "<group>"; };
 		FE3688131A49030800BE1BE5 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		FE46C7E11B1D94F900A9B1F6 /* alertView0505@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "alertView0505@2x.png"; sourceTree = "<group>"; };
+		FE46C7E21B1D94F900A9B1F6 /* alertView_button_0505@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "alertView_button_0505@2x.png"; sourceTree = "<group>"; };
+		FE46C7E31B1D94F900A9B1F6 /* Ellipse0505@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Ellipse0505@2x.png"; sourceTree = "<group>"; };
+		FE46C7E41B1D94F900A9B1F6 /* Out0505@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Out0505@2x.png"; sourceTree = "<group>"; };
+		FE46C7E51B1D94F900A9B1F6 /* Settings_Alt0505@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Settings_Alt0505@2x.png"; sourceTree = "<group>"; };
+		FE46C7E61B1D94F900A9B1F6 /* walk status0505@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "walk status0505@2x.png"; sourceTree = "<group>"; };
+		FE46C7E71B1D94F900A9B1F6 /* Wind_Cone0505@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Wind_Cone0505@2x.png"; sourceTree = "<group>"; };
+		FE46C7F11B1DBCBD00A9B1F6 /* 560.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 560.png; sourceTree = "<group>"; };
+		FE46C7F41B1ED5CA00A9B1F6 /* battery05051.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = battery05051.png; sourceTree = "<group>"; };
+		FE46C7F51B1ED5CA00A9B1F6 /* Book05051.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Book05051.png; sourceTree = "<group>"; };
+		FE46C7F61B1ED5CA00A9B1F6 /* Phone05051.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Phone05051.png; sourceTree = "<group>"; };
+		FE46C7F71B1ED5CA00A9B1F6 /* Ribbon05051.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Ribbon05051.png; sourceTree = "<group>"; };
+		FE46C7F81B1ED5CA00A9B1F6 /* viberation05051.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = viberation05051.png; sourceTree = "<group>"; };
+		FE46C7FE1B1ED6AF00A9B1F6 /* 0001.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 0001.png; sourceTree = "<group>"; };
+		FE46C7FF1B1ED6AF00A9B1F6 /* 0002.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 0002.png; sourceTree = "<group>"; };
+		FE46C8021B1EE52100A9B1F6 /* alertview_button_05051.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = alertview_button_05051.png; sourceTree = "<group>"; };
+		FE46C8041B1EEA1B00A9B1F6 /* alertview_button_0505(1).png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "alertview_button_0505(1).png"; sourceTree = "<group>"; };
+		FE46C8061B1EF25200A9B1F6 /* alertview_button_0505(2).png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "alertview_button_0505(2).png"; sourceTree = "<group>"; };
+		FE46C8091B1EF40300A9B1F6 /* alertView_button_gray@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "alertView_button_gray@2x.png"; sourceTree = "<group>"; };
 		FE4BA5F11A708DEC0087371C /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		FE4F2AFA1AC26C380075463F /* btn_call_default0325.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_call_default0325.png; sourceTree = "<group>"; };
 		FE4F2AFB1AC26C380075463F /* btn_email.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_email.png; sourceTree = "<group>"; };
@@ -1003,6 +1041,32 @@
 			path = resource;
 			sourceTree = "<group>";
 		};
+		FE46C7E01B1D94F900A9B1F6 /* 2X(1) */ = {
+			isa = PBXGroup;
+			children = (
+				FE46C7E11B1D94F900A9B1F6 /* alertView0505@2x.png */,
+				FE46C7E21B1D94F900A9B1F6 /* alertView_button_0505@2x.png */,
+				FE46C7E31B1D94F900A9B1F6 /* Ellipse0505@2x.png */,
+				FE46C7E41B1D94F900A9B1F6 /* Out0505@2x.png */,
+				FE46C7E51B1D94F900A9B1F6 /* Settings_Alt0505@2x.png */,
+				FE46C7E61B1D94F900A9B1F6 /* walk status0505@2x.png */,
+				FE46C7E71B1D94F900A9B1F6 /* Wind_Cone0505@2x.png */,
+			);
+			path = "2X(1)";
+			sourceTree = "<group>";
+		};
+		FE46C7F31B1ED5CA00A9B1F6 /* 2x0603 */ = {
+			isa = PBXGroup;
+			children = (
+				FE46C7F41B1ED5CA00A9B1F6 /* battery05051.png */,
+				FE46C7F51B1ED5CA00A9B1F6 /* Book05051.png */,
+				FE46C7F61B1ED5CA00A9B1F6 /* Phone05051.png */,
+				FE46C7F71B1ED5CA00A9B1F6 /* Ribbon05051.png */,
+				FE46C7F81B1ED5CA00A9B1F6 /* viberation05051.png */,
+			);
+			path = 2x0603;
+			sourceTree = "<group>";
+		};
 		FE4F2AF91AC26C380075463F /* 联系我们0325 */ = {
 			isa = PBXGroup;
 			children = (
@@ -1047,6 +1111,15 @@
 		FE5159441AF8EAE000618D21 /* 0505图标 */ = {
 			isa = PBXGroup;
 			children = (
+				FE46C8091B1EF40300A9B1F6 /* alertView_button_gray@2x.png */,
+				FE46C8061B1EF25200A9B1F6 /* alertview_button_0505(2).png */,
+				FE46C8041B1EEA1B00A9B1F6 /* alertview_button_0505(1).png */,
+				FE46C8021B1EE52100A9B1F6 /* alertview_button_05051.png */,
+				FE46C7FE1B1ED6AF00A9B1F6 /* 0001.png */,
+				FE46C7FF1B1ED6AF00A9B1F6 /* 0002.png */,
+				FE46C7F31B1ED5CA00A9B1F6 /* 2x0603 */,
+				FE46C7F11B1DBCBD00A9B1F6 /* 560.png */,
+				FE46C7E01B1D94F900A9B1F6 /* 2X(1) */,
 				03E8F5D21AFC95A500F4332B /* btn_sync0507.png */,
 				FE5159451AF8EAE000618D21 /* alertView0505.png */,
 				FE5159461AF8EAE000618D21 /* alertView_button_0505.png */,
@@ -1868,7 +1941,9 @@
 				FE5A2D341AA417E000BD43EA /* 12@2x.png in Resources */,
 				FE51595E1AF8EAE000618D21 /* Phone0505.png in Resources */,
 				FE8C728F1AC58AA600059152 /* relationblue0327.png in Resources */,
+				FE46C7E81B1D94F900A9B1F6 /* alertView0505@2x.png in Resources */,
 				FE4F2B071AC2A1D30075463F /* 初始头像.png in Resources */,
+				FE46C7EB1B1D94F900A9B1F6 /* Out0505@2x.png in Resources */,
 				FE5A2D401AA417E000BD43EA /* 18@2x.png in Resources */,
 				FE9E5E291ABC1B83007D9AC1 /* notebook0320.png in Resources */,
 				FEAB84541AA694BD00EA2C92 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
@@ -1915,11 +1990,15 @@
 				FE4F2B031AC26D410075463F /* btn_URL.png in Resources */,
 				FE5A2D381AA417E000BD43EA /* 14@2x.png in Resources */,
 				FED52C201AC584B400647B6B /* viposelogo.png in Resources */,
+				FE46C7FB1B1ED5CA00A9B1F6 /* Phone05051.png in Resources */,
 				FE7F406E1AAD8CAD009EA5C2 /* circle0309.png in Resources */,
+				FE46C7E91B1D94F900A9B1F6 /* alertView_button_0505@2x.png in Resources */,
 				FE8C728C1AC58AA600059152 /* notebook0327.png in Resources */,
 				FEAB84C01AA69CF500EA2C92 /* TwoRegistViewController.xib in Resources */,
 				FEF209B71A5EB0B300BD3921 /* btn_arrow_back.png in Resources */,
+				FE46C7F21B1DBCBE00A9B1F6 /* 560.png in Resources */,
 				FE54FA3C1A763A4500BF2C63 /* Signal_2.png in Resources */,
+				FE46C7ED1B1D94F900A9B1F6 /* walk status0505@2x.png in Resources */,
 				FE5A2D4A1AA417E000BD43EA /* 4.png in Resources */,
 				FE54FA381A763A1400BF2C63 /* Signal_0.png in Resources */,
 				FEAB844A1AA694BD00EA2C92 /* background_top_bar.png in Resources */,
@@ -1934,11 +2013,13 @@
 				FEE886701A31AF750026ACC7 /* pic_logo_bg.png in Resources */,
 				FE9E5E251ABC1B83007D9AC1 /* alertView_button_0320@2x.png in Resources */,
 				FEAB84561AA694BD00EA2C92 /* WeiboSDK.bundle in Resources */,
+				FE46C8051B1EEA1B00A9B1F6 /* alertview_button_0505(1).png in Resources */,
 				FEAB85471AA6A5BB00EA2C92 /* UpdataViewController.xib in Resources */,
 				FEC6CFC71A67B3820093E9AC /* back.png in Resources */,
 				FE7F404A1AAD72C2009EA5C2 /* historyblue0309.png in Resources */,
 				FEFB33F01AC64A7D0070DAFE /* statement1205.png in Resources */,
 				FE5A2D451AA417E000BD43EA /* 20.png in Resources */,
+				FE46C8071B1EF25200A9B1F6 /* alertview_button_0505(2).png in Resources */,
 				FE9E5E3C1ABC41EA007D9AC1 /* 密码0320.png in Resources */,
 				FE7F40751AAD928B009EA5C2 /* 账号0309.png in Resources */,
 				FE5A2D4D1AA417E000BD43EA /* 5@2x.png in Resources */,
@@ -1993,6 +2074,7 @@
 				FE8C72941AC58D0B00059152 /* hj.jpg in Resources */,
 				FE5A2D361AA417E000BD43EA /* 13@2x.png in Resources */,
 				FE9E5E2C1ABC1B83007D9AC1 /* relationblue0320.png in Resources */,
+				FE46C7EC1B1D94F900A9B1F6 /* Settings_Alt0505@2x.png in Resources */,
 				FE4F2B571AC2B9710075463F /* 返過-18.png in Resources */,
 				FE7F40541AAD7A60009EA5C2 /* shakeblue0309.png in Resources */,
 				FE5A2D371AA417E000BD43EA /* 14.png in Resources */,
@@ -2004,6 +2086,7 @@
 				FE5A2D3A1AA417E000BD43EA /* 15@2x.png in Resources */,
 				FE5A2CDD1AA40E4800BD43EA /* recommend1227.png in Resources */,
 				FE8C728B1AC58AA600059152 /* introductionblue0327.png in Resources */,
+				FE46C80A1B1EF40300A9B1F6 /* alertView_button_gray@2x.png in Resources */,
 				FE5159601AF8EAE000618D21 /* Ribbon0505.png in Resources */,
 				FEC6CFC11A67A6B80093E9AC /* 辐射button0115.png in Resources */,
 				FE5A2CE01AA40E4800BD43EA /* shake1227.png in Resources */,
@@ -2018,6 +2101,7 @@
 				FE5A2D321AA417E000BD43EA /* 11@2x.png in Resources */,
 				FE8C72981AC597A700059152 /* historyblue0327改.png in Resources */,
 				FE51595F1AF8EAE000618D21 /* radiation0505.png in Resources */,
+				FE46C8001B1ED6AF00A9B1F6 /* 0001.png in Resources */,
 				FE5A2D471AA417E000BD43EA /* 2@2x.png in Resources */,
 				FE5A2D3F1AA417E000BD43EA /* 18.png in Resources */,
 				FEAB84BE1AA69CF500EA2C92 /* RegistViewController.xib in Resources */,
@@ -2026,6 +2110,7 @@
 				FE5A2CDE1AA40E4800BD43EA /* save1227.png in Resources */,
 				FE5A2D481AA417E000BD43EA /* 3.png in Resources */,
 				FE7F40771AADB591009EA5C2 /* circle0309gai.png in Resources */,
+				FE46C8031B1EE52100A9B1F6 /* alertview_button_05051.png in Resources */,
 				FE4F2B611AC2B9710075463F /* 返過-7.png in Resources */,
 				FE5159611AF8EAE000618D21 /* Settings0505.png in Resources */,
 				FEAB851B1AA6A1F100EA2C92 /* MainiSeedViewController.xib in Resources */,
@@ -2033,7 +2118,9 @@
 				FE4F2B5A1AC2B9710075463F /* 返過-20.png in Resources */,
 				FE5159661AF8EAE000618D21 /* Wind_Cone0505.png in Resources */,
 				FE7F40501AAD72C2009EA5C2 /* statementblue0309.png in Resources */,
+				FE46C7FA1B1ED5CA00A9B1F6 /* Book05051.png in Resources */,
 				03E8F5D31AFC95A500F4332B /* btn_sync0507.png in Resources */,
+				FE46C7FC1B1ED5CA00A9B1F6 /* Ribbon05051.png in Resources */,
 				FEAB85161AA6A1F100EA2C92 /* InforViewController.xib in Resources */,
 				FE7F40741AAD928B009EA5C2 /* 登录0309.png in Resources */,
 				FE8487061AC583F0003C8457 /* 个人中心.png in Resources */,
@@ -2045,12 +2132,14 @@
 				FE5A2D4B1AA417E000BD43EA /* 4@2x.png in Resources */,
 				FE9E5E281ABC1B83007D9AC1 /* introductionblue0320.png in Resources */,
 				FEF209AD1A5E775900BD3921 /* btn_login_select.png in Resources */,
+				FE46C7FD1B1ED5CA00A9B1F6 /* viberation05051.png in Resources */,
 				FE3033D71B0C698B00447F9F /* loginibs.png in Resources */,
 				FE5A2D571AA417E000BD43EA /* checkmark@2x.png in Resources */,
 				FE5159621AF8EAE000618D21 /* Settings_Alt0505.png in Resources */,
 				FE4F2B561AC2B9710075463F /* 返過-17.png in Resources */,
 				FEF209BE1A5FC76500BD3921 /* 02text_inputbox.png in Resources */,
 				FEAB85431AA6A5BB00EA2C92 /* DFUViewController.xib in Resources */,
+				FE46C7F91B1ED5CA00A9B1F6 /* battery05051.png in Resources */,
 				FE5A2CFE1AA410E100BD43EA /* alertView_loading@2x.png in Resources */,
 				FE4F2B5B1AC2B9710075463F /* 返過-21.png in Resources */,
 				FE5A2D421AA417E000BD43EA /* 19@2x.png in Resources */,
@@ -2063,6 +2152,7 @@
 				FE4F2B021AC26D410075463F /* btn_call.png in Resources */,
 				FE5A2CD81AA40E4800BD43EA /* batterygai1227.png in Resources */,
 				FE6D4B5B1A5D0573001FFE5B /* ibirthstone init 640.png in Resources */,
+				FE46C7EE1B1D94F900A9B1F6 /* Wind_Cone0505@2x.png in Resources */,
 				FE5159591AF8EAE000618D21 /* B0505.png in Resources */,
 				FE5A2D3E1AA417E000BD43EA /* 17@2x.png in Resources */,
 				FEAB850E1AA6A1F100EA2C92 /* HistoryViewController.xib in Resources */,
@@ -2087,10 +2177,12 @@
 				FE9E5E3B1ABC41EA007D9AC1 /* 个人中心背景0320.png in Resources */,
 				FE54FA151A75DB4700BF2C63 /* btn_arrow0.png in Resources */,
 				FEF209C01A5FD36000BD3921 /* 01text_inputbox.png in Resources */,
+				FE46C7EA1B1D94F900A9B1F6 /* Ellipse0505@2x.png in Resources */,
 				FEAB84261AA6930500EA2C92 /* new_account1219.png in Resources */,
 				FEF209AC1A5E775900BD3921 /* btn_login_default.png in Resources */,
 				FE8C728A1AC58AA600059152 /* homepageblue0327.png in Resources */,
 				FE7F40481AAD72C2009EA5C2 /* background0309.png in Resources */,
+				FE46C8011B1ED6AF00A9B1F6 /* 0002.png in Resources */,
 				FE19DDD61AA95B33006B67FE /* TeamIntrViewController.xib in Resources */,
 				FE8C72971AC597A700059152 /* battery0327改.png in Resources */,
 			);

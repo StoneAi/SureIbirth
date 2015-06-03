@@ -79,7 +79,7 @@
 #define rightbutton @"断开连接"
 #define circle_size (40, 90, 240, 240)
 #define circle_label @"请点击连接设备"
-#define centrlbutton_size (40, 163, 240, 220)
+#define centrlbutton_size (40, 163, 240, 160)
 #define refreshbutton_size (260 , 100, 50, 50)
 #define refreshbutton_title @"刷新"
 #define alertview_title @"请确认是否更新"
@@ -153,14 +153,14 @@
 #define InforSaveImage @"save0320.png"
 
 //TODO elias
-#define LeftHomeImage @ "Wind_Cone0505.png"   //homepageblue0309 homepageblue0327.png
+#define LeftHomeImage @ "Wind_Cone0505@2x.png"   //homepageblue0309 homepageblue0327.png
 #define LeftHomeHighImage @"homepage1227.png"
 #define LeftHistoryImage @ "historyblue0327改.png"   //historyblue0309
 #define LeftHistoryHighImage @"history1227.png"
 
-#define LeftRecomImage @ "Out0505.png"   //recommendblue0309 Out0505.png recommendblue0327.png
+#define LeftRecomImage @ "Out0505@2x.png"   //recommendblue0309 Out0505.png recommendblue0327.png
 #define LeftRecomHigeImage @ "recommend1227.png"
-#define LeftSettingImage @ "Settings_Alt0505.png"   //setblue0309 setblue0327.png
+#define LeftSettingImage @ "Settings_Alt0505@2x.png"   //setblue0309 setblue0327.png
 #define LeftSettingHighImage @ "set1227.png"
 
 #define HelpImage @"help0104.png"
@@ -172,19 +172,19 @@
 
 #define SettingCancaleImage @"矩形2.png"
 //TODO elias
-#define SettingBatteryImage @ "battery0505.png"  //battery0327改.png
-#define SettingShakeImage @ "viberation0505.png"  //shake0327.png
+#define SettingBatteryImage @ "battery05051.png"  //battery0327改.png
+#define SettingShakeImage @ "viberation05051.png"  //shake0327.png
 #define SettingHelpImage @ "helpblue0327.png" //helpblue0309
 #define SettingHelpHighImage @ "help1205.png"
-#define SettingRelationImage @ "Phone0505.png"   //relationblue0309  relationblue0327.png
+#define SettingRelationImage @ "Phone05051.png"   //relationblue0309  relationblue0327.png
 #define SettingRelationHighImage @"relation1205.png"
-#define SettingStatementImage @ "Ribbon0505.png"   //statementblue0309  statementblue0327.png
+#define SettingStatementImage @ "Ribbon05051.png"   //statementblue0309  statementblue0327.png
 #define SettingStatementHighImage @"statement1205.png"
 #define SettingIntroImage @"introductionblue0327.png"    //introductionblue0309
 #define SettingIntroHighImage @"introduction1227.png"
 #define SettingUpdateImage @ "refresh1226.png"
 #define SettingUpdateHighImage @ "refreshblue0327.png"
-#define SettingUserBookimage @"Book0505.png"   // notebook0327.png
+#define SettingUserBookimage @"Book05051.png"   // notebook0327.png
 #define SettingUserBookHighimage @"notebook0320.png"
 #define SettingBackground @"设置背景.png"
 

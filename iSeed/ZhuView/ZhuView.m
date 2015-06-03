@@ -90,36 +90,41 @@
     //画X轴
 //    CGContextMoveToPoint(context, startwidth, startheight);
 //    CGContextAddLineToPoint(context, self.bounds.size.width-2*startwidth, startheight);
-    
-    for (int i = 0; i<time; i++) {
-        CGFloat pointw = startwidth/2+5+(self.bounds.size.width-2*startwidth)/time*(i+1);
-        UILabel *lable = [[UILabel alloc]init];
-        lable.textAlignment = NSTextAlignmentCenter;
-        lable.font = [UIFont boldSystemFontOfSize:self.labelfont];
-        lable.text = [NSString stringWithFormat:@"%d",self.xCount*(i+1)];
-        lable.frame = CGRectMake(0, 0, 40, 20);
-        lable.center = CGPointMake(pointw,self.bounds.size.height-startheight/2);
-        [self addSubview:lable];
-    }
-    
-   // CGContextSetStrokeColorWithColor(context, [UIColor lightGrayColor].CGColor);
-    //画横线
-    for (int i =0; i<=self.yCount; i++) {
+  
+        for (int i = 0; i<time; i++) {
+            CGFloat pointw = startwidth/2+5+(self.bounds.size.width-2*startwidth)/time*(i+1);
         
-        CGFloat pointh = startheight+(self.bounds.size.height-startheight)/self.yCount*i;
-        CGContextMoveToPoint(context, startwidth/2, pointh-2);
-        CGContextAddLineToPoint(context,self.bounds.size.width-startwidth, pointh-2);
-        UILabel *lable = [[UILabel alloc]init];
-        lable.textAlignment = NSTextAlignmentCenter;
-        lable.font = [UIFont boldSystemFontOfSize:self.labelfont];
-        lable.text = [NSString stringWithFormat:@"%d",(self.ymax-self.ymin)/self.yCount*i];
-        lable.frame = CGRectMake(0, 0, 40, 20);
-        lable.textColor = [UIColor grayColor];
-        lable.center = CGPointMake(self.bounds.size.width-startwidth/2,self.bounds.size.height- pointh);
-        [self addSubview:lable];
-        CGContextStrokePath(context);
-    }
+            UILabel *lable = [[UILabel alloc]init];
+            lable.textAlignment = NSTextAlignmentCenter;
+            lable.font = [UIFont boldSystemFontOfSize:self.labelfont];
+            lable.text = [NSString stringWithFormat:@"%d",self.xCount*(i+1)];
+            lable.frame = CGRectMake(0, 0, 40, 20);
+            lable.center = CGPointMake(pointw,self.bounds.size.height-startheight/2);
+            lable.textColor = [UIColor lightGrayColor];
+            lable.clearsContextBeforeDrawing = YES;
+            [self addSubview:lable];
+        }
+        // CGContextSetStrokeColorWithColor(context, [UIColor lightGrayColor].CGColor);
+        //画横线
+        for (int i =0; i<=self.yCount; i++) {
+            
+            CGFloat pointh = startheight+(self.bounds.size.height-startheight)/self.yCount*i;
+            CGContextMoveToPoint(context, startwidth/2, pointh-2);
+            CGContextAddLineToPoint(context,self.bounds.size.width-startwidth, pointh-2);
+            UILabel *lable = [[UILabel alloc]init];
+            lable.textAlignment = NSTextAlignmentCenter;
+            lable.font = [UIFont boldSystemFontOfSize:self.labelfont];
+            lable.text = [NSString stringWithFormat:@"%d",(self.ymax-self.ymin)/self.yCount*i];
+            lable.frame = CGRectMake(0, 0, 40, 20);
+            lable.textColor = [UIColor lightGrayColor];
+            lable.center = CGPointMake(self.bounds.size.width-startwidth/2,self.bounds.size.height- pointh);
+            lable.clearsContextBeforeDrawing = YES;
+            [self addSubview:lable];
+            CGContextStrokePath(context);
+        }
 
+   
+    
     //CGContextSetRGBStrokeColor(context, 61.0/255, 181.0/255, 189.0/255, 1);
     CGContextSetLineWidth(context, plot.lineWidth);
     

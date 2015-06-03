@@ -101,12 +101,10 @@
     [cancleButton setTitle:NSLocalizedStringFromTable(@"SettingVC_Cancle", @"MyLoaclization" , @"") forState:UIControlStateNormal];
     [cancleButton setBackgroundColor:NAVIGATIONBAR_BACKCOLOR];
     [cancleButton setTitleColor:CELLTEXTLABELHIGHTCOLOR forState:UIControlStateNormal];
-    [cancleButton setBackgroundImage:[UIImage imageNamed:SettingCancaleImage] forState:UIControlStateNormal];
+    //[cancleButton setBackgroundImage:[UIImage imageNamed:SettingCancaleImage] forState:UIControlStateNormal];
+  //  cancleButton.layer.cornerRadius = 25;
     [self.view addSubview:cancleButton];
     
-    
-    
-   
    
 }
 
@@ -238,8 +236,10 @@
            
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
             UISwitch *switchview = [[UISwitch alloc] initWithFrame:CGRectZero];
-            switchview.onTintColor = [UIColor whiteColor];//[UIColor whiteColor]
-            switchview.thumbTintColor = CELLSELECTCOLOR;//CELLSELECTCOLOR
+            
+            switchview.onTintColor = NAVIGATIONBAR_BACKCOLOR;//[UIColor whiteColor]
+           // switchview.thumbTintColor = [UIColor whiteColor];//CELLSELECTCOLOR
+            
             [switchview addTarget:self action:@selector(switchchange:) forControlEvents:UIControlEventValueChanged];
             
   //           震动开关的打开关闭
@@ -247,6 +247,7 @@
             NSLog(@"振动开关为%@",[userDefaults objectForKey:USERDEFAULTS_SHANKE]);
             if ([[userDefaults objectForKey:USERDEFAULTS_SHANKE] isEqual:@"0"]) {
                 [switchview setOn:NO];
+                
                 }
             if ([[userDefaults objectForKey:USERDEFAULTS_SHANKE] isEqual:@"1"]) {
                 [switchview setOn:YES];

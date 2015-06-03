@@ -63,7 +63,7 @@
 //手机蓝牙未打开提醒
 "alert_OpenPhoneBluetooth_Message"  = "请先打开手机蓝牙！";
 "alert_OpenPhoneBluetooth_CancelButtonTittle" = "知道了";
-"Navigation_Rightbutton_Titil" = "断开连接";
+"Navigation_Rightbutton_Titil" = "断开";
 //分享
 "Mainview_Danger" = "危险";
 "Mainview_Safe" = "安全";
@@ -93,7 +93,7 @@
 "Networking_Isnot" = "网络已断开";
 "LeftVC_table_FirstVC_Title" = "首页";
 "LeftVC_table_HistoryVC_Title" = "辐射";
-"LeftVC_table_SPHistoryVC_Title" = "计步";
+"LeftVC_table_SPHistoryVC_Title" = " 计步";
 "LeftVC_table_Recommond_Title" = "分享";
 "LeftVC_table_Setting_Title" = "设置";
 

@@ -62,7 +62,7 @@
     UILabel *regist = [[UILabel alloc] initWithFrame:CGRectMake(100, 27, 120, 30)];
     regist.text = NSLocalizedStringFromTable(@"Lable_changepsd_Title",@"MyLoaclization" , @"");
     regist.textAlignment = NSTextAlignmentCenter;
-    regist.font = [UIFont systemFontOfSize:14.0];
+    regist.font = [UIFont systemFontOfSize:20.0];
     regist.textColor = [UIColor whiteColor];
     [self.view addSubview:regist];
     

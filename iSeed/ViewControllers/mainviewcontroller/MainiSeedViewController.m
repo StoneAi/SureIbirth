@@ -170,11 +170,15 @@ static int i,a1,a2,a3,a4,a5,aver,j;
     NSDate *date = [[NSDate alloc]init];
     _DateLabel.text = [NSString stringWithFormat:@"%@",[date dateStringWithFormat:@"yyyy-MM-dd"]];
     _DateLabel.textColor = [UIColor grayColor];
-    
+    _DateLabel.font = [UIFont systemFontOfSize:15];
+    _DateLabel.alpha = 0.3;
     
     
     animatbutton = [[UIButton alloc]initWithFrame:CGRectMake centrlbutton_size];
+   // animatbutton.center = CGPointMake(self.view.center.x, self.view.center.y-40);
     [animatbutton addTarget:self action:@selector(animatbuttonselect) forControlEvents:UIControlEventTouchUpInside];
+//    [animatbutton setBackgroundImage:[UIImage imageNamed:@"btn_sync0507.png"] forState:UIControlStateNormal];
+//    [animatbutton setTitle:NSLocalizedStringFromTable(@"Mainview_ConnectBLE",@"MyLoaclization" , @"") forState:UIControlStateNormal];
     [self.view addSubview:animatbutton];
     
     
@@ -212,7 +216,7 @@ static int i,a1,a2,a3,a4,a5,aver,j;
     [self.view addSubview:simlabel];
     
     //TODO elias
-    rawordslab = [[UILabel alloc] initWithFrame:CGRectMake(115, 174, 90, 21)]; //214
+    rawordslab = [[UILabel alloc] initWithFrame:CGRectMake(115, 154, 90, 21)]; //214
     //raindexlab.font = [UIFont boldSystemFontOfSize:71.0];
     rawordslab.font = [UIFont systemFontOfSize:17.0];
     rawordslab.text = NSLocalizedStringFromTable(@"Mainview_liveindex", @"MyLoaclization" , @"");
@@ -222,9 +226,9 @@ static int i,a1,a2,a3,a4,a5,aver,j;
     [self.view addSubview:rawordslab];
     
     
-    raindexlab = [[UILabel alloc] initWithFrame:CGRectMake(90, 197, 140, 80)];//237
+    raindexlab = [[UILabel alloc] initWithFrame:CGRectMake(90, 170, 140, 80)];//237
     //raindexlab.font = [UIFont boldSystemFontOfSize:71.0];
-    raindexlab.font = [UIFont systemFontOfSize:13.0];
+    raindexlab.font = [UIFont systemFontOfSize:17.0];
     raindexlab.text = NSLocalizedStringFromTable(@"Mainview_ConnectBLE", @"MyLoaclization" , @"");
     raindexlab.textColor = CircleTextColor;
     //raindexlab.center = CGPointMake(self.view.center.x, self.view.center.y-30);
@@ -234,16 +238,18 @@ static int i,a1,a2,a3,a4,a5,aver,j;
     
     ralevellab = [[UILabel alloc] initWithFrame:CGRectMake(127, 298, 67, 21)];//338
     ralevellab.font = [UIFont systemFontOfSize:17.0];
-    ralevellab.text = @"SAFE";
+   // ralevellab.text = @"SAFE";
     ralevellab.textColor =  [UIColor colorWithRed:60.0/255.0 green:184.0/255.0 blue:120.0/255.0 alpha:1.0]; // [UIColor colorWithRed:17.0/225.0 green:255.0/255.0 blue:249.0/255.0 alpha:1.0];
     //ralevellab.center = CGPointMake(self.view.center.x, self.view.center.y-30);
     ralevellab.textAlignment = NSTextAlignmentCenter;
+    ralevellab.hidden = YES;
     [self.view addSubview:ralevellab];
     
     beginnumlab = [[UILabel alloc] initWithFrame:CGRectMake(69, 327, 10, 21)];//367
     beginnumlab.font = [UIFont systemFontOfSize:17.0];
     beginnumlab.text = @"0";
-    beginnumlab.textColor = [UIColor colorWithRed:170.0/225.0 green:170.0/255.0 blue:170.0/255.0 alpha:1.0];
+    beginnumlab.textColor = [UIColor lightGrayColor];
+    //[UIColor colorWithRed:170.0/225.0 green:170.0/255.0 blue:170.0/255.0 alpha:1.0]
     //beginnumlab.center = CGPointMake(self.view.center.x, self.view.center.y-30);
     beginnumlab.textAlignment = NSTextAlignmentCenter;
     [self.view addSubview:beginnumlab];
@@ -251,7 +257,8 @@ static int i,a1,a2,a3,a4,a5,aver,j;
     endnumlab = [[UILabel alloc] initWithFrame:CGRectMake(226, 327, 39, 21)];//367
     endnumlab.font = [UIFont systemFontOfSize:17.0];
     endnumlab.text = @"100+";
-    endnumlab.textColor = [UIColor colorWithRed:170.0/225.0 green:170.0/255.0 blue:170.0/255.0 alpha:1.0];
+    endnumlab.textColor = [UIColor lightGrayColor];
+    //[UIColor colorWithRed:170.0/225.0 green:170.0/255.0 blue:170.0/255.0 alpha:1.0]
     //endnumlab.center = CGPointMake(self.view.center.x, self.view.center.y-30);
     endnumlab.textAlignment = NSTextAlignmentCenter;
     [self.view addSubview:endnumlab];
@@ -259,7 +266,8 @@ static int i,a1,a2,a3,a4,a5,aver,j;
     raexplab = [[UILabel alloc] initWithFrame:CGRectMake(83, 327, 154, 21)]; //367
     raexplab.font = [UIFont systemFontOfSize:11.0];
     raexplab.text = @"ENJOY YOUR TIME";
-    raexplab.textColor = [UIColor colorWithRed:170.0/225.0 green:170.0/255.0 blue:170.0/255.0 alpha:1.0];
+    raexplab.textColor = [UIColor lightGrayColor];
+    //[UIColor colorWithRed:170.0/225.0 green:170.0/255.0 blue:170.0/255.0 alpha:1.0]
     //raexplab.center = CGPointMake(self.view.center.x, self.view.center.y-30);
     raexplab.textAlignment = NSTextAlignmentCenter;
     [self.view addSubview:raexplab];
@@ -279,7 +287,7 @@ static int i,a1,a2,a3,a4,a5,aver,j;
 
 -(void)circlelayinit
 {
-    CGPoint arcCenter = CGPointMake(CGRectGetMidX(self.view.bounds), CGRectGetMidY(self.view.bounds)-40);
+    CGPoint arcCenter = CGPointMake(CGRectGetMidX(self.view.bounds), CGRectGetMidY(self.view.bounds)-60);
    
     
     UIBezierPath *path = [UIBezierPath bezierPath];
@@ -288,7 +296,7 @@ static int i,a1,a2,a3,a4,a5,aver,j;
     CAShapeLayer* _gaugeCircleLayer = [CAShapeLayer layer];
     _gaugeCircleLayer.lineWidth = 2;
     _gaugeCircleLayer.fillColor = [UIColor clearColor].CGColor;
-    _gaugeCircleLayer.strokeColor = [UIColor lightGrayColor].CGColor;
+    _gaugeCircleLayer.strokeColor = [UIColor colorWithRed:170.0/255 green:170.0/255 blue:170.0/255 alpha:0.3].CGColor;
     _gaugeCircleLayer.strokeStart = 0;
     _gaugeCircleLayer.strokeEnd = 1;
     _gaugeCircleLayer.path = path.CGPath;
@@ -318,7 +326,6 @@ static int i,a1,a2,a3,a4,a5,aver,j;
     // pathAnimation.toValue = [NSNumber numberWithFloat:value];
     pathAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
     [_gaugeCircleLayer1 addAnimation:pathAnimation forKey:@"strokeEndAnimation"];
-    
     
     
 }
@@ -595,6 +602,7 @@ static int i,a1,a2,a3,a4,a5,aver,j;
 {
     [self.my cancelPeripheralConnection:self.currentperipheral.peripheral];
     self.animatbutton.enabled = YES;
+    animatbutton.hidden = NO;
 //    customview.label.text = NSLocalizedStringFromTable(@"Button_DisconnectBle_Title",@"MyLoaclization" , @"");
 //    customview.label.font = [UIFont systemFontOfSize:20];
     
@@ -629,6 +637,7 @@ static int i,a1,a2,a3,a4,a5,aver,j;
 //打印方法
 -(void) didread:(int)label1 label2:(long)label2 label3:(int)label3 states:(int)sta
 {
+    
     int rtvalue = (float)label1/1.317;
     rtv = 0;
     if (label1<100 ){
@@ -733,7 +742,7 @@ static int i,a1,a2,a3,a4,a5,aver,j;
     
     
         
-        
+    ralevellab.hidden = NO;    
         
     refreshbutton.enabled = YES;
     _blesta = 1;
@@ -741,7 +750,7 @@ static int i,a1,a2,a3,a4,a5,aver,j;
     [user setObject:@"1" forKey:USERDEFAULTS_BLESTATE];
     [user synchronize];
     self.navigationItem.rightBarButtonItem.enabled =YES;
-        
+        animatbutton.hidden=YES;
     }
 }
 -(void) centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error
@@ -773,7 +782,7 @@ static int i,a1,a2,a3,a4,a5,aver,j;
     [user setObject:@"0" forKey:USERDEFAULTS_BLESTATE];
     [user synchronize];
     DbmLable.hidden = YES;
-    
+    animatbutton.hidden = NO;
     
 }
 -(void) centralManagerDidUpdateState:(CBCentralManager *)central

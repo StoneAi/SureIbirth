@@ -133,7 +133,7 @@
     ralevelnum.textAlignment = NSTextAlignmentCenter;
     [self.view addSubview:ralevelnum];
     
-    nodatalabtext = [[UILabel alloc] initWithFrame:CGRectMake(126, 445, 68, 21)];
+    nodatalabtext = [[UILabel alloc] initWithFrame:CGRectMake(126, 434, 68, 21)];
     nodatalabtext.font = [UIFont systemFontOfSize:17.0];
     nodatalabtext.text = NSLocalizedStringFromTable(@"rtHistory_nodatatext", @"MyLoaclization" , @"");
     nodatalabtext.textColor =  [UIColor lightGrayColor]; // [UIColor colorWithRed:17.0/225.0 green:255.0/255.0 blue:249.0/255.0 alpha:1.0];
@@ -141,7 +141,7 @@
     nodatalabtext.textAlignment = NSTextAlignmentCenter;
     [self.view addSubview:nodatalabtext];
     
-    
+    _Statelabel.hidden = YES;
     
     
     _Myzhuview.labelfont = 10;
@@ -151,7 +151,7 @@
     polts = [[PNplot alloc]init];
     
     polts.linesColor = [UIColor colorWithRed:173.0/255 green:223.0/255 blue:180.0/255 alpha:1];
-    polts.AxisColor = [UIColor lightGrayColor];
+    polts.AxisColor = [UIColor colorWithRed:170.0/255 green:170.0/255 blue:170.0/255 alpha:0.3];
     polts.lineWidth = 15;
     
     [self writeInfor:nil];
@@ -170,7 +170,7 @@
     CAShapeLayer* _gaugeCircleLayer = [CAShapeLayer layer];
     _gaugeCircleLayer.lineWidth = 2;
     _gaugeCircleLayer.fillColor = [UIColor clearColor].CGColor;
-    _gaugeCircleLayer.strokeColor = [UIColor lightGrayColor].CGColor;
+    _gaugeCircleLayer.strokeColor = [UIColor colorWithRed:170.0/255 green:170.0/255 blue:170.0/255 alpha:0.3].CGColor;
     _gaugeCircleLayer.strokeStart = 0;
     _gaugeCircleLayer.strokeEnd = 1;
     _gaugeCircleLayer.path = path.CGPath;
@@ -343,11 +343,12 @@
         //TODO elias
         nodatalabtext.hidden = NO;
         ralevelnum.hidden = YES;
-        
+        _Statelabel.hidden = YES;
     }
     else{
         //_Nodatalabel.hidden = YES;
        // _Zhishulabel.hidden = NO;
+        _Statelabel.hidden = NO;
         _Dbmlabel.hidden = NO;
         _Danweilabel.hidden = NO;
         _Sync1Button.hidden = YES;
@@ -465,7 +466,7 @@
     int rtv = 0;
     if (all<100 ){
         
-        rtv = 1;
+        rtv = 0;
     }
     else if (all>400)
     {
@@ -478,9 +479,7 @@
         rtv = (all-100)/3;
         
     }
-
     return rtv;
-    
 }
 
 -(void)ZhishuchangeValue:(float)value

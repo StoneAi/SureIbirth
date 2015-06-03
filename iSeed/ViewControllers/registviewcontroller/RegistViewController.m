@@ -58,7 +58,7 @@
     UILabel *regist = [[UILabel alloc] initWithFrame:CGRectMake(100, 27, 120, 30)];
     regist.text = NSLocalizedStringFromTable(@"Lable_regist_Title",@"MyLoaclization" , @"");
     regist.textAlignment = NSTextAlignmentCenter;
-    regist.font = [UIFont systemFontOfSize:20.0];
+    regist.font = [UIFont systemFontOfSize:18];
     regist.textColor = [UIColor whiteColor];
     [self.view addSubview:regist];
     
@@ -90,6 +90,7 @@
     
     nextbutton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     nextbutton.frame = CGRectMake(120, 480-hei, 80, 50);
+    //nextbutton.layer.cornerRadius = 10;
     [nextbutton setTitle:NSLocalizedStringFromTable(@"NextButton_Title",@"MyLoaclization" , @"") forState:UIControlStateNormal];
     [nextbutton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     [nextbutton setBackgroundColor:[UIColor whiteColor]];

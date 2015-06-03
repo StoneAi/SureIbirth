@@ -112,7 +112,7 @@
     calorietext.textAlignment = NSTextAlignmentCenter;
     [self.view addSubview:calorietext];
     
-    metretext = [[UILabel alloc] initWithFrame:CGRectMake(97, 331, 30, 21)]; //17
+    metretext = [[UILabel alloc] initWithFrame:CGRectMake(90, 331, 30, 21)]; //17
     //raindexlab.font = [UIFont boldSystemFontOfSize:71.0];
     metretext.font = [UIFont systemFontOfSize:11.0];
     metretext.text = NSLocalizedStringFromTable(@"stepsHistory_metre", @"MyLoaclization" , @"");
@@ -121,7 +121,7 @@
     metretext.textAlignment = NSTextAlignmentCenter;
     [self.view addSubview:metretext];
     
-    steppuretext = [[UILabel alloc] initWithFrame:CGRectMake(205, 331, 30, 21)];
+    steppuretext = [[UILabel alloc] initWithFrame:CGRectMake(197, 331, 30, 21)];
     //raindexlab.font = [UIFont boldSystemFontOfSize:71.0];
     steppuretext.font = [UIFont systemFontOfSize:11.0];
     steppuretext.text = NSLocalizedStringFromTable(@"stepsHistory_steps", @"MyLoaclization" , @"");
@@ -188,7 +188,7 @@
     CAShapeLayer* _gaugeCircleLayer = [CAShapeLayer layer];
     _gaugeCircleLayer.lineWidth = 2;
     _gaugeCircleLayer.fillColor = [UIColor clearColor].CGColor;
-    _gaugeCircleLayer.strokeColor = [UIColor lightGrayColor].CGColor;
+    _gaugeCircleLayer.strokeColor = [UIColor colorWithRed:170.0/255 green:170.0/255 blue:170.0/255 alpha:0.3].CGColor;
     _gaugeCircleLayer.strokeStart = 0;
     _gaugeCircleLayer.strokeEnd = 1;
     _gaugeCircleLayer.path = path.CGPath;

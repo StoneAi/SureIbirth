@@ -87,7 +87,7 @@
 "LeftVC_table_FirstVC_Title" = "Home";
 //TODO elias
 "LeftVC_table_HistoryVC_Title" = "Total Radiation"; //History
-"LeftVC_table_SPHistoryVC_Title" = "Walk Status";
+"LeftVC_table_SPHistoryVC_Title" = " Walk Status";
 "LeftVC_table_Recommond_Title" = "Share";
 "LeftVC_table_Setting_Title" = "Settings";
 
